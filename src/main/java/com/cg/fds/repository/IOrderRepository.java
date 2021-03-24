@@ -1,15 +1,20 @@
 package com.cg.fds.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-
-import com.cg.fds.entities.Customer;
 import com.cg.fds.entities.OrderDetails;
-import com.cg.fds.entities.Restaurant;
 
-public interface IOrderRepository extends JpaRepository<OrderDetails,Integer> {
+
+
+public interface IOrderRepository {
+	
+	public OrderDetails save(OrderDetails order);
+	public OrderDetails remove(OrderDetails order);
+    public Optional<OrderDetails> findById(int orderId);
+	public List<OrderDetails> findByResId(String restaurantId);
 
 //	public OrderDetails addOrder(OrderDetails order);
 //	public OrderDetails updateOrder(OrderDetails order);

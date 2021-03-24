@@ -6,11 +6,10 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-@Entity
 public class OrderDetails {
 
-	@Id
-	private Integer orderId;
+	
+	private int orderId;
 	private LocalDateTime orderDate;
 	private FoodCart cart;
 	private String orderStatus;
@@ -20,10 +19,10 @@ public class OrderDetails {
 		//Do Nothing
 	}
 	
-	public Integer getOrderId() {
+	public int getOrderId() {
 		return orderId;
 	}
-	public void setOrderId(Integer orderId) {
+	public void setOrderId(int orderId) {
 		this.orderId = orderId;
 	}
 	public LocalDateTime getOrderDate() {
