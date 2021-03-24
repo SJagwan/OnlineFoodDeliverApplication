@@ -3,20 +3,27 @@ package com.cg.fds.entities;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class OrderDetails {
 
-	private int orderId;
+	@Id
+	private Integer orderId;
 	private LocalDateTime orderDate;
 	private FoodCart cart;
 	private String orderStatus;
 	
 	
-	public OrderDetails() {}
+	public OrderDetails() {
+		//Do Nothing
+	}
 	
-	public int getOrderId() {
+	public Integer getOrderId() {
 		return orderId;
 	}
-	public void setOrderId(int orderId) {
+	public void setOrderId(Integer orderId) {
 		this.orderId = orderId;
 	}
 	public LocalDateTime getOrderDate() {
