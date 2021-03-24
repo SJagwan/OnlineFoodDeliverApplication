@@ -1,6 +1,7 @@
 package com.cg.fds.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -16,14 +17,16 @@ public class RestaurantServiceImp implements IRestaurantService {
 
 	@Override
 	public Restaurant addRestaurant(Restaurant res) {
-		// TODO Auto-generated method stub
-		return null;
+		validateRestaurant(res);
+		Restaurant addRestaurant = restaurantRepository.save(res);
+		return addRestaurant;
 	}
 
 	@Override
 	public Restaurant removeRestaurant(Restaurant res) {
-		// TODO Auto-generated method stub
-		return null;
+		validateRestaurant(res);
+		Restaurant removeRestaurant = restaurantRepository.remove(res);
+		return removeRestaurant;
 	}
 
 	@Override
@@ -34,9 +37,13 @@ public class RestaurantServiceImp implements IRestaurantService {
 	}
 
 	@Override
-	public Restaurant viewRestaurant(String name) {
-		// TODO Auto-generated method stub
-		return null;
+	public Restaurant viewRestaurant(String id) {
+		Optional<Restaurant> viewRestaurant = restaurantRepository.findById(id);
+		Restaurant restaurant = null;
+		if (viewRestaurant.isPresent()) {
+			restaurant = viewRestaurant.get();
+		}
+		return restaurant;
 	}
 
 	@Override
@@ -65,20 +72,16 @@ public class RestaurantServiceImp implements IRestaurantService {
 	}
 
 	void validateRestaurant(Restaurant restaurant) {
-            if (restaurant == null) {
-                throw new InvalidRestaurantException("Restaurant can't be null ");
-            }    }
-	
-    void validateRestaurantLocation(String location){
-    	if (location == null || location.isEmpty() || location.trim().isEmpty()) 
-    	{
-        throw new InvalidRestaurantLocationException("Restaurant Name can't be null or empty");
-        }
-   
-    
-            
-        
-        
-    }
+		if (restaurant == null) {
+			throw new InvalidRestaurantException("Restaurant can't be null ");
+		}
+	}
+
+	void validateRestaurantLocation(String location) {
+		if (location == null || location.isEmpty() || location.trim().isEmpty()) {
+			throw new InvalidRestaurantLocationException("Restaurant Name can't be null or empty");
+		}
+
+	}
 
 }

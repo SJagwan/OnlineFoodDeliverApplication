@@ -13,6 +13,7 @@ import com.cg.fds.exception.InvalidRestaurantNameException;
 import com.cg.fds.repository.IRestaurantRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -21,61 +22,95 @@ import org.junit.jupiter.api.function.Executable;
 
 @ExtendWith(MockitoExtension.class)
 public class RestaurantServiceImpTest {
-	
+
 	@Mock
 	IRestaurantRepository restaurantRepository;
-	
+
 	@Spy
 	@InjectMocks
 	RestaurantServiceImp restaurantService;
-	
-	
 
+	@Test
+	public void addRestaurantTest() {
+		Restaurant restaurant = Mockito.mock(Restaurant.class);
+		Restaurant restaurantSaved = Mockito.mock(Restaurant.class);
+		Mockito.when(restaurantRepository.save(restaurant)).thenReturn(restaurantSaved);
+		Restaurant result = restaurantService.addRestaurant(restaurant);
+		Assertions.assertNotNull(result);
+		Assertions.assertEquals(restaurantSaved, result);
+
+	}
+
+	@Test
+	public void removeRestaurantTest() {
+		Restaurant restaurant = Mockito.mock(Restaurant.class);
+		Restaurant restaurantSaved = Mockito.mock(Restaurant.class);
+		Mockito.when(restaurantRepository.remove(restaurant)).thenReturn(restaurantSaved);
+		Restaurant result = restaurantService.removeRestaurant(restaurant);
+		Assertions.assertNotNull(result);
+		Assertions.assertEquals(restaurantSaved, result);
+	}
+
+	@Test
+	public void viewRestaurantTest() {
+		String id = " ";
+		Restaurant restaurant = Mockito.mock(Restaurant.class);
+		Optional<Restaurant> optionalSaved = Optional.of(restaurant);
+		Mockito.when(restaurantRepository.findById(id)).thenReturn(optionalSaved);
+		Restaurant result = restaurantService.viewRestaurant(id);
+		Assertions.assertNotNull(result);
+		Assertions.assertEquals(restaurant, result);
+	}
 
 	@Test
 	public void updateRestaurantTest() {
-		Restaurant restaurant=Mockito.mock(Restaurant.class);
-		Restaurant restaurantSaved=Mockito.mock(Restaurant.class);
+		Restaurant restaurant = Mockito.mock(Restaurant.class);
+		Restaurant restaurantSaved = Mockito.mock(Restaurant.class);
 		Mockito.when(restaurantRepository.save(restaurant)).thenReturn(restaurantSaved);
-		Restaurant result=restaurantService.updateRestaurant(restaurant);
+		Restaurant result = restaurantService.updateRestaurant(restaurant);
 		Assertions.assertNotNull(result);
-		Assertions.assertEquals(restaurantSaved,result);		
+		Assertions.assertEquals(restaurantSaved, result);
 	}
+
 	@Test
 	public void viewNearByRestaurantTest() {
-		String location="Delhi";
-		List<Restaurant> list=Mockito.mock(List.class);
+		String location = "Delhi";
+		List<Restaurant> list = Mockito.mock(List.class);
 		Mockito.when(restaurantRepository.findByLocation(location)).thenReturn(list);
-		List<Restaurant> result=restaurantService.viewNearByRestaurant(location);
+		List<Restaurant> result = restaurantService.viewNearByRestaurant(location);
 		Assertions.assertNotNull(result);
-		Assertions.assertEquals(list,result);		
+		Assertions.assertEquals(list, result);
 	}
+
 	@Test
 	public void viewRestaurantByItemNameTest() {
-		String name="Pranav";
-		List<Restaurant> list=Mockito.mock(List.class);
+		String name = "Pranav";
+		List<Restaurant> list = Mockito.mock(List.class);
 		Mockito.when(restaurantRepository.findRestaurantByItemName(name)).thenReturn(list);
-		List<Restaurant> result=restaurantService.viewRestaurantByItemName(name);
+		List<Restaurant> result = restaurantService.viewRestaurantByItemName(name);
 		Assertions.assertNotNull(result);
-		Assertions.assertEquals(list,result);		
+		Assertions.assertEquals(list, result);
 	}
+
 	@Test
-    public void validateRestaurantNameTest(){
-        String name=" ";
-        Executable executable=()-> restaurantService.validateRestaurantName(name);
-        Assertions.assertThrows(InvalidRestaurantNameException.class,executable);
-    }
+	public void validateRestaurantNameTest() {
+		String name = " ";
+		Executable executable = () -> restaurantService.validateRestaurantName(name);
+		Assertions.assertThrows(InvalidRestaurantNameException.class, executable);
+	}
+
 	@Test
-    public void validateRestaurant(){
-        Restaurant restaurant=null;
-        Executable executable=()-> restaurantService.validateRestaurant(restaurant);
-        Assertions.assertThrows(InvalidRestaurantException.class,executable);
-    }
+	public void validateRestaurant() {
+		Restaurant restaurant = null;
+		Executable executable = () -> restaurantService.validateRestaurant(restaurant);
+		Assertions.assertThrows(InvalidRestaurantException.class, executable);
+	}
+
 	@Test
-    public void validateRestaurantLocationTest(){
-        String location=" ";
-        Executable executable=()-> restaurantService.validateRestaurantLocation(location);
-        Assertions.assertThrows(InvalidRestaurantLocationException.class,executable);
-    }
-	
+	public void validateRestaurantLocationTest() {
+		String location = " ";
+		Executable executable = () -> restaurantService.validateRestaurantLocation(location);
+		Assertions.assertThrows(InvalidRestaurantLocationException.class, executable);
+	}
+
 }
