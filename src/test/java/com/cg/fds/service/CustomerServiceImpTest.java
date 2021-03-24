@@ -1,6 +1,6 @@
 package com.cg.fds.service;
 
-
+import java.util.Optional;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -22,7 +22,7 @@ import com.cg.fds.repository.ICustomerRepository;
 public class CustomerServiceImpTest {
 	@Mock
 	ICustomerRepository customerRepository;
-	
+
 	@Spy
 	@InjectMocks
 	CustomerServiceImp customerService;
@@ -31,7 +31,7 @@ public class CustomerServiceImpTest {
 //	public void setUp() {
 //		customerService = new CustomerServiceImp();
 //	}
-	
+
 //	@Test
 //	
 //	public void testAdd1() {
@@ -48,33 +48,47 @@ public class CustomerServiceImpTest {
 //		
 //	}
 	@Test
-	
+
 	public void addCustomerTest_1() {
-	Customer customer = Mockito.mock(Customer.class);
-	Customer customerSaved = Mockito.mock(Customer.class);
-	Mockito.when(customerRepository.save(customer)).thenReturn(customerSaved);
+		Customer customer = Mockito.mock(Customer.class);
+		Customer customerSaved = Mockito.mock(Customer.class);
+		Mockito.when(customerRepository.save(customer)).thenReturn(customerSaved);
 		Customer result = customerService.addCustomer(customer);
 		Assertions.assertNotNull(result);
 		Assertions.assertEquals(customerSaved, result);
-	
-}
-@Test
-	
+
+	}
+
+	@Test
+
 	public void updateCustomerTest_1() {
-	Customer customer = Mockito.mock(Customer.class);
-	Customer customerSaved = Mockito.mock(Customer.class);
-	Mockito.when(customerRepository.save(customer)).thenReturn(customerSaved);
+		Customer customer = Mockito.mock(Customer.class);
+		Customer customerSaved = Mockito.mock(Customer.class);
+		Mockito.when(customerRepository.save(customer)).thenReturn(customerSaved);
 		Customer result = customerService.updateCustomer(customer);
 		Assertions.assertNotNull(result);
 		Assertions.assertEquals(customerSaved, result);
-	
-}
+
+	}
+
 	@Test
-    public void validateCustomer_1(){
-        Customer customer=null;
-        Executable executable=()-> customerService.validateCustomer(customer);
-        Assertions.assertThrows(InvalidCustomerException.class,executable);
-    }
-	
+
+	public void viewCustomerTest_1() {
+		int id = 1;
+		Customer customer = Mockito.mock(Customer.class);
+		Optional<Customer> optionalSaved =Optional.of(customer);
+		Mockito.when(customerRepository.findById(id)).thenReturn(optionalSaved);
+		Customer result = customerService.viewCustomer(id);
+		Assertions.assertNotNull(result);
+		Assertions.assertEquals(customer, result);
+
+	}
+
+	@Test
+	public void validateCustomer_1() {
+		Customer customer = null;
+		Executable executable = () -> customerService.validateCustomer(customer);
+		Assertions.assertThrows(InvalidCustomerException.class, executable);
+	}
 
 }

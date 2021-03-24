@@ -1,6 +1,7 @@
 package com.cg.fds.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -8,7 +9,7 @@ import com.cg.fds.entities.Customer;
 import com.cg.fds.exception.InvalidCustomerException;
 import com.cg.fds.repository.ICustomerRepository;
 
-public class CustomerServiceImp implements ICustomerService{
+public class CustomerServiceImp implements ICustomerService {
 	@Autowired
 	ICustomerRepository customerRepository;
 
@@ -36,8 +37,12 @@ public class CustomerServiceImp implements ICustomerService{
 
 	@Override
 	public Customer viewCustomer(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		Optional<Customer> viewCustomer = customerRepository.findById(id);
+		Customer customer = null;
+		if (viewCustomer.isPresent()) {
+			customer = viewCustomer.get();
+		}
+		return customer;
 	}
 
 	@Override
@@ -45,14 +50,12 @@ public class CustomerServiceImp implements ICustomerService{
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
+
 	public void validateCustomer(Customer customer) {
 		if (customer == null) {
 			throw new InvalidCustomerException("Customer cannot be null");
 		}
-			
-		
+
 	}
 
-	
 }
