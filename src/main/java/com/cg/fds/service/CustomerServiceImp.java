@@ -31,8 +31,9 @@ public class CustomerServiceImp implements ICustomerService {
 
 	@Override
 	public Customer removeCustomer(Customer customer) {
-		// TODO Auto-generated method stub
-		return null;
+		validateCustomer(customer);
+		Customer removeCustomer = customerRepository.remove(customer);
+		return removeCustomer;
 	}
 
 	@Override
