@@ -10,6 +10,9 @@ import com.cg.fds.entities.Restaurant;
 import com.cg.fds.exception.InvalidRestaurantException;
 import com.cg.fds.exception.InvalidRestaurantLocationException;
 import com.cg.fds.exception.InvalidRestaurantNameException;
+import com.cg.fds.exception.RemoveRestaurantException;
+import com.cg.fds.exception.RestaurantNotFoundException;
+import com.cg.fds.exception.UpdateRestaurantException;
 import com.cg.fds.repository.IRestaurantRepository;
 
 import java.util.List;
@@ -21,7 +24,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.api.function.Executable;
 
 @ExtendWith(MockitoExtension.class)
-public class RestaurantServiceImpTest {
+public class RestaurantServiceImpUnitTest {
 
 	@Mock
 	IRestaurantRepository restaurantRepository;
@@ -30,21 +33,32 @@ public class RestaurantServiceImpTest {
 	@InjectMocks
 	RestaurantServiceImp restaurantService;
 
+	/**
+	 * Testing addRestaurant Scenario if Restaurant is restaurantSaved expected =
+	 * restaurantSaved result = restaurantSaved
+	 */
+
 	@Test
 	public void addRestaurantTest() {
+
 		Restaurant restaurant = Mockito.mock(Restaurant.class);
+		Mockito.doNothing().when(restaurantService).validateRestaurant(restaurant);
 		Restaurant restaurantSaved = Mockito.mock(Restaurant.class);
 		Mockito.when(restaurantRepository.save(restaurant)).thenReturn(restaurantSaved);
 		Restaurant result = restaurantService.addRestaurant(restaurant);
 		Assertions.assertNotNull(result);
 		Assertions.assertEquals(restaurantSaved, result);
+		Mockito.verify(restaurantRepository).save(restaurant);
 
 	}
 
 	@Test
-	public void removeRestaurantTest() {
+	public void removeRestaurantTest_1() {
+		String restaurantId = "1";
 		Restaurant restaurant = Mockito.mock(Restaurant.class);
+		Mockito.doNothing().when(restaurantService).validateRestaurant(restaurant);
 		Restaurant restaurantSaved = Mockito.mock(Restaurant.class);
+		Mockito.when(restaurantRepository.existsById(restaurantId)).thenReturn(true);
 		Mockito.when(restaurantRepository.remove(restaurant)).thenReturn(restaurantSaved);
 		Restaurant result = restaurantService.removeRestaurant(restaurant);
 		Assertions.assertNotNull(result);
@@ -52,8 +66,19 @@ public class RestaurantServiceImpTest {
 	}
 
 	@Test
-	public void viewRestaurantTest() {
-		String id = " ";
+	public void removeRestaurantTest_2() {
+		String restaurantId = "1";
+		Restaurant restaurant = Mockito.mock(Restaurant.class);
+		Mockito.doNothing().when(restaurantService).validateRestaurant(restaurant);
+		Restaurant restaurantSaved = Mockito.mock(Restaurant.class);
+		Mockito.when(restaurantRepository.existsById(restaurantId)).thenReturn(false);
+		Executable executable = () -> restaurantService.removeRestaurant(restaurant);
+		Assertions.assertThrows(RemoveRestaurantException.class, executable);
+	}
+
+	@Test
+	public void viewRestaurantTest_1() {
+		String id = "1";
 		Restaurant restaurant = Mockito.mock(Restaurant.class);
 		Optional<Restaurant> optionalSaved = Optional.of(restaurant);
 		Mockito.when(restaurantRepository.findById(id)).thenReturn(optionalSaved);
@@ -61,27 +86,48 @@ public class RestaurantServiceImpTest {
 		Assertions.assertNotNull(result);
 		Assertions.assertEquals(restaurant, result);
 	}
-/**
- * Testing updateRestaurant
- * Scenario if Restaurant is restaurantSaved
- * expected = restaurantSaved
- *  result =  restaurantSaved 
- */
+
 	@Test
-	public void updateRestaurantTest() {
+	public void viewRestaurantTest_2() {
+		String id = "1";
+		Optional<Restaurant> optionalSaved = Optional.empty();
+		Mockito.when(restaurantRepository.findById(id)).thenReturn(optionalSaved);
+		Executable executable = () -> restaurantService.viewRestaurant(id);
+		Assertions.assertThrows(RestaurantNotFoundException.class, executable);
+	}
+
+	/**
+	 * Testing updateRestaurant Scenario if Restaurant is restaurantSaved expected =
+	 * restaurantSaved result = restaurantSaved
+	 */
+	@Test
+	public void updateRestaurantTest_1() {
+		String restaurantId = "1";
 		Restaurant restaurant = Mockito.mock(Restaurant.class);
+		Mockito.doNothing().when(restaurantService).validateRestaurant(restaurant);
 		Restaurant restaurantSaved = Mockito.mock(Restaurant.class);
+		Mockito.when(restaurantRepository.existsById(restaurantId)).thenReturn(true);
 		Mockito.when(restaurantRepository.save(restaurant)).thenReturn(restaurantSaved);
 		Restaurant result = restaurantService.updateRestaurant(restaurant);
 		Assertions.assertNotNull(result);
 		Assertions.assertEquals(restaurantSaved, result);
 	}
+
+	@Test
+	public void updateRestaurantTest_2() {
+		String restaurantId = "1";
+		Restaurant restaurant = Mockito.mock(Restaurant.class);
+		Mockito.doNothing().when(restaurantService).validateRestaurant(restaurant);
+		Restaurant restaurantSaved = Mockito.mock(Restaurant.class);
+		Mockito.when(restaurantRepository.existsById(restaurantId)).thenReturn(false);
+		Executable executable = () -> restaurantService.updateRestaurant(restaurant);
+		Assertions.assertThrows(UpdateRestaurantException.class, executable);
+	}
+
 	/**
-	 * Testing viewNearByRestaurant
-	 * Scenario if location is "Delhi"
-	 * & List of Restaurants is in lists
-	 * expected =  (list<restaurant>) result       
-	 * result=  (list<restaurant>) result
+	 * Testing viewNearByRestaurant Scenario if location is "Delhi" & List of
+	 * Restaurants is in lists expected = (list<restaurant>) result result=
+	 * (list<restaurant>) result
 	 */
 
 	@Test
@@ -93,13 +139,12 @@ public class RestaurantServiceImpTest {
 		Assertions.assertNotNull(result);
 		Assertions.assertEquals(list, result);
 	}
-/**
- * Testing viewRestaurantByItemName
- * Scenario if Item name is "Noodles"
- * & List of Restaurants is in lists
- * expected = (list<restaurant>) result
- * result = (list<restaurant>) result
- */
+
+	/**
+	 * Testing viewRestaurantByItemName Scenario if Item name is "Noodles" & List of
+	 * Restaurants is in lists expected = (list<restaurant>) result result =
+	 * (list<restaurant>) result
+	 */
 	@Test
 	public void viewRestaurantByItemNameTest() {
 		String name = "Noodles";
@@ -119,6 +164,7 @@ public class RestaurantServiceImpTest {
 		Executable executable = () -> restaurantService.validateRestaurantName(name);
 		Assertions.assertThrows(InvalidRestaurantNameException.class, executable);
 	}
+
 	/**
 	 * Scenario if Restaurant in null;
 	 */
@@ -128,6 +174,7 @@ public class RestaurantServiceImpTest {
 		Executable executable = () -> restaurantService.validateRestaurant(restaurant);
 		Assertions.assertThrows(InvalidRestaurantException.class, executable);
 	}
+
 	/**
 	 * Scenario if Restaurant Location in null;
 	 */

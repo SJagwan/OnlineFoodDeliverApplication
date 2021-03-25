@@ -15,6 +15,8 @@ public interface IRestaurantRepository {
 	public Restaurant remove(Restaurant restaurant);
 
 	public Optional<Restaurant> findById(String id);
+	
+	boolean existsById(String restaurantId);
 	/*
 	 * public Restaurant addRestaurant(Restaurant res); public Restaurant
 	 * removeRestaurant(Restaurant res); public Restaurant
