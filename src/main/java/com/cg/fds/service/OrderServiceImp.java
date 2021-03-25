@@ -49,15 +49,16 @@ public class OrderServiceImp implements IOrderService{
 
 	@Override
 	public List<OrderDetails> viewAllOrders(Restaurant resName) {
-//		List<OrderDetails> OrderList=orderRepository.findByResId(resName.get)
-		
-		return null;
+//		String restaurantId=resName.getRestaurantId();
+		List<OrderDetails> orderList=orderRepository.findByResId("1");
+		return orderList;
 	}
 
 	@Override
 	public List<OrderDetails> viewAllOrders(Customer customer) {
-		// TODO Auto-generated method stub
-		return null;
+//		String customerId=customer.getCustomerId();
+		List<OrderDetails> orderList=orderRepository.findByCustomerId("1");
+		return orderList;
 	}
 	
 	public void validateOrder(OrderDetails order) {

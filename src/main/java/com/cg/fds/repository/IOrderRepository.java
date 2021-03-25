@@ -15,6 +15,7 @@ public interface IOrderRepository {
 	public OrderDetails remove(OrderDetails order);
     public Optional<OrderDetails> findById(int orderId);
 	public List<OrderDetails> findByResId(String restaurantId);
+	public List<OrderDetails> findByCustomerId(String customerId);
 
 //	public OrderDetails addOrder(OrderDetails order);
 //	public OrderDetails updateOrder(OrderDetails order);
