@@ -31,8 +31,9 @@ public class BillServiceImp implements IBillService{
 
 	@Override
 	public Bill removeBill(Bill bill) {
-		// TODO Auto-generated method stub
-		return null;
+		validateBill(bill);
+		Bill removeBill = billRepository.remove(bill);
+		return removeBill;
 	}
 
 	@Override

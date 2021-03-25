@@ -20,9 +20,22 @@ public class BillServiceImpTest {
 	@InjectMocks
 	BillServiceImp billService;
 	
+	@Test
+	public void addBillTest_1() {
+		Bill bill = Mockito.mock(Bill.class);
+		Bill billSaved = Mockito.mock(Bill.class);
+		Mockito.when(billRepository.save(bill)).thenReturn(billSaved);
+		Bill result = billService.addBill(bill);
+		Assertions.assertNotNull(result);
+		Assertions.assertEquals(billSaved, result);
+		
+		
+	}
+	
 	/*
 	 * Scenario updating Bill to null 
 	 */
+	
 	
 	@Test
 	public void updateBillTest_1() {
@@ -44,6 +57,8 @@ public class BillServiceImpTest {
 		Assertions.assertEquals(billSaved, result);
 
 	}
+	
+	
 	
 	
 	@Test
