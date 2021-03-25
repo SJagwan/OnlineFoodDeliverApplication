@@ -7,6 +7,7 @@ import com.cg.fds.entities.Item;
 public interface ICartRepository{
 	
 	FoodCart save(FoodCart cart);
+	boolean existsById(String cartId);
 
 //	public FoodCart addItemToCart(FoodCart cart,Item item);
 //	public FoodCart increaseQuantity(FoodCart cart,Item item,int quantity);
