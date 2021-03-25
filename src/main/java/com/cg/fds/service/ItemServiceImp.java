@@ -17,15 +17,15 @@ import com.cg.fds.exception.RestaurantNotFoundException;
 import com.cg.fds.exception.UpdateItemException;
 import com.cg.fds.repository.IItemRepository;
 
-public class ItemServiceImp implements IItemService{
+public class ItemServiceImp implements IItemService {
 
 	@Autowired
 	private IItemRepository itemRepository;
-	
+
 	@Override
 	public Item addItem(Item item) {
 		validateItem(item);
-	Item addItem = itemRepository.save(item);
+		Item addItem = itemRepository.save(item);
 		return addItem;
 	}
 
@@ -33,7 +33,7 @@ public class ItemServiceImp implements IItemService{
 	public Item viewItem(String id) {
 		Optional<Item> viewItem = itemRepository.findById(id);
 		if (!viewItem.isPresent()) {
-			throw new ItemNotFoundException("Item with id not present="+id);
+			throw new ItemNotFoundException("Item with id not present=" + id);
 		}
 		return viewItem.get();
 	}
@@ -41,23 +41,22 @@ public class ItemServiceImp implements IItemService{
 	@Override
 	public Item updateItem(Item item) {
 		validateItem(item);
-		boolean exists = itemRepository.existsById("id");
-		if(!exists) {
-			throw new UpdateItemException("Item with id not present="+item.getItemId());
+		boolean exists = itemRepository.existsById("1");
+		if (!exists) {
+			throw new UpdateItemException("Item with id not present=" + item.getItemId());
 		}
 		Item updateItem = itemRepository.save(item);
-		return updateItem;	
+		return updateItem;
 	}
 
 	@Override
 	public Item removeItem(String id) {
-	
 		boolean exists = itemRepository.existsById(id);
-		if(!exists) {
-			throw new RemoveItemException("Item with id not present="+id);
+		if (!exists) {
+			throw new RemoveItemException("Item with id not present=" + id);
 		}
 		Item removeItem = itemRepository.remove(id);
-		return removeItem;	
+		return removeItem;
 	}
 
 	@Override
@@ -77,6 +76,7 @@ public class ItemServiceImp implements IItemService{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 	void validateItem(Item item) {
 		if (item == null) {
 			throw new InvalidItemException("Item can't be null");
