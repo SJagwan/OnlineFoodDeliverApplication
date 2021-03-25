@@ -61,7 +61,12 @@ public class RestaurantServiceImpTest {
 		Assertions.assertNotNull(result);
 		Assertions.assertEquals(restaurant, result);
 	}
-
+/**
+ * Testing updateRestaurant
+ * Scenario if Restaurant is restaurantSaved
+ * expected = restaurantSaved
+ *  result =  restaurantSaved 
+ */
 	@Test
 	public void updateRestaurantTest() {
 		Restaurant restaurant = Mockito.mock(Restaurant.class);
@@ -71,6 +76,13 @@ public class RestaurantServiceImpTest {
 		Assertions.assertNotNull(result);
 		Assertions.assertEquals(restaurantSaved, result);
 	}
+	/**
+	 * Testing viewNearByRestaurant
+	 * Scenario if location is "Delhi"
+	 * & List of Restaurants is in lists
+	 * expected =  (list<restaurant>) result       
+	 * result=  (list<restaurant>) result
+	 */
 
 	@Test
 	public void viewNearByRestaurantTest() {
@@ -81,10 +93,16 @@ public class RestaurantServiceImpTest {
 		Assertions.assertNotNull(result);
 		Assertions.assertEquals(list, result);
 	}
-
+/**
+ * Testing viewRestaurantByItemName
+ * Scenario if Item name is "Noodles"
+ * & List of Restaurants is in lists
+ * expected = (list<restaurant>) result
+ * result = (list<restaurant>) result
+ */
 	@Test
 	public void viewRestaurantByItemNameTest() {
-		String name = "Pranav";
+		String name = "Noodles";
 		List<Restaurant> list = Mockito.mock(List.class);
 		Mockito.when(restaurantRepository.findRestaurantByItemName(name)).thenReturn(list);
 		List<Restaurant> result = restaurantService.viewRestaurantByItemName(name);
@@ -92,20 +110,27 @@ public class RestaurantServiceImpTest {
 		Assertions.assertEquals(list, result);
 	}
 
+	/**
+	 * Scenario if Restaurant Name in null;
+	 */
 	@Test
 	public void validateRestaurantNameTest() {
 		String name = " ";
 		Executable executable = () -> restaurantService.validateRestaurantName(name);
 		Assertions.assertThrows(InvalidRestaurantNameException.class, executable);
 	}
-
+	/**
+	 * Scenario if Restaurant in null;
+	 */
 	@Test
 	public void validateRestaurant() {
 		Restaurant restaurant = null;
 		Executable executable = () -> restaurantService.validateRestaurant(restaurant);
 		Assertions.assertThrows(InvalidRestaurantException.class, executable);
 	}
-
+	/**
+	 * Scenario if Restaurant Location in null;
+	 */
 	@Test
 	public void validateRestaurantLocationTest() {
 		String location = " ";
