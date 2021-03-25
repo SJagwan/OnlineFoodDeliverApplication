@@ -81,6 +81,17 @@ public class CustomerServiceImpTest {
 		Assertions.assertEquals(customerSaved, result);
 
 	}
+	@Test
+
+	public void removeCustomerTest_1() {
+		Customer customer = Mockito.mock(Customer.class);
+		Customer customerSaved = Mockito.mock(Customer.class);
+		Mockito.when(customerRepository.remove(customer)).thenReturn(customerSaved);
+		Customer result = customerService.removeCustomer(customer);
+		Assertions.assertNotNull(result);
+		Assertions.assertEquals(customerSaved, result);
+
+	}
 
 	@Test
 

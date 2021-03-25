@@ -10,6 +10,7 @@ public interface ICustomerRepository {
 	public Customer save(Customer customer);
 	public Customer remove(Customer customer);
 	public Optional<Customer> findById(int id);
+	public Customer remove(Customer customer);
 
 //	public Customer addCustomer(Customer customer);
 //	public Customer updateCustomer(Customer customer);
