@@ -31,7 +31,7 @@ public class RestaurantServiceImp implements IRestaurantService {
 
 	@Override
 	public Restaurant updateRestaurant(Restaurant res) {
-
+		validateRestaurant(res);
 		Restaurant updaterestaurant = restaurantRepository.save(res);
 		return updaterestaurant;
 	}
@@ -54,6 +54,7 @@ public class RestaurantServiceImp implements IRestaurantService {
 
 	@Override
 	public List<Restaurant> viewNearByRestaurant(String location) {
+		validateRestaurantLocation(location);
 		List<Restaurant> restaurants = restaurantRepository.findByLocation(location);
 		return restaurants;
 	}
