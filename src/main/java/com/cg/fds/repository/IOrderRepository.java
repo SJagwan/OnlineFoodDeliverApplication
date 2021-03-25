@@ -5,17 +5,22 @@ import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import com.cg.fds.entities.Customer;
 import com.cg.fds.entities.OrderDetails;
 
 
 
 public interface IOrderRepository {
 	
-	public OrderDetails save(OrderDetails order);
-	public OrderDetails remove(OrderDetails order);
-    public Optional<OrderDetails> findById(int orderId);
-	public List<OrderDetails> findByResId(String restaurantId);
-	public List<OrderDetails> findByCustomerId(String customerId);
+	 OrderDetails save(OrderDetails order);
+	 OrderDetails remove(OrderDetails order);
+     Optional<OrderDetails> findById(int orderId);
+     boolean existsById(int orderId);
+//	public List<OrderDetails> findByResId(String restaurantId);
+     
+  // from OrderDetails order join order.cart cart where cart.customer=:customer
+     List<OrderDetails> findAllOrdersByCustomer(Customer customer);
+
 
 //	public OrderDetails addOrder(OrderDetails order);
 //	public OrderDetails updateOrder(OrderDetails order);
