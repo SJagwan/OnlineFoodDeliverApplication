@@ -76,7 +76,7 @@ public class ItemServiceImp implements IItemService {
 
 	@Override
 	public List<Item> viewAllItemsByName(String name) {
-		List<Item> list = itemRepository.findItemByName(name);
+		List<Item> list = itemRepository.findByName(name);
 		return list;
 	}
 

@@ -9,7 +9,7 @@ import com.cg.fds.entities.Category;
 import com.cg.fds.entities.Item;
 
 public interface IItemRepository extends JpaRepository<Item,String> {
-	 List<Item> findItemByName(String itemName);
+	 List<Item> findByName(String itemName);
 
 
 	

@@ -23,7 +23,7 @@ import com.cg.fds.repository.ICustomerRepository;
 
 @ExtendWith(MockitoExtension.class)
 
-public class CustomerServiceImpTest {
+public class CustomerServiceImpUnitTest {
 	@Mock
 	ICustomerRepository customerRepository;
 
@@ -31,6 +31,9 @@ public class CustomerServiceImpTest {
 	@InjectMocks
 	CustomerServiceImp customerService;
 
+/*
+ *test to add new customer 
+ */
 	@Test
 
 	public void addCustomerTest_1() {
@@ -43,6 +46,10 @@ public class CustomerServiceImpTest {
 
 	}
 
+/*
+ * test to remove an existing customer from the list	
+ */
+	@Test
 	public void removeCustomerTest_1() {
 		String id = "1";
 		Customer customer = Mockito.mock(Customer.class);
@@ -56,7 +63,9 @@ public class CustomerServiceImpTest {
 
 	}
 
-	
+/*
+ * test to remove an existing customer from the list	
+ */
 	@Test
 
 	public void removeCustomerTest_2() {
@@ -68,6 +77,10 @@ public class CustomerServiceImpTest {
 		Executable executable = () -> customerService.removeCustomer(customer);
 		Assertions.assertThrows(RemoveCustomerException.class, executable);
 	}
+	
+/*
+ * test to update details of an existing customer from the list	
+ */	
 	@Test
 
 	public void updateCustomerTest_1() {
@@ -82,7 +95,10 @@ public class CustomerServiceImpTest {
 		Assertions.assertEquals(customerSaved, result);
 
 	}
-	
+
+/*
+ * test to update details of an existing customer from the list	
+ */	
 	@Test
 	public void updateCustomerTest_2() {
 		String id = "1";
@@ -95,6 +111,9 @@ public class CustomerServiceImpTest {
 
 	}
 
+/*
+ * test to update details of an existing customer from the list	
+ */	
 	@Test
 
 	public void viewCustomerTest_1() {
@@ -108,6 +127,9 @@ public class CustomerServiceImpTest {
 
 	}
 	
+/*
+ * test to update details of an existing customer from the list	
+ */	
 	@Test
 
 	public void viewCustomerTest_2() {
@@ -119,6 +141,9 @@ public class CustomerServiceImpTest {
 
 	}
 
+/*
+ * test to check if the customer exists or not
+ */
 	@Test
 
 	public void validateCustomer_1() {
