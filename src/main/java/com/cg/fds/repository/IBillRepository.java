@@ -10,8 +10,11 @@ public interface IBillRepository {
 
 	public Bill save(Bill bill);
 	public Bill remove(Bill bill);
-	public Optional<Bill> findById(Bill bill);
+	Optional<Bill> findById(int billId);
 	public double totalCost(Bill bill);
+	boolean existsById(int billId);
+	
+	
 	//public Bill updateBill(Bill bill);
 	//public Bill removeBill(Bill bill);
 	//public Bill viewBill(Bill bill);
