@@ -9,7 +9,7 @@ public class OrderDetails {
 	private LocalDateTime orderDate;
 	private FoodCart cart;
 	private String orderStatus;
-	
+	private List<Item> items;
 	
 	public OrderDetails() {}
 	
@@ -36,6 +36,14 @@ public class OrderDetails {
 	}
 	public void setOrderStatus(String orderStatus) {
 		this.orderStatus = orderStatus;
+	}
+
+	public List<Item> getItems() {
+		return items;
+	}
+
+	public void setItems(List<Item> items) {
+		this.items = items;
 	}
 	
 	
