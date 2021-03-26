@@ -35,8 +35,8 @@ public class RestaurantServiceImp implements IRestaurantService {
 		if(!exists) {
 			throw new RemoveRestaurantException("Restaurant with id not present="+res.getRestaurantId());
 		}
-		Restaurant removeRestaurant = restaurantRepository.remove(res);
-		return removeRestaurant;
+		restaurantRepository.delete(res);
+		return res;
 	}
 
 	@Override

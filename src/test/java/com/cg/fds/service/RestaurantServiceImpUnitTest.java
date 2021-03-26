@@ -57,12 +57,10 @@ public class RestaurantServiceImpUnitTest {
 		String restaurantId = "1";
 		Restaurant restaurant = Mockito.mock(Restaurant.class);
 		Mockito.doNothing().when(restaurantService).validateRestaurant(restaurant);
-		Restaurant restaurantSaved = Mockito.mock(Restaurant.class);
 		Mockito.when(restaurantRepository.existsById(restaurantId)).thenReturn(true);
-		Mockito.when(restaurantRepository.remove(restaurant)).thenReturn(restaurantSaved);
 		Restaurant result = restaurantService.removeRestaurant(restaurant);
 		Assertions.assertNotNull(result);
-		Assertions.assertEquals(restaurantSaved, result);
+		Assertions.assertEquals(restaurant, result);
 	}
 
 	@Test
