@@ -11,6 +11,7 @@ import org.mockito.Mockito;
 import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 import com.cg.fds.entities.Bill;
+import com.cg.fds.entities.Customer;
 import com.cg.fds.repository.IBillRepository;
 @ExtendWith(MockitoExtension.class)
 public class BillServiceImpTest {
@@ -46,6 +47,16 @@ public class BillServiceImpTest {
 	/*
 	 * Scenario updating Bill to billService
 	 */
+	
+	@Test
+	public void removeBillTest_1() {
+		Bill bill = Mockito.mock(Bill.class);
+		Bill billSaved = Mockito.mock(Bill.class);
+		Mockito.when(billRepository.remove(bill)).thenReturn(billSaved);
+		Bill result = billService.removeBill(bill);
+		Assertions.assertNotNull(result);
+		Assertions.assertEquals(billSaved, result);
+	}
 	
 	@Test
 	public void updateBillTest_2() {

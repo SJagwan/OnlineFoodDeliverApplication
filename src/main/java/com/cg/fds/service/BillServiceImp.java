@@ -32,8 +32,8 @@ public class BillServiceImp implements IBillService{
 	@Override
 	public Bill removeBill(Bill bill) {
 		validateBill(bill);
-		Bill removeBill = billRepository.remove(bill);
-		return removeBill;
+		Bill removeBill = billRepository.delete(bill);
+		return bill;
 	}
 
 	@Override
