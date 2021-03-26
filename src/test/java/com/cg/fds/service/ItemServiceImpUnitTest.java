@@ -29,7 +29,9 @@ public class ItemServiceImpUnitTest {
 	@Spy
 	@InjectMocks
 	ItemServiceImp itemService;
-	
+	/*
+	 * Scenario = Item was created and added successfully  
+	 */
 	
 	@Test
 	public void addItemTest() {
@@ -43,7 +45,10 @@ public class ItemServiceImpUnitTest {
 		Mockito.verify(itemRepository).save(item);
 
 	}
-	
+	/*
+	 * Scenario = Item was found & displayed
+	 * Success
+	 */
 	@Test
 	public void viewItemTest_1() {
 		String id = "1";
@@ -54,7 +59,10 @@ public class ItemServiceImpUnitTest {
 		Assertions.assertNotNull(result);
 		Assertions.assertEquals(item, result);
 	}
-
+	/*
+	 * Scenario = Item was not found & hence can't be displayed
+	 * Failure
+	 */
 	@Test
 	public void viewItemTest_2() {
 		String id = "1";
@@ -63,7 +71,10 @@ public class ItemServiceImpUnitTest {
 		Executable executable = () -> itemService.viewItem(id);
 		Assertions.assertThrows(ItemNotFoundException.class, executable);
 	}
-	
+	/*
+	 * Scenario = Item was found & was updated
+	 * Success
+	 */
 	@Test
 	public void updateItemTest_1() {
 		String itemId = "1";
@@ -76,7 +87,10 @@ public class ItemServiceImpUnitTest {
 		Assertions.assertNotNull(result);
 		Assertions.assertEquals(itemUpdated, result);
 	}
-
+	/*
+	 * Scenario = Item was not found & hence can't be updated
+	 * Failure
+	 */
 	@Test
 	public void updateItemTest_2() {
 		String itemId = "1";
@@ -86,7 +100,10 @@ public class ItemServiceImpUnitTest {
 		Executable executable = () -> itemService.updateItem(item);
 		Assertions.assertThrows(UpdateItemException.class, executable);
 	}
-	
+	/*
+	 * Scenario = Item was found & removed
+	 * Success
+	 */
 	@Test
 	public void removeItemTest_1() {
 		String itemId = "1";
@@ -98,7 +115,10 @@ public class ItemServiceImpUnitTest {
 		Assertions.assertNotNull(result);
 		Assertions.assertEquals(itemRemoved, result);
 	}
-
+	/*
+	 * Scenario = Item was not found & hence cant be removed
+	 * Failure
+	 */
 	@Test
 	public void removeItemTest_2() {
 		String itemId = "1";
