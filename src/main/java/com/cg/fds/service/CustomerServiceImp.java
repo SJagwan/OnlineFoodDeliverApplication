@@ -71,8 +71,8 @@ public class CustomerServiceImp implements ICustomerService {
 		{
 			throw new RemoveCustomerException("Customer doesn't exist for id =" + customer.getCustomerId());
 		}
-		Customer removeCustomer = customerRepository.remove(customer);
-		return removeCustomer;
+		 customerRepository.delete(customer);
+		return customer;
 	}
 
 	@Override

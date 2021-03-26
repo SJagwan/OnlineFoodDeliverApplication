@@ -3,14 +3,16 @@ package com.cg.fds.repository;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.jpa.repository.JpaRepository;
+
 import com.cg.fds.entities.Customer;
 
-public interface ICustomerRepository {
+public interface ICustomerRepository extends JpaRepository<Customer,String> {
 	
-	public Customer save(Customer customer);
-	public Optional<Customer> findById(String id);
-	public Customer remove(Customer customer);
-	boolean existsById(String customerId);
+//	public Customer save(Customer customer);
+//	public Optional<Customer> findById(String id);
+//	public Customer remove(Customer customer);
+//	boolean existsById(String customerId);
 
 //	public Customer addCustomer(Customer customer);
 //	public Customer updateCustomer(Customer customer);

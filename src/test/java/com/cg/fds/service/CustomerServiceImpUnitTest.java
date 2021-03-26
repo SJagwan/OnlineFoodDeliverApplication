@@ -22,7 +22,7 @@ import com.cg.fds.repository.ICustomerRepository;
 
 @ExtendWith(MockitoExtension.class)
 
-public class CustomerServiceImpTest {
+public class CustomerServiceImpUnitTest {
 	@Mock
 	ICustomerRepository customerRepository;
 
@@ -47,12 +47,10 @@ public class CustomerServiceImpTest {
 		String id = "1";
 		Customer customer = Mockito.mock(Customer.class);
 		Mockito.doNothing().when(customerService).validateCustomer(customer);
-		Customer customerSaved = Mockito.mock(Customer.class);
 		Mockito.when(customerRepository.existsById(id)).thenReturn(true);
-		Mockito.when(customerRepository.remove(customer)).thenReturn(customerSaved);
 		Customer result = customerService.removeCustomer(customer);
 		Assertions.assertNotNull(result);
-		Assertions.assertEquals(customerSaved, result);
+		Assertions.assertEquals(customer, result);
 
 	}
 
