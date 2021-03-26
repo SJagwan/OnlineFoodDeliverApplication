@@ -10,12 +10,12 @@ import com.cg.fds.entities.OrderDetails;
 
 
 
-public interface IOrderRepository {
+public interface IOrderRepository extends JpaRepository<OrderDetails,Integer> {
 	
-	 OrderDetails save(OrderDetails order);
-	 OrderDetails remove(OrderDetails order);
-     Optional<OrderDetails> findById(int orderId);
-     boolean existsById(int orderId);
+//	 OrderDetails save(OrderDetails order);
+//	 OrderDetails remove(OrderDetails order);
+//     Optional<OrderDetails> findById(int orderId);
+//     boolean existsById(int orderId);
 //	public List<OrderDetails> findByResId(String restaurantId);
      
   // from OrderDetails order join order.cart cart where cart.customer=:customer

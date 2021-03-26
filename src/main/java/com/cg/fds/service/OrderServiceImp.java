@@ -5,22 +5,33 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.cg.fds.constant.OrderStatus;
 import com.cg.fds.entities.Customer;
 import com.cg.fds.entities.FoodCart;
+import com.cg.fds.entities.Item;
 import com.cg.fds.entities.OrderDetails;
 import com.cg.fds.entities.Restaurant;
+import com.cg.fds.exception.AddOrderException;
 import com.cg.fds.exception.InvalidOrderException;
 import com.cg.fds.exception.OrderNotFoundException;
 import com.cg.fds.exception.RemoveOrderException;
 import com.cg.fds.exception.UpdateOrderException;
+import com.cg.fds.repository.ICartRepository;
 import com.cg.fds.repository.IOrderRepository;
 
+@Service
 public class OrderServiceImp implements IOrderService{
 	
 	@Autowired
 	private IOrderRepository orderRepository;
+	
+	@Autowired
+	private ICartService cartService;
+	
+	@Autowired
+	private ICartRepository cartRepository;
 	
 	public LocalDateTime currentDateTime() {
 		return LocalDateTime.now();
@@ -29,15 +40,17 @@ public class OrderServiceImp implements IOrderService{
 	@Override
 	public OrderDetails addOrder(OrderDetails order) {
 		validateOrder(order);
-//		FoodCart cart = order.getCart();
-//        List<Item> items = cart.getItemList();
-//        if (items == null || items.isEmpty()) {
-//            throw new AddOrderException("order can't be created because cart is empty");
-//        }
-//        order.setItems(items);
+		FoodCart cart = order.getCart();
+        List<Item> items = cart.getItemList();
+        if (items == null || items.isEmpty()) {
+            throw new AddOrderException("order can't be created because cart is empty");
+        }
+        order.setItems(items);
         order.setOrderDate(currentDateTime());
         order.setOrderStatus(OrderStatus.CREATED);
-		return orderRepository.save(order);
+		order=orderRepository.save(order);
+		cartService.clearCart(cart);
+		return order;
 	}
 
 	@Override
@@ -61,7 +74,8 @@ public class OrderServiceImp implements IOrderService{
 		{
 			throw new RemoveOrderException("Order doesn't exist for id =" + order.getOrderId());
 		}
-		return orderRepository.remove(order);
+		orderRepository.delete(order);
+		return order;
 	}
 
 	@Override

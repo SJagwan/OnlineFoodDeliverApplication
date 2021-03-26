@@ -21,8 +21,11 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.cg.fds.constant.OrderStatus;
 import com.cg.fds.entities.Customer;
+import com.cg.fds.entities.FoodCart;
+import com.cg.fds.entities.Item;
 import com.cg.fds.entities.OrderDetails;
 import com.cg.fds.entities.Restaurant;
+import com.cg.fds.exception.AddOrderException;
 import com.cg.fds.exception.InvalidCustomerException;
 import com.cg.fds.exception.InvalidOrderException;
 import com.cg.fds.exception.OrderNotFoundException;
@@ -37,6 +40,9 @@ public class OrderServiceImpUnitTest {
 	@Mock
 	IOrderRepository orderRepository;
 	
+	@Mock
+	CartServiceImp cartService;
+	
 	@Spy
 	@InjectMocks
 	 OrderServiceImp orderService;
@@ -49,9 +55,14 @@ public class OrderServiceImpUnitTest {
 	
 	
 	@Test 
-	public void addOrderTest() {
+	public void addOrderTest_1() {
 		OrderDetails orderDetail=Mockito.mock(OrderDetails.class);
 		doNothing().when(orderService).validateOrder(orderDetail);
+		List<Item>items=Mockito.mock(List.class);
+		FoodCart cart=Mockito.mock(FoodCart.class);
+		Mockito.when(orderDetail.getCart()).thenReturn(cart);
+		Mockito.when(cart.getItemList()).thenReturn(items);
+		Mockito.when(items.isEmpty()).thenReturn(false);
 		LocalDateTime currentTime=LocalDateTime.now();
 		Mockito.doReturn(currentTime).when(orderService).currentDateTime();
 		OrderDetails orderDetailSaved=Mockito.mock(OrderDetails.class);
@@ -61,8 +72,23 @@ public class OrderServiceImpUnitTest {
 		Assertions.assertEquals(result, orderDetailSaved);
 		Mockito.verify(orderRepository).save(orderDetail);
 		Mockito.verify(orderService).validateOrder(orderDetail);
+		Mockito.verify(orderDetail).setItems(items);
 		Mockito.verify(orderDetail).setOrderDate(currentTime);
 		Mockito.verify(orderDetail).setOrderStatus(OrderStatus.CREATED);
+	}
+	
+	@Test 
+	public void addOrderTest_2() {
+		OrderDetails orderDetail=Mockito.mock(OrderDetails.class);
+		doNothing().when(orderService).validateOrder(orderDetail);
+		List<Item>items=Mockito.mock(List.class);
+		FoodCart cart=Mockito.mock(FoodCart.class);
+		Mockito.when(orderDetail.getCart()).thenReturn(cart);
+		Mockito.when(cart.getItemList()).thenReturn(items);
+		Mockito.when(items.isEmpty()).thenReturn(true);
+		Executable executable = () -> orderService.addOrder(orderDetail);
+		Assertions.assertThrows(AddOrderException.class, executable);
+		
 	}
 	
 	
@@ -110,14 +136,11 @@ public class OrderServiceImpUnitTest {
 		int id=1;
 		OrderDetails orderDetail=Mockito.mock(OrderDetails.class);
 		doNothing().when(orderService).validateOrder(orderDetail);
-		OrderDetails orderDetailRemoved=Mockito.mock(OrderDetails.class);
 		Mockito.when(orderRepository.existsById(id)).thenReturn(true);
-		Mockito.when(orderRepository.remove(orderDetail)).thenReturn(orderDetailRemoved);
 		OrderDetails result=orderService.removeOrder(orderDetail);
 		Assertions.assertNotNull(result);
-		Assertions.assertEquals(orderDetailRemoved,result);	
+		Assertions.assertEquals(orderDetail,result);	
 		Mockito.verify(orderRepository).existsById(1);
-		Mockito.verify(orderRepository).remove(orderDetail);
 	}
 	
 	@Test
