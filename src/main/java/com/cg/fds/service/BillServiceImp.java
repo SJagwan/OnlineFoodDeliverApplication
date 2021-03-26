@@ -1,6 +1,7 @@
 package com.cg.fds.service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,9 +18,21 @@ public class BillServiceImp implements IBillService{
 	
 	@Autowired
 	private IBillRepository billRepository;
+	
+	@Autowired
+	public LocalDateTime currentDateTime() {
+		return LocalDateTime.now();
+	}
 
 	@Override
 	public Bill addBill(Bill bill) {
+		LocalDateTime currentDateTime = currentDateTime();
+		bill.setBillDate(currentDateTime);
+		OrderDetails order = bill.getOrder();
+		double totalCost=0;
+		List<Item>items = order.getItems(){
+			totalCost=totalCost+item.getCost();
+		}
 		return billRepository.save(bill);
 	}
 

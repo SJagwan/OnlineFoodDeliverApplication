@@ -13,7 +13,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import com.cg.fds.entities.Bill;
 import com.cg.fds.repository.IBillRepository;
 @ExtendWith(MockitoExtension.class)
-public class BillServiceImpTest {
+public class BillServiceImpUnitTest {
 	@Mock
 	IBillRepository billRepository;
 	@Spy
@@ -23,6 +23,9 @@ public class BillServiceImpTest {
 	/*
 	 * Scenario updating Bill to null 
 	 */
+
+	
+	
 	
 	@Test
 	public void updateBillTest_1() {
@@ -54,6 +57,13 @@ public class BillServiceImpTest {
 		Bill result = billService.viewBill(bill);
 		Assertions.assertNotNull(result);
 		Assertions.assertEquals(bill, result);
+	}
+	
+	
+	@Test
+	public void totalCostTest_1() {
+		Bill bill = Mockito.mock(Bill.class);
+		
 	}
 
 }
