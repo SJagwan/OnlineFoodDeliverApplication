@@ -5,9 +5,10 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
 
+@Entity
 public class Customer {
 
-	
+	@Id
 	private String customerId;
 	private String firstName;
 	private String lastName;
@@ -16,7 +17,9 @@ public class Customer {
 	private String mobileNumber;
 	
 
+	@OneToOne
 	private Address address;
+	
 	private String email;
 
 	public Customer() {

@@ -19,14 +19,13 @@ import com.cg.fds.repository.IItemRepository;
 public class CartServiceImp implements ICartService {
 	@Autowired
 	private ICartRepository cartRepository;
-	
+
 	@Autowired
 	private IItemRepository itemRepository;
 
 	@Override
 	public FoodCart addItemToCart(FoodCart cart, Item item) {
 		validateCart(cart);
-		cartExist(cart);
 		List<Item> items = cart.getItemList();
 		if (items == null) {
 			items = new ArrayList<>();
@@ -42,9 +41,9 @@ public class CartServiceImp implements ICartService {
 		validateCart(cart);
 		cartExist(cart);
 		List<Item> items = cart.getItemList();
-		if(!items.contains(item))
-		{
-			throw new ItemNotFoundException("Item is Not present in this ItemList for thisFoodCart="+cart.getCartId());
+		if (!items.contains(item)) {
+			throw new ItemNotFoundException(
+					"Item is Not present in this ItemList for thisFoodCart=" + cart.getCartId());
 		}
 		item.setQuantity(quantity);
 		itemRepository.save(item);
@@ -56,9 +55,8 @@ public class CartServiceImp implements ICartService {
 		validateCart(cart);
 		cartExist(cart);
 		List<Item> items = cart.getItemList();
-		if(!items.contains(item))
-		{
-			throw new ItemNotFoundException("Item is Not present in the ItemList of Cart ="+cart.getCartId());
+		if (!items.contains(item)) {
+			throw new ItemNotFoundException("Item is Not present in the ItemList of Cart =" + cart.getCartId());
 		}
 		item.setQuantity(quantity);
 		itemRepository.save(item);
@@ -70,9 +68,8 @@ public class CartServiceImp implements ICartService {
 		validateCart(cart);
 		cartExist(cart);
 		List<Item> items = cart.getItemList();
-		if(!items.contains(item))
-		{
-			throw new ItemNotFoundException("Item is Not present in the ItemList of Cart ="+cart.getCartId());
+		if (!items.contains(item)) {
+			throw new ItemNotFoundException("Item is Not present in the ItemList of Cart =" + cart.getCartId());
 		}
 		items.remove(item);
 		return cartRepository.save(cart);
@@ -84,23 +81,20 @@ public class CartServiceImp implements ICartService {
 		cartExist(cart);
 		cart.setItemList(null);
 		return cartRepository.save(cart);
-		
+
 	}
-	
-	public void validateCart(FoodCart cart)
-	{
-		if(cart == null)
-		{
+
+	public void validateCart(FoodCart cart) {
+		if (cart == null) {
 			throw new InvalidCartException("Cart cannot be null");
 		}
 	}
-	
-	public void cartExist(FoodCart cart)
-	{
-//		String cartId =cart.getCartId();
-		boolean exists = cartRepository.existsById("1");
-		if(!exists) {
-			throw new CartNotExistException("cart with id not present="+cart.getCartId());
+
+	public void cartExist(FoodCart cart) {
+		String cartId =cart.getCartId();
+		boolean exists = cartRepository.existsById(cartId);
+		if (!exists) {
+			throw new CartNotExistException("cart with id not present=" + cart.getCartId());
 		}
 	}
 

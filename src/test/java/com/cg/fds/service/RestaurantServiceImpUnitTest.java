@@ -128,30 +128,30 @@ public class RestaurantServiceImpUnitTest {
 	 * (list<restaurant>) result
 	 */
 
-	@Test
-	public void viewNearByRestaurantTest() {
-		String location = "Delhi";
-		List<Restaurant> list = Mockito.mock(List.class);
-		Mockito.when(restaurantRepository.findByLocation(location)).thenReturn(list);
-		List<Restaurant> result = restaurantService.viewNearByRestaurant(location);
-		Assertions.assertNotNull(result);
-		Assertions.assertEquals(list, result);
-	}
-
-	/**
-	 * Testing viewRestaurantByItemName Scenario if Item name is "Noodles" & List of
-	 * Restaurants is in lists expected = (list<restaurant>) result result =
-	 * (list<restaurant>) result
-	 */
-	@Test
-	public void viewRestaurantByItemNameTest() {
-		String name = "Noodles";
-		List<Restaurant> list = Mockito.mock(List.class);
-		Mockito.when(restaurantRepository.findRestaurantByItemName(name)).thenReturn(list);
-		List<Restaurant> result = restaurantService.viewRestaurantByItemName(name);
-		Assertions.assertNotNull(result);
-		Assertions.assertEquals(list, result);
-	}
+//	@Test
+//	public void viewNearByRestaurantTest() {
+//		String location = "Delhi";
+//		List<Restaurant> list = Mockito.mock(List.class);
+//		Mockito.when(restaurantRepository.findByLocation(location)).thenReturn(list);
+//		List<Restaurant> result = restaurantService.viewNearByRestaurant(location);
+//		Assertions.assertNotNull(result);
+//		Assertions.assertEquals(list, result);
+//	}
+//
+//	/**
+//	 * Testing viewRestaurantByItemName Scenario if Item name is "Noodles" & List of
+//	 * Restaurants is in lists expected = (list<restaurant>) result result =
+//	 * (list<restaurant>) result
+//	 */
+//	@Test
+//	public void viewRestaurantByItemNameTest() {
+//		String name = "Noodles";
+//		List<Restaurant> list = Mockito.mock(List.class);
+//		Mockito.when(restaurantRepository.findRestaurantByItemName(name)).thenReturn(list);
+//		List<Restaurant> result = restaurantService.viewRestaurantByItemName(name);
+//		Assertions.assertNotNull(result);
+//		Assertions.assertEquals(list, result);
+//	}
 
 	/**
 	 * Scenario if Restaurant Name in null;

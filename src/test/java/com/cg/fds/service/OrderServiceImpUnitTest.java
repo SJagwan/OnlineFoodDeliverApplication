@@ -189,15 +189,15 @@ public class OrderServiceImpUnitTest {
 //		Assertions.assertEquals(orderList,result);		
 //	}
 	
-	@Test
-	public void viewAllOrdersTest_Customer() {
-		List<OrderDetails>orderList=Mockito.mock(List.class);
-		Customer customer=Mockito.mock(Customer.class);
-		Mockito.when(orderRepository.findAllOrdersByCustomer(customer)).thenReturn(orderList);
-		List<OrderDetails> result=orderService.viewAllOrders(customer);
-		Assertions.assertNotNull(result);
-		Assertions.assertEquals(orderList,result);		
-	}
+//	@Test
+//	public void viewAllOrdersTest_Customer() {
+//		List<OrderDetails>orderList=Mockito.mock(List.class);
+//		Customer customer=Mockito.mock(Customer.class);
+//		Mockito.when(orderRepository.findAllOrdersByCustomer(customer)).thenReturn(orderList);
+//		List<OrderDetails> result=orderService.viewAllOrders(customer);
+//		Assertions.assertNotNull(result);
+//		Assertions.assertEquals(orderList,result);		
+//	}
 	
 	/**
 	 * Scenario if OrderDetail is null;

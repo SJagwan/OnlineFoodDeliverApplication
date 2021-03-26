@@ -17,7 +17,6 @@ import com.cg.fds.exception.RemoveItemException;
 import com.cg.fds.exception.UpdateItemException;
 import com.cg.fds.repository.IItemRepository;
 
-
 @Service
 public class ItemServiceImp implements IItemService {
 
@@ -27,8 +26,7 @@ public class ItemServiceImp implements IItemService {
 	@Override
 	public Item addItem(Item item) {
 		validateItem(item);
-		Item addItem = itemRepository.save(item);
-		return addItem;
+		return itemRepository.save(item);
 	}
 
 	@Override
@@ -43,7 +41,7 @@ public class ItemServiceImp implements IItemService {
 	@Override
 	public Item updateItem(Item item) {
 		validateItem(item);
-		boolean exists = itemRepository.existsById("1");
+		boolean exists = itemRepository.existsById(item.getItemId());
 		if (!exists) {
 			throw new UpdateItemException("Item with id not present=" + item.getItemId());
 		}
@@ -76,10 +74,9 @@ public class ItemServiceImp implements IItemService {
 
 	@Override
 	public List<Item> viewAllItemsByName(String name) {
-		List<Item> list = itemRepository.findByName(name);
+		List<Item> list = itemRepository.findByitemName(name);
 		return list;
 	}
-
 
 	/**
 	 * Function to validate item

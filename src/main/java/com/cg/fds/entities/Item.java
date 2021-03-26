@@ -3,6 +3,7 @@ package com.cg.fds.entities;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -16,10 +17,11 @@ public class Item {
 	
 	@ManyToOne
 	private Category category;
+	
 	private int quantity;
 	private double cost;
 	
-//	@OneToMany
+	@OneToMany(fetch = FetchType.EAGER)
 	private List<Restaurant> restaurants;
 
 	public String getItemId() {
@@ -70,4 +72,37 @@ public class Item {
 	public void setRestaurants(List<Restaurant> restaurants) {
 		this.restaurants = restaurants;
 	}
+
+	@Override
+	public String toString() {
+		return "Item [itemId=" + itemId + ", itemName=" + itemName + ", category=" + category + ", quantity=" + quantity
+				+ ", cost=" + cost + ", restaurants=" + restaurants + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((itemId == null) ? 0 : itemId.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Item other = (Item) obj;
+		if (itemId == null) {
+			if (other.itemId != null)
+				return false;
+		} else if (!itemId.equals(other.itemId))
+			return false;
+		return true;
+	}
+	
+	
 }

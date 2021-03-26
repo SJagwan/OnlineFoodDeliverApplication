@@ -16,37 +16,47 @@ import com.cg.fds.exception.InvalidCustomerException;
 import com.cg.fds.exception.InvalidCustomerPhoneNumberException;
 import com.cg.fds.exception.RemoveCustomerException;
 import com.cg.fds.exception.UpdateCustomerException;
+import com.cg.fds.repository.IAddressRepository;
+import com.cg.fds.repository.ICartRepository;
 import com.cg.fds.repository.ICustomerRepository;
+import com.cg.fds.util.FoodCartUtil;
 
 @Service
 public class CustomerServiceImp implements ICustomerService {
 	@Autowired
 	ICustomerRepository customerRepository;
 	
+	@Autowired
+	IAddressRepository addressRepository;
 	
+	@Autowired
+	ICartRepository cartRepository;
+	
+	@Autowired
+	FoodCartUtil cartUtil;
 
 	public String generateId() {
-		StringBuilder builder= new StringBuilder();
-		Random random= new Random();
-		for(int i=0; i<10; i++) {
-			int randomNum=random.nextInt(10);
+		StringBuilder builder = new StringBuilder();
+		Random random = new Random();
+		for (int i = 0; i < 10; i++) {
+			int randomNum = random.nextInt(10);
 			builder.append(randomNum);
 		}
 		return builder.toString();
 	}
-	
+
 	@Override
 	public Customer addCustomer(Customer customer) {
 		validateCustomer(customer);
-//		validatePhone(customer.getMobileNumber());
-//		Address address=customer.getAddress();
-//		Address savedAddress=addressRepository.save(address);
-//		customer.setAddress(savedAddress);
-//		customer.setCustomerId(customer.id);
+		validatePhone(customer.getMobileNumber());
+		Address address=customer.getAddress();
+		addressRepository.save(address);
+		customer.setCustomerId(generateId());
 		Customer saved = customerRepository.save(customer);
-//		FoodCart cart=new FoodCart();
-//		cart.setCustomer(saved);
-		//cartRepository.save(cart);
+		FoodCart cart=cartUtil.getFoodCart();
+		cart.setCustomer(saved);
+		cart.setCartId(generateId());
+		cartRepository.save(cart);
 		return saved;
 	}
 
@@ -54,9 +64,8 @@ public class CustomerServiceImp implements ICustomerService {
 	public Customer updateCustomer(Customer customer) {
 		validateCustomer(customer);
 		String customerId = customer.getCustomerId();
-		boolean exist=customerRepository.existsById("1");
-		if(!exist)
-		{
+		boolean exist = customerRepository.existsById("1");
+		if (!exist) {
 			throw new UpdateCustomerException("Customer doesn't exist for id =" + customer.getCustomerId());
 		}
 		Customer updateCustomer = customerRepository.save(customer);
@@ -68,13 +77,12 @@ public class CustomerServiceImp implements ICustomerService {
 	public Customer removeCustomer(Customer customer) {
 		validateCustomer(customer);
 		String customerId = customer.getCustomerId();
-		boolean exist=customerRepository.existsById("1");
-		if(!exist)
-		{
+		boolean exist = customerRepository.existsById("1");
+		if (!exist) {
 			throw new RemoveCustomerException("Customer doesn't exist for id =" + customer.getCustomerId());
 		}
-		Customer removeCustomer = customerRepository.remove(customer);
-		return removeCustomer;
+		customerRepository.delete(customer);
+		return customer;
 	}
 
 	@Override
@@ -103,10 +111,11 @@ public class CustomerServiceImp implements ICustomerService {
 		if (phoneNumber == null) {
 			throw new InvalidCustomerPhoneNumberException("Customer Phone Number cannot be null");
 		}
-}
+	}
+
 	public void validateAddress(String address) {
 		if (address == null) {
 			throw new InvalidCustomerAddressException("Customer Address cannot be null");
 		}
-}
+	}
 }

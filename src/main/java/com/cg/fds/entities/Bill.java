@@ -7,9 +7,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
+@Entity
 public class Bill {
 
+	@GeneratedValue
+	@Id
 	private int billId;
+	
+	@OneToOne
 	private OrderDetails order;
 	private int totalItem;
 	private double totalCost;

@@ -50,7 +50,7 @@ public class CategoryServiceImp implements ICategoryService {
 		validateCategory(cat);
 		Optional<Category> viewCategory = categoryRepository.findById(cat.getCatId());
 		if (!viewCategory.isPresent()) {
-			throw new CategoryNotFoundException("Category with id not present="+cat.getCatId());
+			throw new CategoryNotFoundException("Category with id not present=" + cat.getCatId());
 		}
 		return viewCategory.get();
 	}

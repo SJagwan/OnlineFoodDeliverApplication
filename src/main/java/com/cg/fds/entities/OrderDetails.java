@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -63,6 +64,37 @@ public class OrderDetails {
 	public void setItems(List<Item> items) {
 		this.items = items;
 	}
+
+	@Override
+	public String toString() {
+		return "OrderDetails [orderId=" + orderId + ", orderDate=" + orderDate + ", cart=" + cart + ", orderStatus="
+				+ orderStatus + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + orderId;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		OrderDetails other = (OrderDetails) obj;
+		if (orderId != other.orderId)
+			return false;
+		return true;
+	}
+	
+	
+	
 
 	
 	

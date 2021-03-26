@@ -30,10 +30,10 @@ public class RestaurantServiceImp implements IRestaurantService {
 	@Override
 	public Restaurant removeRestaurant(Restaurant res) {
 		validateRestaurant(res);
-		String restaurantId=res.getRestaurantId();
+		String restaurantId = res.getRestaurantId();
 		boolean exists = restaurantRepository.existsById("1");
-		if(!exists) {
-			throw new RemoveRestaurantException("Restaurant with id not present="+res.getRestaurantId());
+		if (!exists) {
+			throw new RemoveRestaurantException("Restaurant with id not present=" + res.getRestaurantId());
 		}
 		restaurantRepository.delete(res);
 		return res;
@@ -42,10 +42,10 @@ public class RestaurantServiceImp implements IRestaurantService {
 	@Override
 	public Restaurant updateRestaurant(Restaurant res) {
 		validateRestaurant(res);
-		String restaurantId=res.getRestaurantId();
+		String restaurantId = res.getRestaurantId();
 		boolean exists = restaurantRepository.existsById("1");
-		if(!exists) {
-			throw new UpdateRestaurantException("Restaurant with id not present="+res.getRestaurantId());
+		if (!exists) {
+			throw new UpdateRestaurantException("Restaurant with id not present=" + res.getRestaurantId());
 		}
 		Restaurant updaterestaurant = restaurantRepository.save(res);
 		return updaterestaurant;
@@ -55,29 +55,31 @@ public class RestaurantServiceImp implements IRestaurantService {
 	public Restaurant viewRestaurant(String id) {
 		Optional<Restaurant> viewRestaurant = restaurantRepository.findById(id);
 		if (!viewRestaurant.isPresent()) {
-			throw new RestaurantNotFoundException("Restaurant with id not present="+id);
+			throw new RestaurantNotFoundException("Restaurant with id not present=" + id);
 		}
 		return viewRestaurant.get();
 	}
 
 	@Override
 	public Restaurant viewAllRestaurants() {
-		
+
 		return null;
 	}
 
 	@Override
 	public List<Restaurant> viewNearByRestaurant(String location) {
-		validateRestaurantLocation(location);
-		List<Restaurant> restaurants = restaurantRepository.findByLocation(location);
-		return restaurants;
+//		validateRestaurantLocation(location);
+//		List<Restaurant> restaurants = restaurantRepository.findByLocation(location);
+//		return restaurants;
+		return null;
 	}
 
 	@Override
 	public List<Restaurant> viewRestaurantByItemName(String name) {
-		validateRestaurantName(name);
-		List<Restaurant> restaurants = restaurantRepository.findRestaurantByItemName(name);
-		return restaurants;
+//		validateRestaurantName(name);
+//		List<Restaurant> restaurants = restaurantRepository.findRestaurantByItemName(name);
+//		return restaurants;
+		return null;
 	}
 
 	void validateRestaurantName(String name) {
@@ -90,7 +92,7 @@ public class RestaurantServiceImp implements IRestaurantService {
 		if (restaurant == null) {
 			throw new InvalidRestaurantException("Restaurant can't be null ");
 		}
-		
+
 		validateRestaurantName(restaurant.getRestaurantName());
 		validateRestaurantLocation(restaurant.getAddress().getAddressId());
 	}

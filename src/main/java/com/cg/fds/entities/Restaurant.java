@@ -2,20 +2,23 @@ package com.cg.fds.entities;
 
 import java.util.List;
 
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+@Entity
 public class Restaurant {
 	
+	@Id
 	private String restaurantId;
 	private String restaurantName;
 	
-	
+	@OneToOne
 	private Address address;
 	
-	
+	@OneToMany
 	private List<Item> itemList;
 	private String managerName;
 	private String contactNumber;
