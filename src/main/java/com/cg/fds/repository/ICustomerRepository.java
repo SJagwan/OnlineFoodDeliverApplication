@@ -3,6 +3,9 @@ package com.cg.fds.repository;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.cg.fds.entities.Bill;
 import com.cg.fds.entities.Customer;
 
 public interface ICustomerRepository {

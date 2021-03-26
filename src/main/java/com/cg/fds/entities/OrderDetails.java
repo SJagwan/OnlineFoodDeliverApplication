@@ -21,6 +21,7 @@ public class OrderDetails {
 	private FoodCart cart;
 	
 	private String orderStatus;
+
 	
 	@OneToMany
 	private List<Item> items;
@@ -62,7 +63,7 @@ public class OrderDetails {
 	public void setItems(List<Item> items) {
 		this.items = items;
 	}
-	
+
 	
 	
 	

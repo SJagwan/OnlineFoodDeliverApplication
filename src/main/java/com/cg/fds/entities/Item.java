@@ -66,6 +66,7 @@ public class Item {
 		return restaurants;
 	}
 
+
 	public void setRestaurants(List<Restaurant> restaurants) {
 		this.restaurants = restaurants;
 	}
