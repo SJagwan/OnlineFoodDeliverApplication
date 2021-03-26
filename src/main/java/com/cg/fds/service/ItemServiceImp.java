@@ -9,11 +9,10 @@ import com.cg.fds.entities.Category;
 import com.cg.fds.entities.Item;
 import com.cg.fds.entities.Restaurant;
 import com.cg.fds.exception.InvalidItemException;
-import com.cg.fds.exception.InvalidRestaurantException;
+import com.cg.fds.exception.InvalidItemIdException;
+import com.cg.fds.exception.InvalidItemNameException;
 import com.cg.fds.exception.ItemNotFoundException;
 import com.cg.fds.exception.RemoveItemException;
-import com.cg.fds.exception.RemoveRestaurantException;
-import com.cg.fds.exception.RestaurantNotFoundException;
 import com.cg.fds.exception.UpdateItemException;
 import com.cg.fds.repository.IItemRepository;
 
@@ -73,14 +72,36 @@ public class ItemServiceImp implements IItemService {
 
 	@Override
 	public List<Item> viewAllItemsByName(String name) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Item> list = itemRepository.findItemByName(name);
+		return list;
 	}
 
+	/**
+	 * Function to validate item
+	 */
 	void validateItem(Item item) {
 		if (item == null) {
 			throw new InvalidItemException("Item can't be null");
 		}
+		validateItemName(item.getItemName());
+		validateItemId(item.getItemId());
 	}
 
+	/**
+	 * Function to validate item Name
+	 */
+	void validateItemName(String itemName) {
+		if (itemName == null || itemName.isEmpty() || itemName.trim().isEmpty()) {
+			throw new InvalidItemNameException("Item Name can't be null or empty");
+		}
+	}
+
+	/**
+	 * Function to validate item ID
+	 */
+	void validateItemId(String itemId) {
+		if (itemId == null || itemId.isEmpty() || itemId.trim().isEmpty()) {
+			throw new InvalidItemIdException("Item Id can't be null or empty");
+		}
+	}
 }

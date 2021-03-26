@@ -8,15 +8,10 @@ import com.cg.fds.entities.Item;
 
 public interface IItemRepository {
 	 Item save(Item item);
-
-	//public List<Item> findByLocation(String Location);
-
-	//public List<Item> findRestaurantByItemName(String name);
-
+	 List<Item> findItemByName(String itemName);
 	 Item remove(String itemid);
-	 Optional<Item> findById(String itemid);
-	
-	boolean existsById(String itemId);
+     Optional<Item> findById(String itemid);
+	 boolean existsById(String itemId);
 
 	
 	/*	public Item addItem(Item item);
