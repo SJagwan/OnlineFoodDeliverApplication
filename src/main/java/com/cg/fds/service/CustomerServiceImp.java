@@ -53,18 +53,18 @@ public class CustomerServiceImp implements ICustomerService {
 		addressRepository.save(address);
 		customer.setCustomerId(generateId());
 		Customer saved = customerRepository.save(customer);
-		FoodCart cart=cartUtil.getFoodCart();
-		cart.setCustomer(saved);
-		cart.setCartId(generateId());
-		cartRepository.save(cart);
+//		FoodCart cart=cartUtil.getFoodCart();
+//		cart.setCustomer(saved);
+//		cart.setCartId(generateId());
+//		cartRepository.save(cart);
 		return saved;
 	}
 
 	@Override
 	public Customer updateCustomer(Customer customer) {
 		validateCustomer(customer);
-		String customerId = customer.getCustomerId();
-		boolean exist = customerRepository.existsById("1");
+		String  customerId= customer.getCustomerId();
+		boolean exist = customerRepository.existsById(customerId);
 		if (!exist) {
 			throw new UpdateCustomerException("Customer doesn't exist for id =" + customer.getCustomerId());
 		}
@@ -77,7 +77,7 @@ public class CustomerServiceImp implements ICustomerService {
 	public Customer removeCustomer(Customer customer) {
 		validateCustomer(customer);
 		String customerId = customer.getCustomerId();
-		boolean exist = customerRepository.existsById("1");
+		boolean exist = customerRepository.existsById(customerId);
 		if (!exist) {
 			throw new RemoveCustomerException("Customer doesn't exist for id =" + customer.getCustomerId());
 		}

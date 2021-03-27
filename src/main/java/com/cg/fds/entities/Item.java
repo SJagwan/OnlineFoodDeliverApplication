@@ -5,8 +5,10 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Item {
@@ -15,13 +17,13 @@ public class Item {
 	private String itemId;
 	private String itemName;
 	
-	@ManyToOne
+	@OneToOne
 	private Category category;
 	
 	private int quantity;
 	private double cost;
 	
-	@OneToMany(fetch = FetchType.EAGER)
+	@ManyToMany(mappedBy="itemList",fetch = FetchType.EAGER)
 	private List<Restaurant> restaurants;
 
 	public String getItemId() {

@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -18,7 +19,7 @@ public class Restaurant {
 	@OneToOne
 	private Address address;
 	
-	@OneToMany
+	@ManyToMany
 	private List<Item> itemList;
 	private String managerName;
 	private String contactNumber;

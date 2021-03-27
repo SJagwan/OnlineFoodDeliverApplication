@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.cg.fds.entities.Category;
 import com.cg.fds.exception.CategoryNotFoundException;
@@ -14,6 +15,7 @@ import com.cg.fds.exception.RemoveCategoryException;
 import com.cg.fds.exception.UpdateCategoryException;
 import com.cg.fds.repository.ICategoryRepository;
 
+@Service
 public class CategoryServiceImp implements ICategoryService {
 	@Autowired
 	private ICategoryRepository categoryRepository;
@@ -27,7 +29,7 @@ public class CategoryServiceImp implements ICategoryService {
 	@Override
 	public Category updateCategory(Category cat) {
 		validateCategory(cat);
-		boolean exists = categoryRepository.existsById("1");
+		boolean exists = categoryRepository.existsById(cat.getCatId());
 		if (!exists) {
 			throw new UpdateCategoryException("Category with id not present=" + cat.getCatId());
 		}
@@ -37,7 +39,7 @@ public class CategoryServiceImp implements ICategoryService {
 	@Override
 	public Category removeCategory(Category cat) {
 		validateCategory(cat);
-		boolean exists = categoryRepository.existsById("1");
+		boolean exists = categoryRepository.existsById(cat.getCatId());
 		if (!exists) {
 			throw new RemoveCategoryException("Category with id not present=" + cat.getCatId());
 		}
@@ -57,8 +59,7 @@ public class CategoryServiceImp implements ICategoryService {
 
 	@Override
 	public List<Category> viewAllCategory() {
-		// TODO Auto-generated method stub
-		return null;
+		return categoryRepository.findAll();
 	}
 
 	/**

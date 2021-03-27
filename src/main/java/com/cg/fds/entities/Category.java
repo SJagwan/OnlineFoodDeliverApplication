@@ -25,4 +25,36 @@ public class Category {
 	public void setCategoryName(String categoryName) {
 		this.categoryName = categoryName;
 	}
+
+	@Override
+	public String toString() {
+		return "Category [catId=" + catId + ", categoryName=" + categoryName + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((catId == null) ? 0 : catId.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Category other = (Category) obj;
+		if (catId == null) {
+			if (other.catId != null)
+				return false;
+		} else if (!catId.equals(other.catId))
+			return false;
+		return true;
+	}
+	
+	
 }
