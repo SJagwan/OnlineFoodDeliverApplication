@@ -77,6 +77,7 @@ public class BillServiceImpUnitTest {
 		Bill bill = Mockito.mock(Bill.class);
 		Bill billSaved = Mockito.mock(Bill.class);
 		Mockito.doNothing().when(billService).validateBill(bill);
+		Mockito.when(bill.getBillId()).thenReturn(id);
 		Mockito.when(billRepository.existsById(id)).thenReturn(true);
 		Mockito.when(billRepository.save(bill)).thenReturn(billSaved);
 		Bill result = billService.updateBill(bill);
@@ -94,8 +95,8 @@ public class BillServiceImpUnitTest {
 	public void updateBillTest_2() {
 		int id=1;
 		Bill bill = Mockito.mock(Bill.class);
-		Bill billSaved = Mockito.mock(Bill.class);
 		Mockito.doNothing().when(billService).validateBill(bill);
+		Mockito.when(bill.getBillId()).thenReturn(id);
 		Mockito.when(billRepository.existsById(id)).thenReturn(false);
 		Executable executable = () -> billService.updateBill(bill);
 		Assertions.assertThrows(UpdateBillException.class, executable);
@@ -110,8 +111,8 @@ public class BillServiceImpUnitTest {
 	public void removeBillTest_1() {
 		int id=1;
 		Bill bill = Mockito.mock(Bill.class);
-		Bill billSaved = Mockito.mock(Bill.class);
 		Mockito.doNothing().when(billService).validateBill(bill);
+		Mockito.when(bill.getBillId()).thenReturn(id);
 		Mockito.when(billRepository.existsById(id)).thenReturn(true);
 		Bill result = billService.removeBill(bill);
 		Assertions.assertNotNull(result);
@@ -128,8 +129,8 @@ public class BillServiceImpUnitTest {
 	public void removeBillTest_2() {
 		int id=1;
 		Bill bill = Mockito.mock(Bill.class);
-		Bill billSaved = Mockito.mock(Bill.class);
 		Mockito.doNothing().when(billService).validateBill(bill);
+		Mockito.when(bill.getBillId()).thenReturn(id);
 		Mockito.when(billRepository.existsById(id)).thenReturn(false);
 		Executable executable = () -> billService.removeBill(bill);
 		Assertions.assertThrows(RemoveBillException.class, executable);
@@ -146,6 +147,7 @@ public class BillServiceImpUnitTest {
 		Bill bill=Mockito.mock(Bill.class);
 		int id=1;
 		Optional<Bill>optionBill=Optional.of(bill);
+		Mockito.when(bill.getBillId()).thenReturn(id);
 		Mockito.when(billRepository.findById(id)).thenReturn(optionBill);
 		Bill result=billService.viewBill(bill);
 		Assertions.assertNotNull(result);
@@ -161,6 +163,7 @@ public class BillServiceImpUnitTest {
 		int id=1;
 		Bill bill=Mockito.mock(Bill.class);
 		Optional<Bill>optionBill=Optional.empty();
+		Mockito.when(bill.getBillId()).thenReturn(id);
 		Mockito.when(billRepository.findById(id)).thenReturn(optionBill);
 		Executable executable = () -> billService.viewBill(bill);
 		Assertions.assertThrows(BillDoesNotException.class, executable);		

@@ -4,14 +4,14 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 
-import com.cg.fds.ui.OrderUi;
+import com.cg.fds.ui.CustomUi;
 
 @SpringBootApplication
 public class FdsApplication {
 
 	public static void main(String[] args) {
 		ConfigurableApplicationContext context=SpringApplication.run(FdsApplication.class, args);
-		OrderUi ui=context.getBean(OrderUi.class);
+		CustomUi ui=context.getBean(CustomUi.class);
 		ui.start();
 	}
 

@@ -65,4 +65,35 @@ public class Address {
 	public void setPincode(String pincode) {
 		this.pincode = pincode;
 	}
+	@Override
+	public String toString() {
+		return "Address [addressId=" + addressId + ", buildingName=" + buildingName + ", area=" + area + ", streetNo="
+				+ streetNo + ", city=" + city + ", state=" + state + ", country=" + country + ", pincode=" + pincode
+				+ "]";
+	}
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((addressId == null) ? 0 : addressId.hashCode());
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Address other = (Address) obj;
+		if (addressId == null) {
+			if (other.addressId != null)
+				return false;
+		} else if (!addressId.equals(other.addressId))
+			return false;
+		return true;
+	}
+	
+	
 }

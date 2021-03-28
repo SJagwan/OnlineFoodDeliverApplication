@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cg.fds.entities.Bill;
+import com.cg.fds.entities.Customer;
+import com.cg.fds.entities.FoodCart;
 import com.cg.fds.entities.Item;
 import com.cg.fds.entities.OrderDetails;
 import com.cg.fds.exception.BillDoesNotException;
@@ -16,12 +18,24 @@ import com.cg.fds.exception.InvalidBillException;
 import com.cg.fds.exception.RemoveBillException;
 import com.cg.fds.exception.UpdateBillException;
 import com.cg.fds.repository.IBillRepository;
+import com.cg.fds.repository.ICartRepository;
+import com.cg.fds.repository.ICustomerRepository;
+import com.cg.fds.repository.IOrderRepository;
 
 @Service
 public class BillServiceImp implements IBillService {
 
 	@Autowired
 	private IBillRepository billRepository;
+	
+	@Autowired
+	private ICustomerRepository customerRepository;
+	
+	@Autowired
+	private ICartRepository cartRepository;
+	
+	@Autowired
+	private IOrderRepository orderRepository;
 
 	@Autowired
 	public LocalDateTime currentDateTime() {
@@ -37,7 +51,7 @@ public class BillServiceImp implements IBillService {
 		double totalCost = 0;
 		List<Item> items = order.getItems();
 		for (Item item : items) {
-			totalCost = totalCost + item.getCost();
+			totalCost = totalCost + (item.getCost()*item.getQuantity());
 		}
 		bill.setTotalItem(items.size());
 		bill.setTotalCost(totalCost);
@@ -48,7 +62,7 @@ public class BillServiceImp implements IBillService {
 	public Bill updateBill(Bill bill) {
 		validateBill(bill);
 		int billId = bill.getBillId();
-		boolean exist = billRepository.existsById(1);
+		boolean exist = billRepository.existsById(billId);
 		if (!exist) {
 			throw new UpdateBillException("Bill doesn't exist for id =" + bill.getBillId());
 		}
@@ -59,7 +73,7 @@ public class BillServiceImp implements IBillService {
 	public Bill removeBill(Bill bill) {
 		validateBill(bill);
 		int billId = bill.getBillId();
-		boolean exist = billRepository.existsById(1);
+		boolean exist = billRepository.existsById(billId);
 		if (!exist) {
 			throw new RemoveBillException("Bill doesn't exist for id =" + bill.getBillId());
 		}
@@ -69,8 +83,8 @@ public class BillServiceImp implements IBillService {
 
 	@Override
 	public Bill viewBill(Bill bill) {
-		int id = 1;
-		Optional<Bill> viewBill = billRepository.findById(id);
+		int billId = bill.getBillId();
+		Optional<Bill> viewBill = billRepository.findById(billId);
 		if (!viewBill.isPresent()) {
 			throw new BillDoesNotException("Bill doesn't exist for id =" + bill.getBillId());
 		}
@@ -85,8 +99,10 @@ public class BillServiceImp implements IBillService {
 
 	@Override
 	public List<Bill> viewBills(String custId) {
-
-		return null;
+		Customer customer=customerRepository.findCustomerBycustomerId(custId);
+		FoodCart cart=cartRepository.findFoodCartByCustomer(customer);
+		OrderDetails orderDetail=orderRepository.findOrderDetailsBycart(cart);
+		return billRepository.findByorder(orderDetail);
 	}
 
 	@Override

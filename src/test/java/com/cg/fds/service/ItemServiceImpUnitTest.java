@@ -1,5 +1,6 @@
 package com.cg.fds.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Assertions;
@@ -82,6 +83,7 @@ public class ItemServiceImpUnitTest {
 		Item item = Mockito.mock(Item.class);
 		Mockito.doNothing().when(itemService).validateItem(item);
 		Item itemUpdated= Mockito.mock(Item.class);
+		Mockito.when(item.getItemId()).thenReturn(itemId);
 		Mockito.when(itemRepository.existsById(itemId)).thenReturn(true);
 		Mockito.when(itemRepository.save(item)).thenReturn(itemUpdated);
 		Item result = itemService.updateItem(item);
@@ -97,6 +99,7 @@ public class ItemServiceImpUnitTest {
 		String itemId = "1";
 		Item item = Mockito.mock(Item.class);
 		Mockito.doNothing().when(itemService).validateItem(item);
+		Mockito.when(item.getItemId()).thenReturn(itemId);
 		Mockito.when(itemRepository.existsById(itemId)).thenReturn(false);
 		Executable executable = () -> itemService.updateItem(item);
 		Assertions.assertThrows(UpdateItemException.class, executable);
@@ -109,7 +112,9 @@ public class ItemServiceImpUnitTest {
 	public void removeItemTest_1() {
 		String itemId = "1";
 		Item item = Mockito.mock(Item.class);
+		Optional<Item>itemOption=Optional.of(item);
 		Mockito.when(itemRepository.existsById(itemId)).thenReturn(true);
+		Mockito.when(itemRepository.findById(itemId)).thenReturn(itemOption);
 		Item result = itemService.removeItem(itemId);
 		Assertions.assertNotNull(result);
 		Assertions.assertEquals(item, result);
@@ -124,6 +129,16 @@ public class ItemServiceImpUnitTest {
 		Mockito.when(itemRepository.existsById(itemId)).thenReturn(false);
 		Executable executable = () -> itemService.removeItem(itemId);
 		Assertions.assertThrows(RemoveItemException.class, executable);
+	}
+	
+	@Test
+	public void viewAllItemsByNameTest() {
+		String name="lays";
+		List<Item>list=Mockito.mock(List.class);
+		Mockito.when(itemRepository.findByitemName(name)).thenReturn(list);
+		List<Item> result =itemService.viewAllItemsByName(name);
+		Assertions.assertNotNull(result);
+		Assertions.assertEquals(list, result);
 	}
 
 }

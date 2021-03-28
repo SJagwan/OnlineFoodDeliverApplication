@@ -32,7 +32,6 @@ public class CartServiceImp implements ICartService {
 			cart.setItemList(items);
 		}
 		items.add(item);
-		cart.setItemList(items);
 		return cartRepository.save(cart);
 	}
 

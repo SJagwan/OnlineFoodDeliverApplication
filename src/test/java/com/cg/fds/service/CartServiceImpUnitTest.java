@@ -36,23 +36,43 @@ public class CartServiceImpUnitTest {
 	CartServiceImp cartService;
 	
 	
+	/**
+	 * scenario when items exist in cart before , items list is not null
+	 */
 	@Test
-	void addItemToCartTest() {
-		FoodCart cart=Mockito.mock(FoodCart.class);
+	void addItemToCartTest_1() {
+		FoodCart cart= Mockito.mock(FoodCart.class);
 		Mockito.doNothing().when(cartService).validateCart(cart);
-		Mockito.doNothing().when(cartService).cartExist(cart);
-		FoodCart cartSaved=Mockito.mock(FoodCart.class);
-		Item item=Mockito.mock(Item.class);
-		List<Item>items=new ArrayList<>();
+		FoodCart cartSaved= Mockito.mock(FoodCart.class);
+		Item item= Mockito.mock(Item.class);
+		List<Item>items=Mockito.mock(List.class);
 		Mockito.when(cart.getItemList()).thenReturn(items);
 		Mockito.when(cartRepository.save(cart)).thenReturn(cartSaved);
 		FoodCart result=cartService.addItemToCart(cart, item);
 		Assertions.assertNotNull(result);
 		Assertions.assertEquals(cartSaved, result);
-		Mockito.verify(cart).setItemList(items);
-		Mockito.verify(cart).getItemList();
+		Mockito.verify(items).add(item);
 		Mockito.verify(cartService).validateCart(cart);
-		Mockito.verify(cartService).cartExist(cart);
+	}
+
+
+	/**
+	 * scenario when items exist in cart before , items list is null
+	 */
+	@Test
+	void addItemToCartTest_2() {
+		FoodCart cart= new FoodCart();
+		Mockito.doNothing().when(cartService).validateCart(cart);
+		FoodCart cartSaved= Mockito.mock(FoodCart.class);
+		Item item= Mockito.mock(Item.class);
+		Mockito.when(cartRepository.save(cart)).thenReturn(cartSaved);
+		FoodCart result=cartService.addItemToCart(cart, item);
+		List<Item>items=cart.getItemList();
+		Assertions.assertTrue(items.contains(item));
+		Assertions.assertNotNull(result);
+		Assertions.assertEquals(cartSaved, result);
+		Mockito.verify(cartService).validateCart(cart);
+
 	}
 	
 	@Test
@@ -182,6 +202,7 @@ public class CartServiceImpUnitTest {
 	public void cartExistTest() {
 		String cartId="1";
 		FoodCart cart=Mockito.mock(FoodCart.class);
+		Mockito.when(cart.getCartId()).thenReturn(cartId);
 		Mockito.when(cartRepository.existsById(cartId)).thenReturn(false);
 		Executable executable = () -> cartService.cartExist(cart);
 		Assertions.assertThrows(CartNotExistException.class, executable);

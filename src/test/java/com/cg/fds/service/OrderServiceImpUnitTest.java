@@ -104,6 +104,7 @@ public class OrderServiceImpUnitTest {
 		OrderDetails orderDetail=Mockito.mock(OrderDetails.class);
 //		Mockito.doNothing().when(orderService).validateOrder(orderDetail);
 		OrderDetails orderDetailUpdated=Mockito.mock(OrderDetails.class);
+		Mockito.when(orderDetail.getOrderId()).thenReturn(id);
 		Mockito.when(orderRepository.existsById(id)).thenReturn(true);
 		Mockito.when(orderRepository.save(orderDetail)).thenReturn(orderDetailUpdated);
 		OrderDetails result=orderService.updateOrder(orderDetail);
@@ -120,6 +121,7 @@ public class OrderServiceImpUnitTest {
 		int id=1;
 		OrderDetails orderDetail=Mockito.mock(OrderDetails.class);
 		Mockito.doNothing().when(orderService).validateOrder(orderDetail);
+		Mockito.when(orderDetail.getOrderId()).thenReturn(id);
 		Mockito.when(orderRepository.existsById(id)).thenReturn(false);
 		Executable executable = () -> orderService.updateOrder(orderDetail);
 		Assertions.assertThrows(UpdateOrderException.class, executable);
@@ -136,6 +138,7 @@ public class OrderServiceImpUnitTest {
 		int id=1;
 		OrderDetails orderDetail=Mockito.mock(OrderDetails.class);
 		doNothing().when(orderService).validateOrder(orderDetail);
+		Mockito.when(orderDetail.getOrderId()).thenReturn(id);
 		Mockito.when(orderRepository.existsById(id)).thenReturn(true);
 		OrderDetails result=orderService.removeOrder(orderDetail);
 		Assertions.assertNotNull(result);
@@ -145,9 +148,11 @@ public class OrderServiceImpUnitTest {
 	
 	@Test
 	public void removeOrderTest_2() {
+		int id=1;
 		OrderDetails orderDetail=Mockito.mock(OrderDetails.class);
 		Mockito.doNothing().when(orderService).validateOrder(orderDetail);
-		Mockito.when(orderRepository.existsById(1)).thenReturn(false);
+		Mockito.when(orderDetail.getOrderId()).thenReturn(id);
+		Mockito.when(orderRepository.existsById(id)).thenReturn(false);
 		Executable executable = () -> orderService.removeOrder(orderDetail);
 		Assertions.assertThrows(RemoveOrderException.class, executable);
 			

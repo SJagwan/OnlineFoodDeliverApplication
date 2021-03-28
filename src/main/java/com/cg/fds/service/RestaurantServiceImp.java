@@ -1,11 +1,14 @@
 package com.cg.fds.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cg.fds.entities.Address;
+import com.cg.fds.entities.Item;
 import com.cg.fds.entities.Restaurant;
 import com.cg.fds.exception.InvalidRestaurantException;
 import com.cg.fds.exception.InvalidRestaurantLocationException;
@@ -13,16 +16,22 @@ import com.cg.fds.exception.InvalidRestaurantNameException;
 import com.cg.fds.exception.RemoveRestaurantException;
 import com.cg.fds.exception.RestaurantNotFoundException;
 import com.cg.fds.exception.UpdateRestaurantException;
+import com.cg.fds.repository.IAddressRepository;
 import com.cg.fds.repository.IRestaurantRepository;
 
 @Service
 public class RestaurantServiceImp implements IRestaurantService {
 	@Autowired
 	private IRestaurantRepository restaurantRepository;
+	
+	@Autowired
+	private IAddressRepository addressRepository;
 
 	@Override
 	public Restaurant addRestaurant(Restaurant res) {
 		validateRestaurant(res);
+		Address address=res.getAddress();
+		addressRepository.save(address);
 		Restaurant addRestaurant = restaurantRepository.save(res);
 		return addRestaurant;
 	}
@@ -31,7 +40,7 @@ public class RestaurantServiceImp implements IRestaurantService {
 	public Restaurant removeRestaurant(Restaurant res) {
 		validateRestaurant(res);
 		String restaurantId = res.getRestaurantId();
-		boolean exists = restaurantRepository.existsById("1");
+		boolean exists = restaurantRepository.existsById( restaurantId );
 		if (!exists) {
 			throw new RemoveRestaurantException("Restaurant with id not present=" + res.getRestaurantId());
 		}
@@ -43,7 +52,7 @@ public class RestaurantServiceImp implements IRestaurantService {
 	public Restaurant updateRestaurant(Restaurant res) {
 		validateRestaurant(res);
 		String restaurantId = res.getRestaurantId();
-		boolean exists = restaurantRepository.existsById("1");
+		boolean exists = restaurantRepository.existsById( restaurantId );
 		if (!exists) {
 			throw new UpdateRestaurantException("Restaurant with id not present=" + res.getRestaurantId());
 		}
@@ -62,24 +71,22 @@ public class RestaurantServiceImp implements IRestaurantService {
 
 	@Override
 	public Restaurant viewAllRestaurants() {
-
 		return null;
 	}
 
 	@Override
 	public List<Restaurant> viewNearByRestaurant(String location) {
-//		validateRestaurantLocation(location);
-//		List<Restaurant> restaurants = restaurantRepository.findByLocation(location);
-//		return restaurants;
-		return null;
+
+		Address address=addressRepository.findAddressByarea(location);
+		List<Restaurant> listr=restaurantRepository.findByaddress(address);
+		return listr;
 	}
 
 	@Override
 	public List<Restaurant> viewRestaurantByItemName(String name) {
-//		validateRestaurantName(name);
-//		List<Restaurant> restaurants = restaurantRepository.findRestaurantByItemName(name);
-//		return restaurants;
-		return null;
+
+		List<Restaurant> list=restaurantRepository.findByrestaurantName(name);
+		return list;
 	}
 
 	void validateRestaurantName(String name) {
@@ -94,12 +101,12 @@ public class RestaurantServiceImp implements IRestaurantService {
 		}
 
 		validateRestaurantName(restaurant.getRestaurantName());
-		validateRestaurantLocation(restaurant.getAddress().getAddressId());
+		validateRestaurantLocation(restaurant.getAddress().getArea());
 	}
 
 	void validateRestaurantLocation(String location) {
 		if (location == null || location.isEmpty() || location.trim().isEmpty()) {
-			throw new InvalidRestaurantLocationException("Restaurant Name can't be null or empty");
+			throw new InvalidRestaurantLocationException("Restaurant location  can't be null or empty");
 		}
 
 	}

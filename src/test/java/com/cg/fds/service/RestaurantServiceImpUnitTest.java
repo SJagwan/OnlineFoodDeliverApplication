@@ -6,6 +6,7 @@ import org.mockito.Mockito;
 import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import com.cg.fds.entities.Address;
 import com.cg.fds.entities.Restaurant;
 import com.cg.fds.exception.InvalidRestaurantException;
 import com.cg.fds.exception.InvalidRestaurantLocationException;
@@ -13,6 +14,7 @@ import com.cg.fds.exception.InvalidRestaurantNameException;
 import com.cg.fds.exception.RemoveRestaurantException;
 import com.cg.fds.exception.RestaurantNotFoundException;
 import com.cg.fds.exception.UpdateRestaurantException;
+import com.cg.fds.repository.IAddressRepository;
 import com.cg.fds.repository.IRestaurantRepository;
 
 import java.util.List;
@@ -28,6 +30,9 @@ public class RestaurantServiceImpUnitTest {
 
 	@Mock
 	IRestaurantRepository restaurantRepository;
+	
+	@Mock
+	IAddressRepository addressRepository;
 
 	@Spy
 	@InjectMocks
@@ -42,8 +47,11 @@ public class RestaurantServiceImpUnitTest {
 	public void addRestaurantTest() {
 
 		Restaurant restaurant = Mockito.mock(Restaurant.class);
+		Address address=Mockito.mock(Address.class);
 		Mockito.doNothing().when(restaurantService).validateRestaurant(restaurant);
 		Restaurant restaurantSaved = Mockito.mock(Restaurant.class);
+		Mockito.when(restaurant.getAddress()).thenReturn(address);
+		Mockito.when(addressRepository.save(address)).thenReturn(address);
 		Mockito.when(restaurantRepository.save(restaurant)).thenReturn(restaurantSaved);
 		Restaurant result = restaurantService.addRestaurant(restaurant);
 		Assertions.assertNotNull(result);
@@ -57,6 +65,7 @@ public class RestaurantServiceImpUnitTest {
 		String restaurantId = "1";
 		Restaurant restaurant = Mockito.mock(Restaurant.class);
 		Mockito.doNothing().when(restaurantService).validateRestaurant(restaurant);
+		Mockito.when(restaurant.getRestaurantId()).thenReturn(restaurantId);
 		Mockito.when(restaurantRepository.existsById(restaurantId)).thenReturn(true);
 		Restaurant result = restaurantService.removeRestaurant(restaurant);
 		Assertions.assertNotNull(result);
@@ -68,7 +77,7 @@ public class RestaurantServiceImpUnitTest {
 		String restaurantId = "1";
 		Restaurant restaurant = Mockito.mock(Restaurant.class);
 		Mockito.doNothing().when(restaurantService).validateRestaurant(restaurant);
-		Restaurant restaurantSaved = Mockito.mock(Restaurant.class);
+		Mockito.when(restaurant.getRestaurantId()).thenReturn(restaurantId);
 		Mockito.when(restaurantRepository.existsById(restaurantId)).thenReturn(false);
 		Executable executable = () -> restaurantService.removeRestaurant(restaurant);
 		Assertions.assertThrows(RemoveRestaurantException.class, executable);
@@ -104,6 +113,7 @@ public class RestaurantServiceImpUnitTest {
 		Restaurant restaurant = Mockito.mock(Restaurant.class);
 		Mockito.doNothing().when(restaurantService).validateRestaurant(restaurant);
 		Restaurant restaurantSaved = Mockito.mock(Restaurant.class);
+		Mockito.when(restaurant.getRestaurantId()).thenReturn(restaurantId);
 		Mockito.when(restaurantRepository.existsById(restaurantId)).thenReturn(true);
 		Mockito.when(restaurantRepository.save(restaurant)).thenReturn(restaurantSaved);
 		Restaurant result = restaurantService.updateRestaurant(restaurant);
@@ -116,7 +126,7 @@ public class RestaurantServiceImpUnitTest {
 		String restaurantId = "1";
 		Restaurant restaurant = Mockito.mock(Restaurant.class);
 		Mockito.doNothing().when(restaurantService).validateRestaurant(restaurant);
-		Restaurant restaurantSaved = Mockito.mock(Restaurant.class);
+		Mockito.when(restaurant.getRestaurantId()).thenReturn(restaurantId);
 		Mockito.when(restaurantRepository.existsById(restaurantId)).thenReturn(false);
 		Executable executable = () -> restaurantService.updateRestaurant(restaurant);
 		Assertions.assertThrows(UpdateRestaurantException.class, executable);

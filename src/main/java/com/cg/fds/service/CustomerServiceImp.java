@@ -68,6 +68,7 @@ public class CustomerServiceImp implements ICustomerService {
 		if (!exist) {
 			throw new UpdateCustomerException("Customer doesn't exist for id =" + customer.getCustomerId());
 		}
+		
 		Customer updateCustomer = customerRepository.save(customer);
 
 		return updateCustomer;
@@ -81,6 +82,8 @@ public class CustomerServiceImp implements ICustomerService {
 		if (!exist) {
 			throw new RemoveCustomerException("Customer doesn't exist for id =" + customer.getCustomerId());
 		}
+		FoodCart cart=cartRepository.findFoodCartByCustomer(customer);
+		cartRepository.delete(cart);
 		customerRepository.delete(customer);
 		return customer;
 	}
