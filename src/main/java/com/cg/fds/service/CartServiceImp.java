@@ -2,10 +2,12 @@ package com.cg.fds.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cg.fds.entities.Customer;
 import com.cg.fds.entities.FoodCart;
 import com.cg.fds.entities.Item;
 import com.cg.fds.exception.CartNotExistException;
@@ -19,9 +21,13 @@ import com.cg.fds.repository.IItemRepository;
 public class CartServiceImp implements ICartService {
 	@Autowired
 	private ICartRepository cartRepository;
-
+	
+	@Autowired
+	private ICustomerService customerService;
+	
 	@Autowired
 	private IItemRepository itemRepository;
+
 
 	@Override
 	public FoodCart addItemToCart(FoodCart cart, Item item) {
@@ -30,6 +36,11 @@ public class CartServiceImp implements ICartService {
 		if (items == null) {
 			items = new ArrayList<>();
 			cart.setItemList(items);
+		}
+		if(items.contains(item))
+		{
+			FoodCart updatedCart=increaseQuantity(cart,item,item.getQuantity());
+			return updatedCart;
 		}
 		items.add(item);
 		return cartRepository.save(cart);
@@ -44,7 +55,11 @@ public class CartServiceImp implements ICartService {
 			throw new ItemNotFoundException(
 					"Item is Not present in this ItemList for thisFoodCart=" + cart.getCartId());
 		}
-		item.setQuantity(quantity);
+		int index=items.indexOf(item);
+		Item existing=items.get(index);
+		int existingQuantity=existing.getQuantity();
+        int updatedQuantity=existingQuantity+quantity;
+		item.setQuantity(updatedQuantity);
 		itemRepository.save(item);
 		return cartRepository.save(cart);
 	}
@@ -57,7 +72,14 @@ public class CartServiceImp implements ICartService {
 		if (!items.contains(item)) {
 			throw new ItemNotFoundException("Item is Not present in the ItemList of Cart =" + cart.getCartId());
 		}
-		item.setQuantity(quantity);
+		int index=items.indexOf(item);
+		Item existing=items.get(index);
+		int existingQuantity=existing.getQuantity();
+        int updatedQuantity=existingQuantity-quantity;
+        item.setQuantity(updatedQuantity);
+		if(updatedQuantity<=0){
+			items.remove(existing);
+		}
 		itemRepository.save(item);
 		return cartRepository.save(cart);
 	}
@@ -81,6 +103,13 @@ public class CartServiceImp implements ICartService {
 		cart.setItemList(null);
 		return cartRepository.save(cart);
 
+	}
+	
+	@Override
+	public FoodCart findFoodCartByCustomer(String customerId) {
+		Customer customer=customerService.viewCustomer(customerId);
+		FoodCart foodCart=cartRepository.findFoodCartByCustomer(customer);
+		return foodCart;
 	}
 
 	public void validateCart(FoodCart cart) {

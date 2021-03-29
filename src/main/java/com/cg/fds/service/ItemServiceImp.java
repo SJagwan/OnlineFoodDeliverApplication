@@ -62,7 +62,7 @@ public class ItemServiceImp implements IItemService {
 
 	@Override
 	public List<Item> viewAllItems(Restaurant res) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
@@ -74,7 +74,7 @@ public class ItemServiceImp implements IItemService {
 
 	@Override
 	public List<Item> viewAllItemsByName(String name) {
-		List<Item> list = itemRepository.findByitemName(name);
+		List<Item> list = itemRepository.findByItemName(name);
 		return list;
 	}
 

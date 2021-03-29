@@ -53,10 +53,10 @@ public class CustomerServiceImp implements ICustomerService {
 		addressRepository.save(address);
 		customer.setCustomerId(generateId());
 		Customer saved = customerRepository.save(customer);
-//		FoodCart cart=cartUtil.getFoodCart();
-//		cart.setCustomer(saved);
-//		cart.setCartId(generateId());
-//		cartRepository.save(cart);
+		FoodCart cart=cartUtil.getFoodCart();
+		cart.setCartId(generateId());
+		cart.setCustomer(saved);
+		cartRepository.save(cart);
 		return saved;
 	}
 

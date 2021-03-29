@@ -99,10 +99,10 @@ public class BillServiceImp implements IBillService {
 
 	@Override
 	public List<Bill> viewBills(String custId) {
-		Customer customer=customerRepository.findCustomerBycustomerId(custId);
+		Customer customer=customerRepository.findCustomerByCustomerId(custId);
 		FoodCart cart=cartRepository.findFoodCartByCustomer(customer);
 		OrderDetails orderDetail=orderRepository.findOrderDetailsBycart(cart);
-		return billRepository.findByorder(orderDetail);
+		return billRepository.findByOrder(orderDetail);
 	}
 
 	@Override

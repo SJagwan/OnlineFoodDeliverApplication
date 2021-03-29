@@ -95,9 +95,6 @@ public class CustomUi {
 	
 	public void start() {
 		
-		FoodCart cart=cartUtil.getFoodCart();
-		cart.setCartId(generateId());
-		
 		Category category1=categoryUtil.getCategory();
 		category1.setCatId(generateId());
 		category1.setCategoryName("chips");
@@ -174,7 +171,7 @@ public class CustomUi {
 //		customer2.setFirstName("Hardik");
 //		System.out.println(customerService.updateCustomer(customer2));
 //
-//		FoodCart cart=cartRepository.findFoodCartByCustomer(customer2);
+		FoodCart cart=cartRepository.findFoodCartByCustomer(customer1);
 		cart.setCustomer(customer1);
 		
 //		System.out.println("View Customer");
@@ -217,13 +214,13 @@ public class CustomUi {
 //		System.out.println(r1.getItemList());
 //		System.out.println("Remove Restaurant");
 //		System.out.println(restaurantService.removeRestaurant(r1));
-		System.out.println("Update Restaurant");
-		r1.setRestaurantName("SJ");
-		System.out.println(restaurantService.updateRestaurant(r1));
-		System.out.println("View Restaurant");
-		System.out.println(restaurantService.viewRestaurant(r1.getRestaurantId()));
-		System.out.println("FindBy location Restaurant");
-		System.out.println(restaurantService.viewNearByRestaurant("dehradun"));
+//		System.out.println("Update Restaurant");
+//		r1.setRestaurantName("SJ");
+//		System.out.println(restaurantService.updateRestaurant(r1));
+//		System.out.println("View Restaurant");
+//		System.out.println(restaurantService.viewRestaurant(r1.getRestaurantId()));
+//		System.out.println("FindBy location Restaurant");
+//		System.out.println(restaurantService.viewNearByRestaurant("dehradun"));
 		System.out.println();
 		
 		
@@ -238,9 +235,9 @@ public class CustomUi {
 //		System.out.println(" Increase Quantity");
 //		System.out.println(cartService.increaseQuantity(cart, item1, 3));
 //		System.out.println(" Reduce Quantity");
-//		System.out.println(cartService.reduceQuantity(cart, item1, 2));
-////		System.out.println(" Remove Item");
-////		System.out.println(cartService.removeItem(cart, item2));
+//		System.out.println(cartService.reduceQuantity(cart, item1, 3));
+		System.out.println(" Remove Item");
+		System.out.println(cartService.removeItem(cart, item2));
 ////		System.out.println("Clear cart");
 ////		System.out.println(cartService.clearCart(cart));
 ////		System.out.println();
