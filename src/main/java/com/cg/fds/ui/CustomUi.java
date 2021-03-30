@@ -246,11 +246,11 @@ public class CustomUi {
 ////		System.out.println(cartService.clearCart(cart));
 ////		System.out.println();
 //		
-//		order.setCart(cart);
-//		System.out.println("------------------UI-- OrderDetails -----------------");
-//		
-//		System.out.println("Adding orderDetail");
-//		System.out.println(orderService.addOrder(order));
+		order.setCart(cart1);
+		System.out.println("------------------UI-- OrderDetails -----------------");
+		
+		System.out.println("Adding orderDetail");
+		System.out.println(orderService.addOrder(order));
 //		System.out.println("Update orderDetail");
 //		order.setOrderStatus(OrderStatus.DELIVERED);
 ////		System.out.println(orderService.updateOrder(order));

@@ -2,6 +2,7 @@ package com.cg.fds.service;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -82,19 +83,22 @@ public class BillServiceImp implements IBillService {
 	}
 
 	@Override
-	public Bill viewBill(Bill bill) {
-		int billId = bill.getBillId();
+	public Bill viewBill(int billId) {
+		
 		Optional<Bill> viewBill = billRepository.findById(billId);
 		if (!viewBill.isPresent()) {
-			throw new BillDoesNotException("Bill doesn't exist for id =" + bill.getBillId());
+			throw new BillDoesNotException("Bill doesn't exist for id =" + billId);
 		}
 		return viewBill.get();
 	}
 
 	@Override
 	public List<Bill> viewBills(LocalDate startDate, LocalDate endDate) {
-
-		return null;
+		LocalDateTime startDateTime = LocalDateTime.of(startDate, LocalTime.MIN);
+        LocalDateTime endDateTime = LocalDateTime.of(endDate, LocalTime.MAX);
+        List<Bill> bills = billRepository.findOrdersBetweenDates(startDateTime, endDateTime);
+        return bills;
+       
 	}
 
 	@Override

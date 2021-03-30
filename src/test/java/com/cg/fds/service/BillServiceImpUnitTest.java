@@ -149,7 +149,7 @@ public class BillServiceImpUnitTest {
 		Optional<Bill>optionBill=Optional.of(bill);
 		Mockito.when(bill.getBillId()).thenReturn(id);
 		Mockito.when(billRepository.findById(id)).thenReturn(optionBill);
-		Bill result=billService.viewBill(bill);
+		Bill result=billService.viewBill(id);
 		Assertions.assertNotNull(result);
 		Assertions.assertEquals(bill,result);
 		Mockito.verify(billRepository).findById(1);
@@ -165,7 +165,7 @@ public class BillServiceImpUnitTest {
 		Optional<Bill>optionBill=Optional.empty();
 		Mockito.when(bill.getBillId()).thenReturn(id);
 		Mockito.when(billRepository.findById(id)).thenReturn(optionBill);
-		Executable executable = () -> billService.viewBill(bill);
+		Executable executable = () -> billService.viewBill(id);
 		Assertions.assertThrows(BillDoesNotException.class, executable);		
 	}
 	
