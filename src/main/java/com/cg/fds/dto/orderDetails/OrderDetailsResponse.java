@@ -1,16 +1,15 @@
 package com.cg.fds.dto.orderDetails;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
-public class OrderDetailsR {
+public class OrderDetailsResponse {
 	private String customerId;
 	private String firstName;
 	private String orderStatus;
-	private LocalDateTime orderDate;
+	private String orderDate;
 	private List<String>itemName;
 	
-	public OrderDetailsR() {}
+	public OrderDetailsResponse() {}
 
 	public String getCustomerId() {
 		return customerId;
@@ -36,11 +35,11 @@ public class OrderDetailsR {
 		this.orderStatus = orderStatus;
 	}
 
-	public LocalDateTime getOrderDate() {
+	public String getOrderDate() {
 		return orderDate;
 	}
 
-	public void setOrderDate(LocalDateTime orderDate) {
+	public void setOrderDate(String orderDate) {
 		this.orderDate = orderDate;
 	}
 

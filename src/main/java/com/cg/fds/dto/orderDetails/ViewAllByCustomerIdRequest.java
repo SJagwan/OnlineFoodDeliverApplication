@@ -1,16 +1,17 @@
 package com.cg.fds.dto.orderDetails;
 
-public class AddOrderRequest {
+public class ViewAllByCustomerIdRequest {
+	
 	private String customerId;
-	
-	public AddOrderRequest() {}
-	
+	public ViewAllByCustomerIdRequest() {
+		
+	}
 	public String getCustomerId() {
 		return customerId;
 	}
 	public void setCustomerId(String customerId) {
 		this.customerId = customerId;
 	}
-	
 
+	
 }

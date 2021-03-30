@@ -101,7 +101,7 @@ public class BillServiceImp implements IBillService {
 	public List<Bill> viewBills(String custId) {
 		Customer customer=customerRepository.findCustomerByCustomerId(custId);
 		FoodCart cart=cartRepository.findFoodCartByCustomer(customer);
-		OrderDetails orderDetail=orderRepository.findOrderDetailsBycart(cart);
+		OrderDetails orderDetail=orderRepository.findOrderDetailsByCart(cart);
 		return billRepository.findByOrder(orderDetail);
 	}
 
