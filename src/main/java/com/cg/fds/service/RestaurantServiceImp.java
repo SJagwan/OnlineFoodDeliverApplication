@@ -26,6 +26,11 @@ public class RestaurantServiceImp implements IRestaurantService {
 	
 	@Autowired
 	private IAddressRepository addressRepository;
+	/**
+	 * scenario : Adding the Restaurant
+	 * input: res Object is passed in the parameter
+	 * expectation: Restaurant should be added
+	 */
 
 	@Override
 	public Restaurant addRestaurant(Restaurant res) {
@@ -35,6 +40,11 @@ public class RestaurantServiceImp implements IRestaurantService {
 		Restaurant addRestaurant = restaurantRepository.save(res);
 		return addRestaurant;
 	}
+	/**
+	 * scenario : Removing the restaurant
+	 * input: res Object is passed in the parameter
+	 * expectation: If the restaurant is present in the Database, then restaurant is getting removed, or else an exception is thrown
+	 */
 
 	@Override
 	public Restaurant removeRestaurant(Restaurant res) {
@@ -47,6 +57,11 @@ public class RestaurantServiceImp implements IRestaurantService {
 		restaurantRepository.delete(res);
 		return res;
 	}
+	/**
+	 * scenario : Updating the restaurant
+	 * input: res Object is passed in the parameter
+	 * expectation: If the restaurant is present in the Database, then restaurant is getting updated, or else an exception is thrown
+	 */
 
 	@Override
 	public Restaurant updateRestaurant(Restaurant res) {
@@ -60,6 +75,11 @@ public class RestaurantServiceImp implements IRestaurantService {
 		return updaterestaurant;
 	}
 
+	/**
+	 * scenario : viewing the restaurant
+	 * input: id Object is passed in the parameter
+	 * expectation: If the Restaurant is present in the Database, then restaurant is getting viewed, or else an exception is thrown
+	 */
 	@Override
 	public Restaurant viewRestaurant(String id) {
 		Optional<Restaurant> viewRestaurant = restaurantRepository.findById(id);
@@ -68,12 +88,19 @@ public class RestaurantServiceImp implements IRestaurantService {
 		}
 		return viewRestaurant.get();
 	}
+	/**
+	 * scenario : viewing all the restaurants
+	 */
 
 	@Override
 	public Restaurant viewAllRestaurants() {
 		return null;
 	}
-
+	/**
+	 * scenario : viewing the list of all near by restaurants
+	 * input: location Object is passed in the parameter
+	 * expectation: List of restaurants should be returned with respect to the address/location
+	 */
 	@Override
 	public List<Restaurant> viewNearByRestaurant(String location) {
 
@@ -81,6 +108,11 @@ public class RestaurantServiceImp implements IRestaurantService {
 		List<Restaurant> listr=restaurantRepository.findByAddress(address);
 		return listr;
 	}
+	/**
+	 * scenario : viewing the list of restaurant by the ItemName
+	 * input: name Object is passed in the parameter
+	 * expectation: List of restaurant should be returned
+	 */
 
 	@Override
 	public List<Restaurant> viewRestaurantByItemName(String name) {

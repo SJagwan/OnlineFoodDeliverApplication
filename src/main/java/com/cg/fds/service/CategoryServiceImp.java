@@ -19,12 +19,23 @@ import com.cg.fds.repository.ICategoryRepository;
 public class CategoryServiceImp implements ICategoryService {
 	@Autowired
 	private ICategoryRepository categoryRepository;
+	
+	/**
+	 * scenario : Adding category
+	 * input: Cat Object is passed in the parameter
+	 * expectation: Saving and adding category
+	 */
 
 	@Override
 	public Category addCategory(Category cat) {
 		validateCategory(cat);
 		return categoryRepository.save(cat);
 	}
+	/**
+	 * scenario : Updating the Category
+	 * input: Cat Object is passed in the parameter
+	 * expectation: If the Category is present in the Database, then Category is getting updated, or else an exception is thrown
+	 */
 
 	@Override
 	public Category updateCategory(Category cat) {
@@ -35,7 +46,11 @@ public class CategoryServiceImp implements ICategoryService {
 		}
 		return categoryRepository.save(cat);
 	}
-
+	/**
+	 * scenario : Removing the Category
+	 * input: Cat Object is passed in the parameter
+	 * expectation: If the Category is present in the Database, then Category is getting removed , or else an exception is thrown
+	 */
 	@Override
 	public Category removeCategory(Category cat) {
 		validateCategory(cat);
@@ -46,7 +61,11 @@ public class CategoryServiceImp implements ICategoryService {
 		categoryRepository.delete(cat);
 		return cat;
 	}
-
+	/**
+	 * scenario : Viewing the Category
+	 * input: Cat Object is passed in the parameter
+	 * expectation: If the Category is present in the Database, then Category is getting viewed, or else an exception is thrown
+	 */
 	@Override
 	public Category viewCategory(Category cat) {
 		validateCategory(cat);
@@ -56,14 +75,19 @@ public class CategoryServiceImp implements ICategoryService {
 		}
 		return viewCategory.get();
 	}
-
+	/**
+	 * scenario : Viewing the list of all categories
+	 * expectation: View the list
+	 */
 	@Override
 	public List<Category> viewAllCategory() {
 		return categoryRepository.findAll();
 	}
 
 	/**
-	 * Function to validate Category
+	 * scenario : Validate Category
+	 * input: cat Object is passed in the parameter
+	 * expectation: If the category is null, an exception is thrown
 	 */
 	void validateCategory(Category cat) {
 		if (cat == null) {
@@ -74,7 +98,9 @@ public class CategoryServiceImp implements ICategoryService {
 	}
 
 	/**
-	 * Function to validate Category Name
+	 * scenario : Validate category name
+	 * input: categoryName Object is passed in the parameter
+	 * expectation: If the category Name is null, an exception is thrown
 	 */
 	void validateCategoryName(String categoryName) {
 		if (categoryName == null || categoryName.isEmpty() || categoryName.trim().isEmpty()) {
@@ -83,7 +109,9 @@ public class CategoryServiceImp implements ICategoryService {
 	}
 
 	/**
-	 * Function to validate Category ID
+	 * scenario : Validating Category Id
+	 * input: catId Object is passed in the parameter
+	 * expectation: If the Category Id is null, an exception is thrown
 	 */
 	void validateCategoryId(String catId) {
 		if (catId == null || catId.isEmpty() || catId.trim().isEmpty()) {

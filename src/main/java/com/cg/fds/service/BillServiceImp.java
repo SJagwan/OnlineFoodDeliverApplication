@@ -42,6 +42,11 @@ public class BillServiceImp implements IBillService {
 		return LocalDateTime.now();
 	}
 
+	/**
+	 * scenario : Adding the bill to the database, Calculating the Bill amount
+	 * input: Bill Object is passed in the parameter
+	 * expectation: Bill should get added to database
+	 */
 	@Override
 	public Bill addBill(Bill bill) {
 		validateBill(bill);
@@ -57,6 +62,12 @@ public class BillServiceImp implements IBillService {
 		bill.setTotalCost(totalCost);
 		return billRepository.save(bill);
 	}
+	
+	/**
+	 * scenario : Updating the Bill
+	 * input: Bill Object is passed in the parameter
+	 * expectation: If the bill is present in the Database, then bill is getting updated, or else an exception is thrown
+	 */
 
 	@Override
 	public Bill updateBill(Bill bill) {
@@ -68,6 +79,11 @@ public class BillServiceImp implements IBillService {
 		}
 		return billRepository.save(bill);
 	}
+	/**
+	 * scenario : Removing the Bill
+	 * input: Bill Object is passed in the parameter
+	 * expectation: If the bill is present in the Database, then bill is getting removed, or else an exception is thrown
+	 */
 
 	@Override
 	public Bill removeBill(Bill bill) {
@@ -80,6 +96,11 @@ public class BillServiceImp implements IBillService {
 		billRepository.delete(bill);
 		return bill;
 	}
+	/**
+	 * scenario : Viewing the Bill
+	 * input: Bill Object is passed in the parameter
+	 * expectation: If the bill is present in the Database, then bill is getting viewed, or else an exception is thrown
+	 */
 
 	@Override
 	public Bill viewBill(Bill bill) {
@@ -90,12 +111,22 @@ public class BillServiceImp implements IBillService {
 		}
 		return viewBill.get();
 	}
+	/**
+	 * scenario : Viewing the Bill between the LocalDates
+	 * input: Passing StartDate and EndDate in the parameter
+	 * expectation: Getting Bills between all the LocalDates
+	 */
 
 	@Override
 	public List<Bill> viewBills(LocalDate startDate, LocalDate endDate) {
 
 		return null;
 	}
+	/**
+	 * scenario : Viewing the Bill
+	 * input: Passing Customer Id in the parameter
+	 * expectation: Getting List of Bills By Customer Id
+	 */
 
 	@Override
 	public List<Bill> viewBills(String custId) {
@@ -104,11 +135,21 @@ public class BillServiceImp implements IBillService {
 		OrderDetails orderDetail=orderRepository.findOrderDetailsByCart(cart);
 		return billRepository.findByOrder(orderDetail);
 	}
+	/**
+	 * scenario : Total Cost 
+	 * input: Bill Object is passed in the parameter
+	 * expectation: Getting the Total Cost
+	 */
 
 	@Override
 	public double totalCost(Bill bill) {
 		return bill.getTotalCost();
 	}
+	/**
+	 * scenario : If Bill is null
+	 * input: Bill Object is passed in the parameter
+	 * expectation: Throws an Error
+	 */
 
 	public void validateBill(Bill bill) {
 		if (bill == null) {

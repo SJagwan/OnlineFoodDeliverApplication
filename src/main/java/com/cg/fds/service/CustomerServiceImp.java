@@ -44,6 +44,11 @@ public class CustomerServiceImp implements ICustomerService {
 		}
 		return builder.toString();
 	}
+	/**
+	 * scenario : Adding the customer
+	 * input: Customer Object is passed in the parameter
+	 * expectation: Add customer and customer details, and generate customer Id 
+	 */
 
 	@Override
 	public Customer addCustomer(Customer customer) {
@@ -59,6 +64,11 @@ public class CustomerServiceImp implements ICustomerService {
 		cartRepository.save(cart);
 		return saved;
 	}
+	/**
+	 * scenario : Updating the Customer
+	 * input: customer Object is passed in the parameter
+	 * expectation: If the customer is present in the Database, then customer is getting updated, or else an exception is thrown
+	 */
 
 	@Override
 	public Customer updateCustomer(Customer customer) {
@@ -73,6 +83,11 @@ public class CustomerServiceImp implements ICustomerService {
 
 		return updateCustomer;
 	}
+	/**
+	 * scenario : Removing the Customer
+	 * input: customer Object is passed in the parameter
+	 * expectation: If the customer is present in the Database, then customer is getting removed, or else an exception is thrown
+	 */
 
 	@Override
 	public Customer removeCustomer(Customer customer) {
@@ -87,7 +102,11 @@ public class CustomerServiceImp implements ICustomerService {
 		customerRepository.delete(customer);
 		return customer;
 	}
-
+	/**
+	 * scenario : viewing the customer
+	 * input: id Object is passed in the parameter
+	 * expectation: If the customer is present in the Database, then customer is getting viewed, or else an exception is thrown
+	 */
 	@Override
 	public Customer viewCustomer(String id) {
 		Optional<Customer> viewCustomer = customerRepository.findById(id);
@@ -96,6 +115,11 @@ public class CustomerServiceImp implements ICustomerService {
 		}
 		return viewCustomer.get();
 	}
+	/**
+	 * scenario : viewing the list of customer
+	 * input: RestaurantName Object is passed in the parameter
+	 * expectation: customer list
+	 */
 
 	@Override
 	public List<Customer> viewAllCustomer(String restaurantname) {

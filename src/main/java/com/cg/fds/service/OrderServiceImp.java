@@ -54,7 +54,11 @@ public class OrderServiceImp implements IOrderService {
 	public LocalDateTime currentDateTime() {
 		return LocalDateTime.now();
 	}
-
+	/**
+	 * scenario : Adding the Order
+	 * input: order Object is passed in the parameter
+	 * expectation: Order should be added. If the order is not added, an exception is thrown. 
+	 */
 	@Transactional
 	@Override
 	public OrderDetails addOrder(OrderDetails order) {
@@ -76,7 +80,11 @@ public class OrderServiceImp implements IOrderService {
 		
 		return order;
 	}
-
+	/**
+	 * scenario : Updating the Order
+	 * input: order Object is passed in the parameter
+	 * expectation: If the order is present in the Database, then order is getting updated, or else an exception is thrown
+	 */
 	@Override
 	public OrderDetails updateOrder(OrderDetails order) {
 		validateOrder(order);
@@ -87,6 +95,11 @@ public class OrderServiceImp implements IOrderService {
 		}
 		return orderRepository.save(order);
 	}
+	/**
+	 * scenario : Removing the Order
+	 * input: order Object is passed in the parameter
+	 * expectation: If the order is present in the Database, then order is getting removed, or else an exception is thrown
+	 */
 
 	@Override
 	public OrderDetails removeOrder(OrderDetails order) {
@@ -102,7 +115,11 @@ public class OrderServiceImp implements IOrderService {
 		return order;
 	}
 	
-
+	/**
+	 * scenario : viewing the Order
+	 * input: orderId Object is passed in the parameter
+	 * expectation: If the orderId is not present in the Database, an exception is thrown
+	 */
 	
 	@Override
 	public OrderDetails viewOrder(int orderId) {
@@ -112,11 +129,21 @@ public class OrderServiceImp implements IOrderService {
 		}
 		return optionOrderDetail.get();
 	}
+	/**
+	 * scenario : Viewing the list of all Orders in the restaurant
+	 * input: resName Object is passed in the parameter
+	 * expectation: list of all Orders should be viewed
+	 */
 
 	@Override
 	public List<OrderDetails> viewAllOrders(Restaurant resName) {
 		return null;
 	}
+	/**
+	 * scenario : viewing the list of all orders of the customer 
+	 * input: customer Object is passed in the parameter
+	 * expectation: List of all orders should be returned
+	 */
 
 	@Override
 	public List<OrderDetails> viewAllOrders(Customer customer) {

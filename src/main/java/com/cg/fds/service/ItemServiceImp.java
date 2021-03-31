@@ -22,13 +22,22 @@ public class ItemServiceImp implements IItemService {
 
 	@Autowired
 	private IItemRepository itemRepository;
+	/**
+	 * scenario : Adding the items
+	 * input: item Object is passed in the parameter
+	 * expectation: Items should be added
+	 */
 
 	@Override
 	public Item addItem(Item item) {
 		validateItem(item);
 		return itemRepository.save(item);
 	}
-
+	/**
+	 * scenario : viewing the items
+	 * input: id Object is passed in the parameter
+	 * expectation: If the item is present in the Database, then item is getting viewed, or else an exception is thrown
+	 */
 	@Override
 	public Item viewItem(String id) {
 		Optional<Item> viewItem = itemRepository.findById(id);
@@ -37,6 +46,11 @@ public class ItemServiceImp implements IItemService {
 		}
 		return viewItem.get();
 	}
+	/**
+	 * scenario : Updating the item
+	 * input: item Object is passed in the parameter
+	 * expectation: If the item is present in the Database, then item is getting updated, or else an exception is thrown
+	 */
 
 	@Override
 	public Item updateItem(Item item) {
@@ -48,7 +62,11 @@ public class ItemServiceImp implements IItemService {
 		Item updateItem = itemRepository.save(item);
 		return updateItem;
 	}
-
+	/**
+	 * scenario : Removing the Bill
+	 * input: id Object is passed in the parameter
+	 * expectation: If the item is present in the Database, then item is getting removed, or else an exception is thrown
+	 */
 	@Override
 	public Item removeItem(String id) {
 		boolean exists = itemRepository.existsById(id);
@@ -59,18 +77,33 @@ public class ItemServiceImp implements IItemService {
 		itemRepository.deleteById(id);
 		return removeItem.get();
 	}
+	/**
+	 * scenario : viewing the list of all items in the restaurant
+	 * input: res Object is passed in the parameter
+	 * expectation: List should be viewed
+	 */
 
 	@Override
 	public List<Item> viewAllItems(Restaurant res) {
 		
 		return null;
 	}
+	/**
+	 * scenario : viewing the list of all items in the category
+	 * input: cat Object is passed in the parameter
+	 * expectation: List should be viewed
+	 */
 
 	@Override
 	public List<Item> viewAllItems(Category cat) {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	/**
+	 * scenario : viewing the list of all items by name and returning the list
+	 * input: name Object is passed in the parameter
+	 * expectation: List shoukd be returned
+	 */
 
 	@Override
 	public List<Item> viewAllItemsByName(String name) {
@@ -79,7 +112,9 @@ public class ItemServiceImp implements IItemService {
 	}
 
 	/**
-	 * Function to validate item
+	 * scenario : Validate the item
+	 * input: item Object is passed in the parameter
+	 * expectation: If the item is null, an exception is thrown
 	 */
 
 	void validateItem(Item item) {
@@ -91,16 +126,19 @@ public class ItemServiceImp implements IItemService {
 	}
 
 	/**
-	 * Function to validate item Name
+	 * scenario : Validating the Item name
+	 * input: itemName Object is passed in the parameter
+	 * expectation: If the itemName is null, an exception is thrown
 	 */
 	void validateItemName(String itemName) {
 		if (itemName == null || itemName.isEmpty() || itemName.trim().isEmpty()) {
 			throw new InvalidItemNameException("Item Name can't be null or empty");
 		}
 	}
-
 	/**
-	 * Function to validate item ID
+	 * scenario : Validating the item Id
+	 * input: itemId Object is passed in the parameter
+	 * expectation: If the itemId is null, an exception is thrown
 	 */
 	void validateItemId(String itemId) {
 		if (itemId == null || itemId.isEmpty() || itemId.trim().isEmpty()) {
