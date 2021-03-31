@@ -10,8 +10,8 @@ import com.cg.fds.entities.Item;
 import com.cg.fds.entities.Restaurant;
 
 public interface IItemRepository extends JpaRepository<Item,String> {
+
 	 List<Item> findByitemName(String itemName);
 	 List<Item> findByCategory(Category category);
 	 //List<Item> findByRestaurant(Restaurant restaurant);
-	 
 }

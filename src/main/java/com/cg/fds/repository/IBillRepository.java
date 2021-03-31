@@ -10,5 +10,6 @@ import com.cg.fds.entities.OrderDetails;
 
 public interface IBillRepository extends JpaRepository<Bill,Integer> {
 
-	List<Bill> findByorder(OrderDetails order);
+	List<Bill> findByOrder(OrderDetails order);
+	Bill findBillByOrder(OrderDetails order);
 }

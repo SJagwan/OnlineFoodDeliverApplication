@@ -12,7 +12,8 @@ import com.cg.fds.entities.OrderDetails;
 
 public interface IOrderRepository extends JpaRepository<OrderDetails,Integer> {
 	
-	OrderDetails findOrderDetailsBycart(FoodCart cart);
+	OrderDetails findOrderDetailsByCart(FoodCart cart);
+	List<OrderDetails> findByCart(FoodCart cart);
 	
 	
 	

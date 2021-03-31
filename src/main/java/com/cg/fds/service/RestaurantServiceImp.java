@@ -70,22 +70,20 @@ public class RestaurantServiceImp implements IRestaurantService {
 	}
 
 	@Override
-	public Restaurant viewAllRestaurants() {
-		return null;
+	public List<Restaurant> viewAllRestaurants() {
+		return restaurantRepository.findAll();
 	}
 
 	@Override
 	public List<Restaurant> viewNearByRestaurant(String location) {
-
-		Address address=addressRepository.findAddressByarea(location);
-		List<Restaurant> listr=restaurantRepository.findByaddress(address);
+		Address address=addressRepository.findAddressByArea(location);
+		List<Restaurant> listr=restaurantRepository.findByAddress(address);
 		return listr;
-	}
+	} 
 
 	@Override
 	public List<Restaurant> viewRestaurantByItemName(String name) {
-
-		List<Restaurant> list=restaurantRepository.findByrestaurantName(name);
+		List<Restaurant> list=restaurantRepository.findByRestaurantName(name);
 		return list;
 	}
 

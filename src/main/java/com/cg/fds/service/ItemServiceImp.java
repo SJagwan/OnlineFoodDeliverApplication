@@ -37,11 +37,14 @@ public class ItemServiceImp implements IItemService {
 	                List<Item> restaurantItems = restaurant.getItemList();
 	                if(!restaurantItems.contains(item)){
 	                    restaurantItems.add(item);
-	                   restaurantRepository.save(restaurant);}
+	                   restaurantRepository.save(restaurant);
+	                 }
 	            }
 	        }
 	        return saved;
 	}
+	
+	
 
 	@Override
 	public Item viewItem(String id) {

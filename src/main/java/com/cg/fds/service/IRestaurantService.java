@@ -10,7 +10,7 @@ public interface IRestaurantService {
 	public Restaurant removeRestaurant(Restaurant res);
 	public Restaurant updateRestaurant(Restaurant res);
 	public Restaurant viewRestaurant(String name);
-	public Restaurant viewAllRestaurants();
+	public List<Restaurant> viewAllRestaurants();
 	public List<Restaurant> viewNearByRestaurant(String location);
 	public List<Restaurant> viewRestaurantByItemName(String name);
 }
