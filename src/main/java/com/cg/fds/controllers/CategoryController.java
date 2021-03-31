@@ -32,7 +32,6 @@ public class CategoryController {
 	public CategoryDetails addingCategory(@RequestBody AddCategory request) {
 		Category  category = categoryUtil.getCategory();
 		category.setCategoryName(request.getName());
-		category.setCatId(categoryUtil.generateId());
 		category =  categoryService.addCategory(category);
 		return categoryUtil.toCategoryDetail(category);
 	}
@@ -45,12 +44,12 @@ public class CategoryController {
 		return categoryUtil.toCategoryDetail(category);
 	}
 	
-	@DeleteMapping("/remove")
-	public CategoryDetails removingCategory(@RequestBody RemoveCategory request) {
-		Category category = categoryService.viewCategory(request.getId());
-		category =  categoryService.removeCategory(category);
-		return categoryUtil.toCategoryDetail(category);
-	}
+//	@DeleteMapping("/remove")
+//	public CategoryDetails removingCategory(@RequestBody RemoveCategory request) {
+//		Category category = categoryService.viewCategory(request.getId());
+//		category =  categoryService.removeCategory(category);
+//		return categoryUtil.toCategoryDetail(category);
+//	}
 	
 	@GetMapping("/view/{id}")
 	public CategoryDetails viewingCategory(@PathVariable String id) {
