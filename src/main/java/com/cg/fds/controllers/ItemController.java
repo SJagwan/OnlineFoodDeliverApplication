@@ -1,5 +1,6 @@
 package com.cg.fds.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cg.fds.dto.Items.AddItem;
+import com.cg.fds.dto.Items.AddItemToRestaurant;
 import com.cg.fds.dto.Items.FindItemByCategory;
 import com.cg.fds.dto.Items.FindItemByRestaurant;
 import com.cg.fds.dto.Items.ItemDetails;
@@ -45,17 +47,30 @@ public class ItemController {
 	@PostMapping("/add_item")
 	public ItemDetails addItem(@RequestBody AddItem request) {
 		Item item = itemUtil.getItem();
+		Restaurant restaurant=restaurantService.viewRestaurant(request.getRestaurantId());
 		Category category = categoryService.viewCategory(request.getCatId());
 		item.setCategory(category);
 		item.setCost(request.getCost());
 		item.setItemId(itemUtil.generateId());
 		item.setItemName(request.getItemName());
 		item.setQuantity(request.getQuantity());
-		return itemUtil.toItemDetails(itemService.addItem(item));
-
+		List<Restaurant>restaurants=item.getRestaurants();
+		if(restaurants==null ){
+			restaurants=new ArrayList<>();
+			item.setRestaurants(restaurants);
+		}
+		restaurants.add(restaurant);
+		item=itemService.addItem(item);
+		return itemUtil.toItemDetails(item);
 	}
-
-	@PutMapping("/update_item")
+	
+	@PutMapping("/addtorestaurant")
+    public ItemDetails addItemToRestaurant(@RequestBody AddItemToRestaurant request)
+    {
+		Item item = itemService.viewItem(request.getItemId());
+		return null;
+    }
+	@PutMapping("/update")
 	public ItemDetails updateItem(@RequestBody UpdateItem request) {
 		Item item = itemService.viewItem(request.getItemId());
 		item.setCost(request.getCost());

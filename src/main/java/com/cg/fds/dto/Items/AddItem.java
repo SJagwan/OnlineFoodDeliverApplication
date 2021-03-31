@@ -13,8 +13,17 @@ public class AddItem {
 	private String catId;
 	private int quantity;
 	private double cost;
+	private String restaurantId;
 
 	
+	public String getRestaurantId() {
+		return restaurantId;
+	}
+
+	public void setRestaurantId(String restaurantId) {
+		this.restaurantId = restaurantId;
+	}
+
 	public AddItem() {
 		
 	}
