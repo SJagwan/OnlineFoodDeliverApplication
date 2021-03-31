@@ -41,7 +41,7 @@ public class CustomerController {
 	@Autowired
 	private AddressUtil addressUtil;
 	
-	@PostMapping("/add_customer")
+	@PostMapping("/add")
 	public CustomerDetails addCustomer(@RequestBody AddCustomer request)
 	{
 		Customer customer=customerUtil.getCustomer();
@@ -64,7 +64,7 @@ public class CustomerController {
 		return customerUtil.customerDetails(customerService.addCustomer(customer));
 	}
 	
-	@PutMapping("/updatecustomer")
+	@PutMapping("/update")
 	public CustomerDetails updateCustomer(@RequestBody UpdateCustomerRequest request) {
 		
 		Customer customer=customerService.viewCustomer(request.getId());
@@ -76,13 +76,13 @@ public class CustomerController {
 		return customerUtil.customerDetails(customerService.updateCustomer(customer));
 		}
 
-	@DeleteMapping("/deletecustomer")
+	@DeleteMapping("/delete")
 	public CustomerDetails deleteCustomer(@RequestBody RemoveCustomerRequest request) {
 		Customer customer=customerService.viewCustomer(request.getId());
 		return customerUtil.customerDetails(customerService.removeCustomer(customer));
 	}
 
-	@GetMapping("/viewcustomer/{id}")
+	@GetMapping("/view/{id}")
 	public CustomerDetails viewCustomer(@PathVariable String id) {
 		return customerUtil.customerDetails(customerService.viewCustomer(id));		
 	}
