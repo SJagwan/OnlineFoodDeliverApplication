@@ -18,6 +18,7 @@ import com.cg.fds.exception.RemoveItemException;
 import com.cg.fds.exception.UpdateItemException;
 import com.cg.fds.repository.ICartItemRepository;
 import com.cg.fds.repository.IItemRepository;
+import com.cg.fds.repository.IRestaurantRepository;
 
 @Service
 public class ItemServiceImp implements IItemService {
@@ -28,11 +29,28 @@ public class ItemServiceImp implements IItemService {
 	@Autowired
 	private ICartItemRepository cartItemRepository;
 
+	@Autowired
+	private IRestaurantRepository restaurantRepository;
+
+
 	@Override
 	public Item addItem(Item item) {
-		validateItem(item);
-		return itemRepository.save(item);
+		 validateItem(item);
+	        Item saved = itemRepository.save(item);
+	        List<Restaurant> restaurants = saved.getRestaurants();
+	        if (restaurants != null) {
+	            for (Restaurant restaurant : restaurants) {
+	                List<Item> restaurantItems = restaurant.getItemList();
+	                if(!restaurantItems.contains(item)){
+	                    restaurantItems.add(item);
+	                   restaurantRepository.save(restaurant);
+	                 }
+	            }
+	        }
+	        return saved;
 	}
+	
+	
 
 	@Override
 	public Item viewItem(String id) {
@@ -67,7 +85,9 @@ public class ItemServiceImp implements IItemService {
 
 	@Override
 	public List<Item> viewAllItems(Restaurant res) {
-		return null;
+		List<Item> list = res.getItemList();
+		return list;
+
 	}
 
 	@Override

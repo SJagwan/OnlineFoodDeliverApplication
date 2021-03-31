@@ -1,9 +1,11 @@
 package com.cg.fds.util;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import java.util.Random;
+
+
 import org.springframework.stereotype.Component;
 
 import com.cg.fds.dto.foodcart.FoodCartDetails;
@@ -57,5 +59,13 @@ public class FoodCartUtil {
 		}
 		return list;
 	}
-
+	public String generateId() {
+		StringBuilder builder= new StringBuilder();
+		Random random= new Random();
+		for(int i=0; i<10; i++) {
+			int randomNum=random.nextInt(10);
+			builder.append(randomNum);
+		}
+		return builder.toString();
+	}
 }
