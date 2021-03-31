@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cg.fds.entities.Category;
+import com.cg.fds.entities.FoodCart;
 import com.cg.fds.entities.Item;
 import com.cg.fds.entities.Restaurant;
 import com.cg.fds.exception.InvalidItemException;
@@ -15,29 +16,54 @@ import com.cg.fds.exception.InvalidItemNameException;
 import com.cg.fds.exception.ItemNotFoundException;
 import com.cg.fds.exception.RemoveItemException;
 import com.cg.fds.exception.UpdateItemException;
+import com.cg.fds.repository.ICartItemRepository;
 import com.cg.fds.repository.IItemRepository;
+import com.cg.fds.repository.IRestaurantRepository;
 
 @Service
 public class ItemServiceImp implements IItemService {
 
 	@Autowired
 	private IItemRepository itemRepository;
-	/**
+
+	
+
+	
+	@Autowired
+	private ICartItemRepository cartItemRepository;
+
+	@Autowired
+	private IRestaurantRepository restaurantRepository;
+
+/**
 	 * scenario : Adding the items
 	 * input: item Object is passed in the parameter
 	 * expectation: Items should be added
 	 */
-
+  
 	@Override
 	public Item addItem(Item item) {
-		validateItem(item);
-		return itemRepository.save(item);
+		 validateItem(item);
+	        Item saved = itemRepository.save(item);
+	        List<Restaurant> restaurants = saved.getRestaurants();
+	        if (restaurants != null) {
+	            for (Restaurant restaurant : restaurants) {
+	                List<Item> restaurantItems = restaurant.getItemList();
+	                if(!restaurantItems.contains(item)){
+	                    restaurantItems.add(item);
+	                   restaurantRepository.save(restaurant);
+	                 }
+	            }
+	        }
+	        return saved;
 	}
+  
 	/**
 	 * scenario : viewing the items
 	 * input: id Object is passed in the parameter
 	 * expectation: If the item is present in the Database, then item is getting viewed, or else an exception is thrown
 	 */
+
 	@Override
 	public Item viewItem(String id) {
 		Optional<Item> viewItem = itemRepository.findById(id);
@@ -85,8 +111,9 @@ public class ItemServiceImp implements IItemService {
 
 	@Override
 	public List<Item> viewAllItems(Restaurant res) {
-		
-		return null;
+		List<Item> list = res.getItemList();
+		return list;
+
 	}
 	/**
 	 * scenario : viewing the list of all items in the category
@@ -96,8 +123,7 @@ public class ItemServiceImp implements IItemService {
 
 	@Override
 	public List<Item> viewAllItems(Category cat) {
-		// TODO Auto-generated method stub
-		return null;
+		return itemRepository.findByCategory(cat);
 	}
 	/**
 	 * scenario : viewing the list of all items by name and returning the list
@@ -109,6 +135,11 @@ public class ItemServiceImp implements IItemService {
 	public List<Item> viewAllItemsByName(String name) {
 		List<Item> list = itemRepository.findByItemName(name);
 		return list;
+	}
+	
+	
+	public List<Item> viewAllItemsByCart(FoodCart cart) {
+		return cartItemRepository.findItemsByCart(cart);
 	}
 
 	/**

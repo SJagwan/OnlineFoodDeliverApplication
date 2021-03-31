@@ -1,5 +1,6 @@
 package com.cg.fds.util;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Component;
 public class DateUtil {
 	
 	private final String pattern="dd/MM/yy hh:mm:ss";
+	private final String pattern2="dd/MM/yy";
 
     public String toText(LocalDateTime datetime, String pattern){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);
@@ -21,16 +23,16 @@ public class DateUtil {
         return text;
     }
 
-    public LocalDateTime toLocalDateTime(String datetimeText, String pattern){
+    public LocalDate toLocalDate(String datetimeText, String pattern){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);
-        LocalDateTime datetime= LocalDateTime.parse(datetimeText,formatter);
+        LocalDate datetime= LocalDate.parse(datetimeText,formatter);
         return datetime;
     }
 
 
-    public LocalDateTime toLocalDateTime(String datetimeText){
-        LocalDateTime datetime= toLocalDateTime(datetimeText,pattern);
-        return datetime;
+    public LocalDate toLocalDate(String dateText){
+        LocalDate date= toLocalDate(dateText,pattern2);
+        return date;
     }
 
 

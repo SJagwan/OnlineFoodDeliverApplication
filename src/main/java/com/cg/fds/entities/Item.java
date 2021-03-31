@@ -17,9 +17,8 @@ public class Item {
 	private String itemId;
 	private String itemName;
 	
-	@OneToOne
+	@ManyToOne
 	private Category category;
-	
 	private int quantity;
 	private double cost;
 	
