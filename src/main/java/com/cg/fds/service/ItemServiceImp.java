@@ -82,8 +82,6 @@ public class ItemServiceImp implements IItemService {
 	}
 	
 	
-
-	@Override
 	public List<Item> viewAllItemsByCart(FoodCart cart) {
 		return cartItemRepository.findItemsByCart(cart);
 	}
