@@ -43,6 +43,7 @@ public class CategoryServiceImp implements ICategoryService {
 		if (!exists) {
 			throw new RemoveCategoryException("Category with id not present=" + cat.getCatId());
 		}
+		
 		categoryRepository.delete(cat);
 		return cat;
 	}

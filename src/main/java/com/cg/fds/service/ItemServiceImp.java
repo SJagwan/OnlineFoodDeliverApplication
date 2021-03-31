@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cg.fds.entities.Category;
+import com.cg.fds.entities.FoodCart;
 import com.cg.fds.entities.Item;
 import com.cg.fds.entities.Restaurant;
 import com.cg.fds.exception.InvalidItemException;
@@ -15,6 +16,7 @@ import com.cg.fds.exception.InvalidItemNameException;
 import com.cg.fds.exception.ItemNotFoundException;
 import com.cg.fds.exception.RemoveItemException;
 import com.cg.fds.exception.UpdateItemException;
+import com.cg.fds.repository.ICartItemRepository;
 import com.cg.fds.repository.IItemRepository;
 
 @Service
@@ -22,6 +24,9 @@ public class ItemServiceImp implements IItemService {
 
 	@Autowired
 	private IItemRepository itemRepository;
+	
+	@Autowired
+	private ICartItemRepository cartItemRepository;
 
 	@Override
 	public Item addItem(Item item) {
@@ -62,20 +67,25 @@ public class ItemServiceImp implements IItemService {
 
 	@Override
 	public List<Item> viewAllItems(Restaurant res) {
-		
 		return null;
 	}
 
 	@Override
 	public List<Item> viewAllItems(Category cat) {
-		// TODO Auto-generated method stub
-		return null;
+		return itemRepository.findByCategory(cat);
 	}
 
 	@Override
 	public List<Item> viewAllItemsByName(String name) {
 		List<Item> list = itemRepository.findByItemName(name);
 		return list;
+	}
+	
+	
+
+	@Override
+	public List<Item> viewAllItemsByCart(FoodCart cart) {
+		return cartItemRepository.findItemsByCart(cart);
 	}
 
 	/**

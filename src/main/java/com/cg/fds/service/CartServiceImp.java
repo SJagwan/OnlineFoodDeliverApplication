@@ -1,7 +1,5 @@
 package com.cg.fds.service;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,11 +12,9 @@ import com.cg.fds.entities.Item;
 import com.cg.fds.exception.CartException;
 import com.cg.fds.exception.CartNotExistException;
 import com.cg.fds.exception.InvalidCartException;
-import com.cg.fds.exception.ItemNotFoundException;
-import com.cg.fds.exception.RemoveRestaurantException;
 import com.cg.fds.repository.ICartItemRepository;
 import com.cg.fds.repository.ICartRepository;
-import com.cg.fds.repository.IItemRepository;
+
 
 @Service
 public class CartServiceImp implements ICartService {
@@ -27,9 +23,6 @@ public class CartServiceImp implements ICartService {
 
 	@Autowired
 	private ICustomerService customerService;
-
-	@Autowired
-	private IItemRepository itemRepository;
 
 	@Autowired
 	private ICartItemRepository cartItemRepository;
