@@ -11,7 +11,6 @@ import com.cg.fds.entities.Item;
 import com.cg.fds.exception.CartNotExistException;
 import com.cg.fds.exception.InvalidCartException;
 import com.cg.fds.exception.ItemNotFoundException;
-import com.cg.fds.exception.RemoveRestaurantException;
 import com.cg.fds.repository.ICartRepository;
 import com.cg.fds.repository.IItemRepository;
 

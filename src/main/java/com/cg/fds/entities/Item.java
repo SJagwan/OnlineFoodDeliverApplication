@@ -19,7 +19,6 @@ public class Item {
 	
 	@OneToOne
 	private Category category;
-	
 	private int quantity;
 	private double cost;
 	

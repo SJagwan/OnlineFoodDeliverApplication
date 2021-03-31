@@ -62,14 +62,13 @@ public class ItemServiceImp implements IItemService {
 
 	@Override
 	public List<Item> viewAllItems(Restaurant res) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Item> list = res.getItemList();
+		return list;
 	}
 
 	@Override
 	public List<Item> viewAllItems(Category cat) {
-		// TODO Auto-generated method stub
-		return null;
+		return itemRepository.findByCategory(cat);
 	}
 
 	@Override
