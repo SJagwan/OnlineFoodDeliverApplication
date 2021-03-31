@@ -2,9 +2,11 @@ package com.cg.fds.entities;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -16,10 +18,7 @@ public class FoodCart {
 	
 	@OneToOne
 	private Customer customer;
-	
-	@OneToMany(fetch = FetchType.EAGER)
-	private List<Item> itemList;
-	
+
 	
 	public String getCartId() {
 		return cartId;
@@ -33,15 +32,9 @@ public class FoodCart {
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
 	}
-	public List<Item> getItemList() {
-		return itemList;
-	}
-	public void setItemList(List<Item> itemList) {
-		this.itemList = itemList;
-	}
 	@Override
 	public String toString() {
-		return "FoodCart [cartId=" + cartId + ", customer=" + customer + ", itemList=" + itemList + "]";
+		return "FoodCart [cartId=" + cartId + ", customer=" + customer + "]";
 	}
 	@Override
 	public int hashCode() {

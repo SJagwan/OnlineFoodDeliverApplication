@@ -135,7 +135,7 @@ public class ItemServiceImpUnitTest {
 	public void viewAllItemsByNameTest() {
 		String name="lays";
 		List<Item>list=Mockito.mock(List.class);
-		Mockito.when(itemRepository.findByitemName(name)).thenReturn(list);
+		Mockito.when(itemRepository.findByItemName(name)).thenReturn(list);
 		List<Item> result =itemService.viewAllItemsByName(name);
 		Assertions.assertNotNull(result);
 		Assertions.assertEquals(list, result);

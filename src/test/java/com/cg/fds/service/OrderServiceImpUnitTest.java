@@ -31,6 +31,7 @@ import com.cg.fds.exception.InvalidOrderException;
 import com.cg.fds.exception.OrderNotFoundException;
 import com.cg.fds.exception.RemoveOrderException;
 import com.cg.fds.exception.UpdateOrderException;
+import com.cg.fds.repository.ICartItemRepository;
 import com.cg.fds.repository.IOrderRepository;
 
 @ExtendWith(MockitoExtension.class)
@@ -42,6 +43,9 @@ public class OrderServiceImpUnitTest {
 	
 	@Mock
 	CartServiceImp cartService;
+	
+	@Mock
+	ICartItemRepository cartItemRepository;
 	
 	@Spy
 	@InjectMocks
@@ -61,7 +65,7 @@ public class OrderServiceImpUnitTest {
 		List<Item>items=Mockito.mock(List.class);
 		FoodCart cart=Mockito.mock(FoodCart.class);
 		Mockito.when(orderDetail.getCart()).thenReturn(cart);
-		Mockito.when(cart.getItemList()).thenReturn(items);
+		Mockito.when(cartItemRepository.findItemsByCart(cart)).thenReturn(items);
 		Mockito.when(items.isEmpty()).thenReturn(false);
 		LocalDateTime currentTime=LocalDateTime.now();
 		Mockito.doReturn(currentTime).when(orderService).currentDateTime();
@@ -84,7 +88,7 @@ public class OrderServiceImpUnitTest {
 		List<Item>items=Mockito.mock(List.class);
 		FoodCart cart=Mockito.mock(FoodCart.class);
 		Mockito.when(orderDetail.getCart()).thenReturn(cart);
-		Mockito.when(cart.getItemList()).thenReturn(items);
+		Mockito.when(cartItemRepository.findItemsByCart(cart)).thenReturn(items);
 		Mockito.when(items.isEmpty()).thenReturn(true);
 		Executable executable = () -> orderService.addOrder(orderDetail);
 		Assertions.assertThrows(AddOrderException.class, executable);

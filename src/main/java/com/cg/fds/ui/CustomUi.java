@@ -95,9 +95,6 @@ public class CustomUi {
 	
 	public void start() {
 		
-		FoodCart cart=cartUtil.getFoodCart();
-		cart.setCartId(generateId());
-		
 		Category category1=categoryUtil.getCategory();
 		category1.setCatId(generateId());
 		category1.setCategoryName("chips");
@@ -174,8 +171,11 @@ public class CustomUi {
 //		customer2.setFirstName("Hardik");
 //		System.out.println(customerService.updateCustomer(customer2));
 //
-//		FoodCart cart=cartRepository.findFoodCartByCustomer(customer2);
-		cart.setCustomer(customer1);
+		FoodCart cart1=cartRepository.findFoodCartByCustomer(customer1);
+//		cart1.setCustomer(customer1);
+		
+		FoodCart cart2=cartRepository.findFoodCartByCustomer(customer2);
+//		cart2.setCustomer(customer2);
 		
 //		System.out.println("View Customer");
 //		System.out.println(customerService.viewCustomer(customer1.getCustomerId()));
@@ -210,6 +210,8 @@ public class CustomUi {
 //		System.out.println();
 //		System.out.println("View Item by name");
 //		System.out.println(itemService.viewAllItemsByName("lays"));
+		System.out.println("View Item bycategory");
+		System.out.println(itemService.viewAllItems(category1));
 		
 		System.out.println("------------------UI-- Restaurant -----------------");
 		System.out.println("Adding Restaurant");
@@ -217,58 +219,57 @@ public class CustomUi {
 //		System.out.println(r1.getItemList());
 //		System.out.println("Remove Restaurant");
 //		System.out.println(restaurantService.removeRestaurant(r1));
-		System.out.println("Update Restaurant");
-		r1.setRestaurantName("SJ");
-		System.out.println(restaurantService.updateRestaurant(r1));
-		System.out.println("View Restaurant");
-		System.out.println(restaurantService.viewRestaurant(r1.getRestaurantId()));
-		System.out.println("FindBy location Restaurant");
-		System.out.println(restaurantService.viewNearByRestaurant("dehradun"));
+//		System.out.println("Update Restaurant");
+//		r1.setRestaurantName("SJ");
+//		System.out.println(restaurantService.updateRestaurant(r1));
+//		System.out.println("View Restaurant");
+//		System.out.println(restaurantService.viewRestaurant(r1.getRestaurantId()));
+//		System.out.println("FindBy location Restaurant");
+//		System.out.println(restaurantService.viewNearByRestaurant("dehradun"));
 		System.out.println();
 		
 		
 		System.out.println("------------------UI-- FoodCart -----------------");
 		
 		System.out.println("Adding ItemToCart");
-		System.out.println(cartService.addItemToCart(cart, item1));
+		System.out.println(cartService.addItemToCart(cart1, item1));
 
 //		System.out.println(cart.getItemList());
 		
-		System.out.println(cartService.addItemToCart(cart, item2));
+//		System.out.println(cartService.addItemToCart(cart1, item2));
+//		System.out.println(cartService.addItemToCart(cart2, item3));
 //		System.out.println(" Increase Quantity");
 //		System.out.println(cartService.increaseQuantity(cart, item1, 3));
 //		System.out.println(" Reduce Quantity");
-//		System.out.println(cartService.reduceQuantity(cart, item1, 2));
-////		System.out.println(" Remove Item");
-////		System.out.println(cartService.removeItem(cart, item2));
+//		System.out.println(cartService.reduceQuantity(cart, item1, 3));
+//		System.out.println(" Remove Item");
+//		System.out.println(cartService.removeItem(cart, item2));
 ////		System.out.println("Clear cart");
 ////		System.out.println(cartService.clearCart(cart));
 ////		System.out.println();
 //		
-		order.setCart(cart);
-		System.out.println("------------------UI-- OrderDetails -----------------");
-		
-		System.out.println("Adding orderDetail");
-		System.out.println(orderService.addOrder(order));
-		System.out.println("Update orderDetail");
-		order.setOrderStatus(OrderStatus.DELIVERED);
-		System.out.println(orderService.updateOrder(order));
-////		System.out.println("Remove orderDetail");
-////		System.out.println(orderService.removeOrder(order));
+//		order.setCart(cart1);
+//		System.out.println("------------------UI-- OrderDetails -----------------");
+//		
+//		System.out.println("Adding orderDetail");
+//		System.out.println(orderService.addOrder(order));
+//		System.out.println("Update orderDetail");
+//		order.setOrderStatus(OrderStatus.DELIVERED);
+////		System.out.println(orderService.updateOrder(order));
+//		System.out.println("Remove orderDetail");
+//		System.out.println(orderService.removeOrder(order));
 ////		System.out.println("View orderDetail");
 ////		System.out.println(orderService.viewOrder(order.getOrderId()));
 ////		System.out.println((order.getItems()));
 //		
 //		System.out.println();
+	
+//		System.out.println("------------------UI-- Bill -----------------");
 		
-		Bill bill=billUtil.getBill();
-		bill.setOrder(order);		
-		System.out.println("------------------UI-- Bill -----------------");
-		
-		System.out.println("Add bill");
-		System.out.println(billService.addBill(bill));
-		System.out.println("Update bill");
-		bill.setTotalItem(6);
+//		System.out.println("Add bill");
+//		System.out.println(billService.addBill(bill));
+//		System.out.println("Update bill");
+//		bill.setTotalItem(6);
 //		System.out.println(billService.updateBill(bill));
 //		System.out.println("View bill");
 //		System.out.println(billService.viewBill(bill));

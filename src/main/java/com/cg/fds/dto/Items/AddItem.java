@@ -10,11 +10,20 @@ import com.cg.fds.entities.OrderDetails;
 public class AddItem {
 
 	private String itemName;
-	private Category category;
+	private String catId;
 	private int quantity;
 	private double cost;
+	private String restaurantId;
 
 	
+	public String getRestaurantId() {
+		return restaurantId;
+	}
+
+	public void setRestaurantId(String restaurantId) {
+		this.restaurantId = restaurantId;
+	}
+
 	public AddItem() {
 		
 	}
@@ -27,12 +36,14 @@ public class AddItem {
 		this.itemName = itemName;
 	}
 
-	public Category getCategory() {
-		return category;
+	
+
+	public String getCatId() {
+		return catId;
 	}
 
-	public void setCategory(Category category) {
-		this.category = category;
+	public void setCatId(String catId) {
+		this.catId = catId;
 	}
 
 	public int getQuantity() {

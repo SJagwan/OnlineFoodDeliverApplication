@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cg.fds.entities.Category;
+import com.cg.fds.entities.FoodCart;
 import com.cg.fds.entities.Item;
 import com.cg.fds.entities.Restaurant;
 import com.cg.fds.exception.InvalidItemException;
@@ -15,19 +16,41 @@ import com.cg.fds.exception.InvalidItemNameException;
 import com.cg.fds.exception.ItemNotFoundException;
 import com.cg.fds.exception.RemoveItemException;
 import com.cg.fds.exception.UpdateItemException;
+import com.cg.fds.repository.ICartItemRepository;
 import com.cg.fds.repository.IItemRepository;
+import com.cg.fds.repository.IRestaurantRepository;
 
 @Service
 public class ItemServiceImp implements IItemService {
 
 	@Autowired
 	private IItemRepository itemRepository;
+	
+	@Autowired
+	private ICartItemRepository cartItemRepository;
+
+	@Autowired
+	private IRestaurantRepository restaurantRepository;
+
 
 	@Override
 	public Item addItem(Item item) {
-		validateItem(item);
-		return itemRepository.save(item);
+		 validateItem(item);
+	        Item saved = itemRepository.save(item);
+	        List<Restaurant> restaurants = saved.getRestaurants();
+	        if (restaurants != null) {
+	            for (Restaurant restaurant : restaurants) {
+	                List<Item> restaurantItems = restaurant.getItemList();
+	                if(!restaurantItems.contains(item)){
+	                    restaurantItems.add(item);
+	                   restaurantRepository.save(restaurant);
+	                 }
+	            }
+	        }
+	        return saved;
 	}
+	
+	
 
 	@Override
 	public Item viewItem(String id) {
@@ -62,20 +85,25 @@ public class ItemServiceImp implements IItemService {
 
 	@Override
 	public List<Item> viewAllItems(Restaurant res) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Item> list = res.getItemList();
+		return list;
+
 	}
 
 	@Override
 	public List<Item> viewAllItems(Category cat) {
-		// TODO Auto-generated method stub
-		return null;
+		return itemRepository.findByCategory(cat);
 	}
 
 	@Override
 	public List<Item> viewAllItemsByName(String name) {
-		List<Item> list = itemRepository.findByitemName(name);
+		List<Item> list = itemRepository.findByItemName(name);
 		return list;
+	}
+	
+	
+	public List<Item> viewAllItemsByCart(FoodCart cart) {
+		return cartItemRepository.findItemsByCart(cart);
 	}
 
 	/**

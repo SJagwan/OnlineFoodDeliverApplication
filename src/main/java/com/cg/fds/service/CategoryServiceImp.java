@@ -69,9 +69,9 @@ public class CategoryServiceImp implements ICategoryService {
 //		return cat;
 //	}
 
+
 	@Override
-	public Category viewCategory(String catId) {
-		
+     public Category viewCategory(String catId) {
 		Optional<Category> viewCategory = categoryRepository.findById(catId);
 		if (!viewCategory.isPresent()) {
 			throw new CategoryNotFoundException("Category with id not present=" + catId);

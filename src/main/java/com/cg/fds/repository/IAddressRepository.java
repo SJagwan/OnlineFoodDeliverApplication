@@ -9,6 +9,6 @@ import com.cg.fds.entities.Address;
 
 public interface IAddressRepository extends JpaRepository<Address,String> {
 	
-	Address findAddressByarea(String location);
+	Address findAddressByArea(String location);
 
 }
