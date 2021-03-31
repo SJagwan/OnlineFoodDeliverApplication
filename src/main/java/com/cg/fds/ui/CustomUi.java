@@ -248,6 +248,7 @@ public class CustomUi {
 ////		System.out.println(cartService.clearCart(cart));
 ////		System.out.println();
 //		
+
 //		order.setCart(cart1);
 //		System.out.println("------------------UI-- OrderDetails -----------------");
 //		
