@@ -20,6 +20,7 @@ import com.cg.fds.dto.Items.FindItemByRestaurant;
 import com.cg.fds.dto.Items.ItemDetails;
 import com.cg.fds.dto.Items.RemoveItem;
 import com.cg.fds.dto.Items.UpdateItem;
+import com.cg.fds.dto.restaurant.RestaurantDetails;
 import com.cg.fds.entities.Category;
 import com.cg.fds.entities.Item;
 import com.cg.fds.entities.Restaurant;
@@ -27,6 +28,7 @@ import com.cg.fds.service.CategoryServiceImp;
 import com.cg.fds.service.IItemService;
 import com.cg.fds.service.RestaurantServiceImp;
 import com.cg.fds.util.ItemUtil;
+import com.cg.fds.util.RestaurantUtil;
 
 @RequestMapping("/items")
 @RestController
@@ -43,33 +45,42 @@ public class ItemController {
 
 	@Autowired
 	private RestaurantServiceImp restaurantService;
+
+	@Autowired
+	private RestaurantUtil restaurantUtil;
 	
-	@PostMapping("/add_item")
+	@PostMapping("/add")
 	public ItemDetails addItem(@RequestBody AddItem request) {
 		Item item = itemUtil.getItem();
-		Restaurant restaurant=restaurantService.viewRestaurant(request.getRestaurantId());
+		Restaurant restaurant = restaurantService.viewRestaurant(request.getRestaurantId());
 		Category category = categoryService.viewCategory(request.getCatId());
 		item.setCategory(category);
 		item.setCost(request.getCost());
 		item.setItemId(itemUtil.generateId());
 		item.setItemName(request.getItemName());
 		item.setQuantity(request.getQuantity());
-		List<Restaurant>restaurants=item.getRestaurants();
-		if(restaurants==null ){
-			restaurants=new ArrayList<>();
+		List<Restaurant> restaurants = item.getRestaurants();
+		if (restaurants == null) {
+			restaurants = new ArrayList<>();
 			item.setRestaurants(restaurants);
 		}
 		restaurants.add(restaurant);
-		item=itemService.addItem(item);
+		item = itemService.addItem(item);
 		return itemUtil.toItemDetails(item);
 	}
-	
+
 	@PutMapping("/addtorestaurant")
-    public ItemDetails addItemToRestaurant(@RequestBody AddItemToRestaurant request)
-    {
+	public RestaurantDetails addItemToRestaurant(@RequestBody AddItemToRestaurant request) {
 		Item item = itemService.viewItem(request.getItemId());
-		return null;
-    }
+		Restaurant restaurant = restaurantService.viewRestaurant(request.getRestaurantId());
+		List<Item> restaurantItems = restaurant.getItemList();
+		if (!restaurantItems.contains(item)) {
+			restaurantItems.add(item);		
+		}
+		restaurant = restaurantService.updateRestaurant(restaurant);
+		return restaurantUtil.toRestaurantDetails(restaurant);
+	}
+
 	@PutMapping("/update")
 	public ItemDetails updateItem(@RequestBody UpdateItem request) {
 		Item item = itemService.viewItem(request.getItemId());
@@ -80,31 +91,31 @@ public class ItemController {
 
 	}
 
-	@DeleteMapping("/remove_item")
+	@DeleteMapping("/remove")
 	public ItemDetails removeItem(@RequestBody RemoveItem request) {
 		return itemUtil.toItemDetails(itemService.removeItem(request.getItemId()));
 	}
 
-	@GetMapping("/viewitem/{id}")
+	@GetMapping("/view/{id}")
 	public ItemDetails viewItem(@PathVariable String id) {
 		return itemUtil.toItemDetails(itemService.viewItem(id));
 	}
 
-	@GetMapping("/viewitembyname/{name}")
+	@GetMapping("/byname/{name}")
 	public List<ItemDetails> viewItembyname(@PathVariable String name) {
 		return itemUtil.toItemDetailsList(itemService.viewAllItemsByName(name));
 	}
 
-	@GetMapping("/viewitembycategory")
+	@GetMapping("/bycategory")
 	public List<ItemDetails> viewItembycategory(@RequestBody FindItemByCategory request) {
 		Category category = categoryService.viewCategory(request.getCatId());
 		return itemUtil.toItemDetailsList(itemService.viewAllItems(category));
 	}
-    @GetMapping("/viewitembyrestaurant") 
-    public List<ItemDetails> viewItembyrestaurant(@RequestBody FindItemByRestaurant request) 
-    { 
-    	Restaurant restaurant = restaurantService.viewRestaurant(request.getRestaurantId());
-    	return itemUtil.toItemDetailsList(itemService.viewAllItems(restaurant)) ;
-    	}
-		 
+
+	@GetMapping("/byrestaurant")
+	public List<ItemDetails> viewItembyrestaurant(@RequestBody FindItemByRestaurant request) {
+		Restaurant restaurant = restaurantService.viewRestaurant(request.getRestaurantId());
+		return itemUtil.toItemDetailsList(itemService.viewAllItems(restaurant));
+	}
+
 }
