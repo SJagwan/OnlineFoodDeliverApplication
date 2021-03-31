@@ -42,7 +42,7 @@ public class OrderDetailsController {
 	@Autowired
 	private OrderUtil orderUtil;
 	
-	@PostMapping("/addorder")
+	@PostMapping("/add")
 	public OrderDetailsResponse addOrder(@RequestBody AddOrderRequest request) {
 		OrderDetails order=new OrderDetails();
 		FoodCart cart=cartService.findFoodCartByCustomer(request.getCustomerId());
@@ -50,25 +50,25 @@ public class OrderDetailsController {
 		return orderUtil.toOrderDetailsResponse(orderService.addOrder(order));
 	}
 	
-	@PutMapping("/updateorder")
+	@PutMapping("/update")
 	public OrderDetailsResponse updateOrder(@RequestBody UpdateOrderRequest request) {
 		OrderDetails order=orderService.viewOrder(request.getOrderId());
 		order.setOrderStatus(request.getOrderStatus());
 		return orderUtil.toOrderDetailsResponse(orderService.updateOrder(order));
 	}
 	
-	@DeleteMapping("/deleteorder")
+	@DeleteMapping("/delete")
 	public OrderDetailsResponse deleteOrder(@RequestBody ViewOrDeleteOrderRequest request) {
 		OrderDetails order=orderService.viewOrder(request.getOrderId());
 		return orderUtil.toOrderDetailsResponse(orderService.removeOrder(order));
 	}
 
-	@GetMapping("/vieworder")
+	@GetMapping("/view")
 	public OrderDetailsResponse viewOrder(@RequestBody ViewOrDeleteOrderRequest request) {
 		return orderUtil.toOrderDetailsResponse(orderService.viewOrder(request.getOrderId()));
 	}
 	
-	@GetMapping("/vieworderbycustomerid")
+	@GetMapping("/viewbycustomerid")
 	public List<OrderDetailsResponse> viewAllOrderByCustomer(@RequestBody ViewAllByCustomerIdRequest request) {
 		
 		Customer customer=customerService.viewCustomer(request.getCustomerId());
