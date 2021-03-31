@@ -172,10 +172,10 @@ public class CustomUi {
 //		System.out.println(customerService.updateCustomer(customer2));
 //
 		FoodCart cart1=cartRepository.findFoodCartByCustomer(customer1);
-		cart1.setCustomer(customer1);
+//		cart1.setCustomer(customer1);
 		
 		FoodCart cart2=cartRepository.findFoodCartByCustomer(customer2);
-		cart2.setCustomer(customer2);
+//		cart2.setCustomer(customer2);
 		
 //		System.out.println("View Customer");
 //		System.out.println(customerService.viewCustomer(customer1.getCustomerId()));
@@ -210,6 +210,8 @@ public class CustomUi {
 //		System.out.println();
 //		System.out.println("View Item by name");
 //		System.out.println(itemService.viewAllItemsByName("lays"));
+		System.out.println("View Item bycategory");
+		System.out.println(itemService.viewAllItems(category1));
 		
 		System.out.println("------------------UI-- Restaurant -----------------");
 		System.out.println("Adding Restaurant");
@@ -234,8 +236,8 @@ public class CustomUi {
 
 //		System.out.println(cart.getItemList());
 		
-		System.out.println(cartService.addItemToCart(cart1, item2));
-		System.out.println(cartService.addItemToCart(cart2, item3));
+//		System.out.println(cartService.addItemToCart(cart1, item2));
+//		System.out.println(cartService.addItemToCart(cart2, item3));
 //		System.out.println(" Increase Quantity");
 //		System.out.println(cartService.increaseQuantity(cart, item1, 3));
 //		System.out.println(" Reduce Quantity");
@@ -246,11 +248,12 @@ public class CustomUi {
 ////		System.out.println(cartService.clearCart(cart));
 ////		System.out.println();
 //		
-		order.setCart(cart1);
-		System.out.println("------------------UI-- OrderDetails -----------------");
-		
-		System.out.println("Adding orderDetail");
-		System.out.println(orderService.addOrder(order));
+
+//		order.setCart(cart1);
+//		System.out.println("------------------UI-- OrderDetails -----------------");
+//		
+//		System.out.println("Adding orderDetail");
+//		System.out.println(orderService.addOrder(order));
 //		System.out.println("Update orderDetail");
 //		order.setOrderStatus(OrderStatus.DELIVERED);
 ////		System.out.println(orderService.updateOrder(order));

@@ -1,6 +1,5 @@
 package com.cg.fds.service;
 
-import com.cg.fds.entities.Customer;
 import com.cg.fds.entities.FoodCart;
 import com.cg.fds.entities.Item;
 

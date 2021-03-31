@@ -1,6 +1,5 @@
 package com.cg.fds.service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -70,21 +69,19 @@ public class RestaurantServiceImp implements IRestaurantService {
 	}
 
 	@Override
-	public Restaurant viewAllRestaurants() {
-		return null;
+	public List<Restaurant> viewAllRestaurants() {
+		return restaurantRepository.findAll();
 	}
 
 	@Override
 	public List<Restaurant> viewNearByRestaurant(String location) {
-
 		Address address=addressRepository.findAddressByArea(location);
 		List<Restaurant> listr=restaurantRepository.findByAddress(address);
 		return listr;
-	}
+	} 
 
 	@Override
 	public List<Restaurant> viewRestaurantByItemName(String name) {
-
 		List<Restaurant> list=restaurantRepository.findByRestaurantName(name);
 		return list;
 	}

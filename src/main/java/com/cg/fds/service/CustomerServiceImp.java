@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cg.fds.entities.Address;
+import com.cg.fds.entities.CartItem;
 import com.cg.fds.entities.Customer;
 import com.cg.fds.entities.FoodCart;
 import com.cg.fds.exception.CustomerNotFoundException;
@@ -17,6 +18,7 @@ import com.cg.fds.exception.InvalidCustomerPhoneNumberException;
 import com.cg.fds.exception.RemoveCustomerException;
 import com.cg.fds.exception.UpdateCustomerException;
 import com.cg.fds.repository.IAddressRepository;
+import com.cg.fds.repository.ICartItemRepository;
 import com.cg.fds.repository.ICartRepository;
 import com.cg.fds.repository.ICustomerRepository;
 import com.cg.fds.util.FoodCartUtil;
@@ -31,6 +33,9 @@ public class CustomerServiceImp implements ICustomerService {
 	
 	@Autowired
 	ICartRepository cartRepository;
+	
+	@Autowired
+	private ICartItemRepository cartItemRepository;
 	
 	@Autowired
 	FoodCartUtil cartUtil;
@@ -83,6 +88,12 @@ public class CustomerServiceImp implements ICustomerService {
 			throw new RemoveCustomerException("Customer doesn't exist for id =" + customer.getCustomerId());
 		}
 		FoodCart cart=cartRepository.findFoodCartByCustomer(customer);
+		List<CartItem> cartItems=cartItemRepository.findByCart(cart);
+		for(CartItem cartItem:cartItems)
+		{
+			cartItemRepository.deleteById(cartItem.getId());
+		}
+		
 		cartRepository.delete(cart);
 		customerRepository.delete(customer);
 		return customer;
