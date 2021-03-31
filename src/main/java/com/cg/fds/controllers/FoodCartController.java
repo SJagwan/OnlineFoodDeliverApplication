@@ -67,14 +67,14 @@ public class FoodCartController {
 		return cartUtil.toCartDetails(cartService.removeItem(cart, item));
 	}
 	@Transactional
-	@DeleteMapping("/clearcart")
+	@DeleteMapping("/clear")
 	public FoodCartDetails clearCart(@RequestBody ClearCartRequest request)
 	{
 		FoodCart cart=cartService.findFoodCartByCustomer(request.getCustomerId());
 		return cartUtil.toCartDetails(cartService.clearCart(cart));
 	}
 	
-	@GetMapping("/findcart")
+	@GetMapping("/find")
 	public FoodCartDetails findCart(@RequestBody FindCartRequest request)
 	{
 		return cartUtil.toCartDetails(cartService.findFoodCartByCustomer(request.getCustomerId()));
