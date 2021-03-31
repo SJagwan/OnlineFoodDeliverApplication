@@ -26,6 +26,12 @@ public class CartServiceImp implements ICartService {
 
 	@Autowired
 	private ICartItemRepository cartItemRepository;
+	
+	/**
+	 * scenario : Adding the items to the Cart
+	 * input: Cart and Item Objects are passed in the parameter
+	 * expectation: Items are added in the Cart
+	 */
 
 	@Override
 	public FoodCart addItemToCart(FoodCart cart, Item item) {
@@ -33,6 +39,11 @@ public class CartServiceImp implements ICartService {
 		increaseQuantity(cart,item,1);
 		return cart;
 	}
+	/**
+	 * scenario : Increasing the Quantity
+	 * input: Cart, Item and quantity Objects are passed in the parameter
+	 * expectation: Check the existing quantity of the cart, Add the updated quantity
+	 */
 
 	@Override
 	public FoodCart increaseQuantity(FoodCart cart, Item item, int quantity) {
@@ -52,6 +63,11 @@ public class CartServiceImp implements ICartService {
 		cartItemRepository.save(cartItem);
 		return cart;
 	}
+	/**
+	 * scenario : Reducing the Quantity
+	 * input: Cart, Item and Quantity Objects are passed in the parameter
+	 * expectation: Check the existing quantity of the cart, and reduce the quantity
+	 */
 
 	@Override
 	public FoodCart reduceQuantity(FoodCart cart, Item item, int quantity) {
@@ -72,7 +88,11 @@ public class CartServiceImp implements ICartService {
         cartItemRepository.save(cartItem);
         return cart;
 	}
-
+	/**
+	 * scenario : Remove the Item
+	 * input: Cart and Item Objects are passed in the parameter
+	 * expectation: Item gets removed
+	 */
 	@Override
 	public FoodCart removeItem(FoodCart cart, Item item) {
 		validateCart(cart);
@@ -81,7 +101,11 @@ public class CartServiceImp implements ICartService {
         cartItemRepository.deleteById(cartItemId);
         return cart;
 	}
-
+	/**
+	 * scenario : Clearing the Cart
+	 * input: Cart Object is passed in the parameter
+	 * expectation: Items in the cart gets cleared
+	 */
 	@Override
 	public FoodCart clearCart(FoodCart cart) {
 		validateCart(cart);
@@ -89,6 +113,11 @@ public class CartServiceImp implements ICartService {
         cartItemRepository.deleteByCart(cart);
         return cart;
 	}
+	/**
+	 * scenario : Viewing the Cart
+	 * input: Customer Id Object is passed in the parameter
+	 * expectation: Viewing the Cart by customer Id
+	 */
 
 	@Override
 	public FoodCart findFoodCartByCustomer(String customerId) {
