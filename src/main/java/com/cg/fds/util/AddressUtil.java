@@ -11,7 +11,7 @@ public class AddressUtil {
 	public Address getAddress() {
 		return new Address();
 	}
-	
+  
 	public String generateId() {
 		StringBuilder builder= new StringBuilder();
 		Random random= new Random();

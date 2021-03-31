@@ -13,6 +13,8 @@ import com.cg.fds.entities.Item;
 public interface ICartItemRepository extends JpaRepository<CartItem,String> {
 
     void deleteByCart(FoodCart cart);
+    
+    List<CartItem> findByCart(FoodCart cart);
 
 //    void deleteByCartAndItem(FoodCart cart, Item item);
 
