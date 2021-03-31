@@ -1,4 +1,4 @@
-package com.cg.fds.dto.orderDetails;
+package com.cg.fds.dto.restaurant;
 
 public class ViewAllByCustomerIdRequest {
 	

@@ -161,8 +161,13 @@ public class RestaurantServiceImpUnitTest {
 //		List<Restaurant> result = restaurantService.viewRestaurantByItemName(name);
 //		Assertions.assertNotNull(result);
 //		Assertions.assertEquals(list, result);
-//	}
+//  }
 
+//	@Test
+//	public void viewAllRestaurant() {
+//		
+//	}
+	
 	/**
 	 * Scenario if Restaurant Name in null;
 	 */
