@@ -44,7 +44,7 @@ public class FoodCartUtil {
 		FoodCartItemDetails foodItem=new FoodCartItemDetails();
 		foodItem.setItemId(item.getItemId());
 		foodItem.setItemName(item.getItemName());
-		foodItem.setQuantity(item.getQuantity());
+//		foodItem.setQuantity(item.getQuantity());
 		foodItem.setCost(item.getCost());
 		foodItem.setCategoryName(item.getCategory().getCategoryName());
 		return foodItem;

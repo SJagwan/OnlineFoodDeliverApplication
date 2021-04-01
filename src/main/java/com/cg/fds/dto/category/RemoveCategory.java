@@ -1,11 +1,13 @@
 package com.cg.fds.dto.category;
 
+
 public class RemoveCategory {
+
+	private String id;
+	
 	public RemoveCategory() {
 
 	}
-
-	private String id;
 
 	public String getId() {
 		return id;

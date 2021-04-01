@@ -1,11 +1,11 @@
 package com.cg.fds.dto.customers;
 
 public class CustomerDetails {
-	
+
 	private String firstName;
 	private String lastName;
 	private String gender;
-	
+
 	public CustomerDetails() {
 	}
 
@@ -32,6 +32,5 @@ public class CustomerDetails {
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
-	
-	
+
 }

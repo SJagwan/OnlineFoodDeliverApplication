@@ -2,27 +2,26 @@ package com.cg.fds.entities;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
+
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
+
 import javax.persistence.OneToOne;
 
 @Entity
 public class Restaurant {
-	
+
 	@Id
 	private String restaurantId;
 	private String restaurantName;
-	
+
 	@OneToOne
 	private Address address;
-	
+
 	@ManyToMany
 	private List<Item> itemList;
-	
+
 	private String managerName;
 	private String contactNumber;
 
@@ -81,8 +80,7 @@ public class Restaurant {
 	@Override
 	public String toString() {
 		return "Restaurant [restaurantId=" + restaurantId + ", restaurantName=" + restaurantName + ", address="
-				+ address +", managerName=" + managerName + ", contactNumber="
-				+ contactNumber + "]";
+				+ address + ", managerName=" + managerName + ", contactNumber=" + contactNumber + "]";
 	}
 
 	@Override
@@ -109,9 +107,5 @@ public class Restaurant {
 			return false;
 		return true;
 	}
-	
-	
-
-
 
 }

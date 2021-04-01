@@ -1,12 +1,19 @@
 package com.cg.fds.dto.category;
 
+import javax.validation.constraints.NotBlank;
+
 public class UpdateCategory {
-public UpdateCategory() {
-		
+	
+
+	@NotBlank
+	private String id;
+	@NotBlank
+	private String name;
+	
+	public UpdateCategory() {
+
 	}
-private String id;
-	
-	
+
 	public String getName() {
 		return name;
 	}
@@ -23,6 +30,6 @@ private String id;
 		this.name = name;
 	}
 
-	private String name;
+	
 
 }

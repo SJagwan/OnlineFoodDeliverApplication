@@ -8,21 +8,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cg.fds.entities.Category;
-import com.cg.fds.entities.Item;
 import com.cg.fds.exception.CategoryNotFoundException;
 import com.cg.fds.exception.InvalidCategoryException;
 import com.cg.fds.exception.InvalidCategoryIdException;
 import com.cg.fds.exception.InvalidCategoryNameException;
-import com.cg.fds.exception.RemoveCategoryException;
-import com.cg.fds.exception.UpdateCategoryException;
+
 import com.cg.fds.repository.ICategoryRepository;
-import com.cg.fds.repository.IItemRepository;
+
 
 @Service
 public class CategoryServiceImp implements ICategoryService {
 	
-	@Autowired
-	private IItemRepository itemRepository;
 	@Autowired
 	private ICategoryRepository categoryRepository;
 	
@@ -47,6 +43,7 @@ public class CategoryServiceImp implements ICategoryService {
 		validateCategory(cat);
 		String id = generateId();
 		cat.setCatId(id);
+		validateCategoryId(cat.getCatId());
 		return categoryRepository.save(cat);
 	}
 	/**
@@ -60,7 +57,7 @@ public class CategoryServiceImp implements ICategoryService {
 		validateCategory(cat);
 		boolean exists = categoryRepository.existsById(cat.getCatId());
 		if (!exists) {
-			throw new UpdateCategoryException("Category with id not present=" + cat.getCatId());
+			throw new CategoryNotFoundException("Category with id not present=" + cat.getCatId());
 		}
 		return categoryRepository.save(cat);
 	}
@@ -116,7 +113,7 @@ public class CategoryServiceImp implements ICategoryService {
 			throw new InvalidCategoryException("Category can't be null");
 		}
 		validateCategoryName(cat.getCategoryName());
-		validateCategoryId(cat.getCatId());
+		
 	}
 
 	/**

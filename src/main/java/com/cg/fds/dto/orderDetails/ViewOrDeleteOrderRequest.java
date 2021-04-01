@@ -1,11 +1,14 @@
 package com.cg.fds.dto.orderDetails;
 
+import javax.validation.constraints.NotNull;
+
 public class ViewOrDeleteOrderRequest {
-	
+
+	@NotNull
 	private int orderId;
-	
+
 	public ViewOrDeleteOrderRequest() {
-		
+
 	}
 
 	public int getOrderId() {
@@ -16,5 +19,4 @@ public class ViewOrDeleteOrderRequest {
 		this.orderId = orderId;
 	}
 
-	
 }

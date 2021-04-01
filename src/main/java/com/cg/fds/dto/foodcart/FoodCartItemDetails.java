@@ -1,15 +1,16 @@
 package com.cg.fds.dto.foodcart;
 
+
 public class FoodCartItemDetails {
-	
+
 	private String itemId;
 	private String itemName;
 	private String categoryName;
-	private int quantity;
+//	private int quantity;
 	private double cost;
-	
+
 	public FoodCartItemDetails() {
-		
+
 	}
 
 	public String getItemId() {
@@ -36,13 +37,13 @@ public class FoodCartItemDetails {
 		this.categoryName = categoryName;
 	}
 
-	public int getQuantity() {
-		return quantity;
-	}
-
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
-	}
+//	public int getQuantity() {
+//		return quantity;
+//	}
+//
+//	public void setQuantity(int quantity) {
+//		this.quantity = quantity;
+//	}
 
 	public double getCost() {
 		return cost;
@@ -51,7 +52,5 @@ public class FoodCartItemDetails {
 	public void setCost(double cost) {
 		this.cost = cost;
 	}
-	
-	
 
 }

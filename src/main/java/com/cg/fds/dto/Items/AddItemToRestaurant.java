@@ -1,7 +1,11 @@
 package com.cg.fds.dto.Items;
 
+import javax.validation.constraints.NotBlank;
+
 public class AddItemToRestaurant {
+	@NotBlank
 	private String itemId;
+	@NotBlank
 	private String restaurantId;
 	
 	public AddItemToRestaurant()

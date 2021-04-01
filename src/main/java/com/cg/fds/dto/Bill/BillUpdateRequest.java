@@ -1,10 +1,11 @@
 package com.cg.fds.dto.Bill;
 
-import com.cg.fds.entities.OrderDetails;
+import javax.validation.constraints.NotNull;
 
 public class BillUpdateRequest {
+	@NotNull
 	private int billId;
-	
+
 	private int totalItem;
 	private double totalCost;
 

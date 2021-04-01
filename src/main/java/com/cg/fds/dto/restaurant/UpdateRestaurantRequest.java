@@ -1,7 +1,10 @@
 package com.cg.fds.dto.restaurant;
 
+import javax.validation.constraints.NotBlank;
+
 public class UpdateRestaurantRequest {
 
+	@NotBlank
 	private String restaurantId;
 
 	private String restaurantName;
@@ -42,7 +45,5 @@ public class UpdateRestaurantRequest {
 	public void setContactNumber(String contactNumber) {
 		this.contactNumber = contactNumber;
 	}
-
-	
 
 }

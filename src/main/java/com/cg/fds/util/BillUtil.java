@@ -26,13 +26,14 @@ public class BillUtil {
 		details.setTotalCost(bill.getTotalCost());
 		return details;
 	}
+
 	public Bill getBill() {
 		return new Bill();
 	}
-	
-	public List<BillDetailsResponse> toDetailsList(List<Bill> bills){
+
+	public List<BillDetailsResponse> toDetailsList(List<Bill> bills) {
 		List<BillDetailsResponse> bd = new ArrayList<>();
-		for(Bill bill: bills ) {
+		for (Bill bill : bills) {
 			bd.add(toDetails(bill));
 		}
 		return bd;

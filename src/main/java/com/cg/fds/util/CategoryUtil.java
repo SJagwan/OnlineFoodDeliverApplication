@@ -11,21 +11,22 @@ import com.cg.fds.entities.Category;
 
 @Component
 public class CategoryUtil {
-	
+
 	public Category getCategory() {
 		return new Category();
 	}
-	
-public CategoryDetails toCategoryDetail(Category category) {
-	CategoryDetails cd = new CategoryDetails();
-	cd.setName(category.getCategoryName());
-	return cd;
-}
-public List<CategoryDetails> toCategoryDetailsList(List<Category> categoryList){
-	List<CategoryDetails>categoryDetails = new ArrayList<>();
-	for(Category c:categoryList) {
-		categoryDetails.add(toCategoryDetail(c));
+
+	public CategoryDetails toCategoryDetail(Category category) {
+		CategoryDetails cd = new CategoryDetails();
+		cd.setName(category.getCategoryName());
+		return cd;
 	}
-	return categoryDetails;
-}
+
+	public List<CategoryDetails> toCategoryDetailsList(List<Category> categoryList) {
+		List<CategoryDetails> categoryDetails = new ArrayList<>();
+		for (Category c : categoryList) {
+			categoryDetails.add(toCategoryDetail(c));
+		}
+		return categoryDetails;
+	}
 }

@@ -1,7 +1,11 @@
 package com.cg.fds.dto.Bill;
 
+import javax.validation.constraints.NotBlank;
+
 public class BillByDateRequest {
+	@NotBlank
 	private String startDate;
+	@NotBlank
 	private String endDate;
 
 	public String getStartDate() {

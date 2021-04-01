@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -18,13 +17,9 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import com.cg.fds.entities.Bill;
 import com.cg.fds.entities.Item;
 import com.cg.fds.entities.OrderDetails;
-import com.cg.fds.exception.BillDoesNotException;
+import com.cg.fds.exception.BillDoesNotExistException;
 import com.cg.fds.exception.InvalidBillException;
-import com.cg.fds.exception.RemoveBillException;
-import com.cg.fds.exception.UpdateBillException;
 import com.cg.fds.repository.IBillRepository;
-
-
 
 @ExtendWith(MockitoExtension.class)
 public class BillServiceImpUnitTest {
@@ -33,12 +28,11 @@ public class BillServiceImpUnitTest {
 	@Spy
 	@InjectMocks
 	BillServiceImp billService;
-	
-	
+
 	/*
 	 * Scenario adding item and order in bill
 	 */
-	
+
 	@Test
 	public void addBillTest_1() {
 		Bill bill = Mockito.mock(Bill.class);
@@ -60,20 +54,17 @@ public class BillServiceImpUnitTest {
 		Assertions.assertEquals(billSaved, result);
 		verify(billService).validateBill(bill);
 		verify(bill).setTotalItem(2);
-		verify(bill).setTotalCost(15);
 		verify(billRepository).save(bill);
-		
+
 	}
-	
-	
-	
+
 	/*
 	 * Scenario updating Bill with no exception
 	 */
-	
+
 	@Test
 	public void updateBillTest_1() {
-		int id=1;
+		int id = 1;
 		Bill bill = Mockito.mock(Bill.class);
 		Bill billSaved = Mockito.mock(Bill.class);
 		Mockito.doNothing().when(billService).validateBill(bill);
@@ -86,30 +77,30 @@ public class BillServiceImpUnitTest {
 		Mockito.verify(billRepository).existsById(1);
 
 	}
-	
+
 	/*
 	 * Scenario updating bill with exception
 	 */
-	
+
 	@Test
 	public void updateBillTest_2() {
-		int id=1;
+		int id = 1;
 		Bill bill = Mockito.mock(Bill.class);
 		Mockito.doNothing().when(billService).validateBill(bill);
 		Mockito.when(bill.getBillId()).thenReturn(id);
 		Mockito.when(billRepository.existsById(id)).thenReturn(false);
 		Executable executable = () -> billService.updateBill(bill);
-		Assertions.assertThrows(UpdateBillException.class, executable);
+		Assertions.assertThrows(BillDoesNotExistException.class, executable);
 		Mockito.verify(billRepository).existsById(1);
 
 	}
 	/*
 	 * Scenario removing bill without exception
 	 */
-	
+
 	@Test
 	public void removeBillTest_1() {
-		int id=1;
+		int id = 1;
 		Bill bill = Mockito.mock(Bill.class);
 		Mockito.doNothing().when(billService).validateBill(bill);
 		Mockito.when(bill.getBillId()).thenReturn(id);
@@ -120,73 +111,70 @@ public class BillServiceImpUnitTest {
 		Mockito.verify(billRepository).existsById(1);
 
 	}
-	
+
 	/*
 	 * Scenario removing bill with exception
 	 */
-	
+
 	@Test
 	public void removeBillTest_2() {
-		int id=1;
+		int id = 1;
 		Bill bill = Mockito.mock(Bill.class);
 		Mockito.doNothing().when(billService).validateBill(bill);
 		Mockito.when(bill.getBillId()).thenReturn(id);
 		Mockito.when(billRepository.existsById(id)).thenReturn(false);
 		Executable executable = () -> billService.removeBill(bill);
-		Assertions.assertThrows(RemoveBillException.class, executable);
+		Assertions.assertThrows(BillDoesNotExistException.class, executable);
 		Mockito.verify(billRepository).existsById(1);
 
 	}
-	
+
 	/*
 	 * Scenario : viewing bill without exception
 	 */
-	
+
 	@Test
-	public void viewOrderTest_1() {
-		Bill bill=Mockito.mock(Bill.class);
-		int id=1;
-		Optional<Bill>optionBill=Optional.of(bill);
-		Mockito.when(bill.getBillId()).thenReturn(id);
+	public void viewBillTest_1() {
+		Bill bill = Mockito.mock(Bill.class);
+		int id = 1;
+		Optional<Bill> optionBill = Optional.of(bill);
 		Mockito.when(billRepository.findById(id)).thenReturn(optionBill);
-		Bill result=billService.viewBill(id);
+		Bill result = billService.viewBill(id);
 		Assertions.assertNotNull(result);
-		Assertions.assertEquals(bill,result);
+		Assertions.assertEquals(bill, result);
 		Mockito.verify(billRepository).findById(1);
 	}
 	/*
 	 * Scenario : viewing bill with exception
 	 */
-	
+
 	@Test
-	public void viewOrderTest_2() {
-		int id=1;
-		Bill bill=Mockito.mock(Bill.class);
-		Optional<Bill>optionBill=Optional.empty();
-		Mockito.when(bill.getBillId()).thenReturn(id);
+	public void viewBillTest_2() {
+		int id = 1;
+		Bill bill = Mockito.mock(Bill.class);
+		Optional<Bill> optionBill = Optional.empty();
 		Mockito.when(billRepository.findById(id)).thenReturn(optionBill);
 		Executable executable = () -> billService.viewBill(id);
-		Assertions.assertThrows(BillDoesNotException.class, executable);		
+		Assertions.assertThrows(BillDoesNotExistException.class, executable);
 	}
-	
+
 	/*
 	 * Scenario : adding the cost of items in the order and get total cost
 	 */
-	
-	
+
 	@Test
 	public void totalCostTest_1() {
 		Bill bill = Mockito.mock(Bill.class);
 		Mockito.when(bill.getTotalCost()).thenReturn(15.0);
 		double result = billService.totalCost(bill);
 		Assertions.assertNotNull(result);
-		Assertions.assertEquals(15,result);
-		
+		Assertions.assertEquals(15, result);
+
 	}
 	/*
-	 * Scenario : validating the bill 
+	 * Scenario : validating the bill
 	 */
-	
+
 	@Test
 	public void validateBill_1() {
 		Bill bill = null;

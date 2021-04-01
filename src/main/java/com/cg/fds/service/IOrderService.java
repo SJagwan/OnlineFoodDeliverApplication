@@ -8,11 +8,11 @@ import com.cg.fds.entities.Restaurant;
 
 public interface IOrderService {
 
-	public OrderDetails addOrder(OrderDetails order);
-	public OrderDetails updateOrder(OrderDetails order);
-	public OrderDetails removeOrder(OrderDetails order);
-	public OrderDetails viewOrder(int orderId);
-	public List<OrderDetails> viewAllOrders(Restaurant resName);
-	public List<OrderDetails> viewAllOrders(Customer customer);
+	 OrderDetails addOrder(OrderDetails order);
+	 OrderDetails updateOrder(OrderDetails order);
+	 OrderDetails removeOrder(OrderDetails order);
+	 OrderDetails viewOrder(int orderId);
+	 List<OrderDetails> viewAllOrders(Restaurant resName);
+	 List<OrderDetails> viewAllOrders(Customer customer);
 	
 }

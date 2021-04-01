@@ -15,15 +15,6 @@ public class CustomerUtil {
 		return new Customer();
 	}
 
-	public String generateId() {
-		StringBuilder builder = new StringBuilder();
-		Random random = new Random();
-		for (int i = 0; i < 10; i++) {
-			int randomNum = random.nextInt(10);
-			builder.append(randomNum);
-		}
-		return builder.toString();
-	}
 	
 	public CustomerDetails customerDetails(Customer customer) {
 		

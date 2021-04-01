@@ -1,21 +1,19 @@
 package com.cg.fds.dto.Items;
 
-
-
-import java.time.LocalDateTime;
-
-import com.cg.fds.entities.Category;
-import com.cg.fds.entities.OrderDetails;
+import javax.validation.constraints.NotBlank;
 
 public class AddItem {
 
 	private String itemName;
+	
+	@NotBlank
 	private String catId;
 	private int quantity;
 	private double cost;
+	
+	@NotBlank
 	private String restaurantId;
 
-	
 	public String getRestaurantId() {
 		return restaurantId;
 	}
@@ -25,7 +23,7 @@ public class AddItem {
 	}
 
 	public AddItem() {
-		
+
 	}
 
 	public String getItemName() {
@@ -35,8 +33,6 @@ public class AddItem {
 	public void setItemName(String itemName) {
 		this.itemName = itemName;
 	}
-
-	
 
 	public String getCatId() {
 		return catId;
@@ -61,6 +57,5 @@ public class AddItem {
 	public void setCost(double cost) {
 		this.cost = cost;
 	}
-	
-	
+
 }

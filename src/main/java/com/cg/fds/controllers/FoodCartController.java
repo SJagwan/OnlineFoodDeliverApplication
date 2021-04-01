@@ -1,8 +1,10 @@
 package com.cg.fds.controllers;
 
 import javax.transaction.Transactional;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,61 +25,57 @@ import com.cg.fds.service.IItemService;
 
 import com.cg.fds.util.FoodCartUtil;
 
+@Validated
 @RequestMapping("/foodcart")
 @RestController
 public class FoodCartController {
-	
+
 	@Autowired
 	private ICartService cartService;
-	
+
 	@Autowired
 	private FoodCartUtil cartUtil;
-	
+
 	@Autowired
 	private IItemService itemService;
-	
+
 	@PostMapping("/additemtocart")
-	public FoodCartDetails addItemToCart(@RequestBody FoodCartRequest request)
-	{
-		FoodCart cart=cartService.findFoodCartByCustomer(request.getCustomerId());
-		Item item=itemService.viewItem(request.getItemId());
+	public FoodCartDetails addItemToCart(@RequestBody @Valid FoodCartRequest request) {
+		FoodCart cart = cartService.findFoodCartByCustomer(request.getCustomerId());
+		Item item = itemService.viewItem(request.getItemId());
 		return cartUtil.toCartDetails(cartService.addItemToCart(cart, item));
 	}
-	
+
 	@PutMapping("/increasequantity")
-	public FoodCartDetails increaseQuantity(@RequestBody ChangeQuantityRequest request)
-	{
-		FoodCart cart=cartService.findFoodCartByCustomer(request.getCustomerId());
-		Item item=itemService.viewItem(request.getItemId());
+	public FoodCartDetails increaseQuantity(@RequestBody @Valid ChangeQuantityRequest request) {
+		FoodCart cart = cartService.findFoodCartByCustomer(request.getCustomerId());
+		Item item = itemService.viewItem(request.getItemId());
 		return cartUtil.toCartDetails(cartService.increaseQuantity(cart, item, request.getQuantity()));
 	}
-	
+
 	@PutMapping("/reducequantity")
-	public FoodCartDetails reduceQuantity(@RequestBody ChangeQuantityRequest request)
-	{
-		FoodCart cart=cartService.findFoodCartByCustomer(request.getCustomerId());
-		Item item=itemService.viewItem(request.getItemId());
+	public FoodCartDetails reduceQuantity(@RequestBody @Valid ChangeQuantityRequest request) {
+		FoodCart cart = cartService.findFoodCartByCustomer(request.getCustomerId());
+		Item item = itemService.viewItem(request.getItemId());
 		return cartUtil.toCartDetails(cartService.reduceQuantity(cart, item, request.getQuantity()));
 	}
-	
+
 	@DeleteMapping("/removeitem")
-	public FoodCartDetails removeItem(@RequestBody FoodCartRequest request)
-	{
-		FoodCart cart=cartService.findFoodCartByCustomer(request.getCustomerId());
-		Item item=itemService.viewItem(request.getItemId());
+	public FoodCartDetails removeItem(@RequestBody @Valid FoodCartRequest request) {
+		FoodCart cart = cartService.findFoodCartByCustomer(request.getCustomerId());
+		Item item = itemService.viewItem(request.getItemId());
 		return cartUtil.toCartDetails(cartService.removeItem(cart, item));
 	}
+
 	@Transactional
 	@DeleteMapping("/clear")
-	public FoodCartDetails clearCart(@RequestBody ClearCartRequest request)
-	{
-		FoodCart cart=cartService.findFoodCartByCustomer(request.getCustomerId());
+	public FoodCartDetails clearCart(@RequestBody @Valid ClearCartRequest request) {
+		FoodCart cart = cartService.findFoodCartByCustomer(request.getCustomerId());
 		return cartUtil.toCartDetails(cartService.clearCart(cart));
 	}
-	
+
 	@GetMapping("/find")
-	public FoodCartDetails findCart(@RequestBody FindCartRequest request)
-	{
+	public FoodCartDetails findCart(@RequestBody @Valid FindCartRequest request) {
 		return cartUtil.toCartDetails(cartService.findFoodCartByCustomer(request.getCustomerId()));
 
 	}

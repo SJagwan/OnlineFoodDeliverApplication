@@ -1,11 +1,12 @@
 package com.cg.fds.dto.category;
 
+import javax.validation.constraints.NotBlank;
+
 public class AddCategory {
 	public AddCategory() {
-		
+
 	}
-	
-	
+
 	public String getName() {
 		return name;
 	}
@@ -14,6 +15,7 @@ public class AddCategory {
 		this.name = name;
 	}
 
+	@NotBlank
 	private String name;
 
 }

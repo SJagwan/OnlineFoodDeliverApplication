@@ -1,10 +1,17 @@
 package com.cg.fds.dto.foodcart;
 
+import javax.validation.Valid;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+
 public class ChangeQuantityRequest {
+	@NotBlank
 	private String customerId;
+	@NotBlank
 	private String itemId;
+	@Min(1)
 	private int quantity;
-	
+
 	public ChangeQuantityRequest() {
 	}
 
@@ -31,7 +38,5 @@ public class ChangeQuantityRequest {
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
-	
-	
 
 }

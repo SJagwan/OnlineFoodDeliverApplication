@@ -3,7 +3,11 @@ package com.cg.fds.controllers;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,6 +34,7 @@ import com.cg.fds.service.RestaurantServiceImp;
 import com.cg.fds.util.ItemUtil;
 import com.cg.fds.util.RestaurantUtil;
 
+@Validated
 @RequestMapping("/items")
 @RestController
 public class ItemController {
@@ -48,9 +53,9 @@ public class ItemController {
 
 	@Autowired
 	private RestaurantUtil restaurantUtil;
-	
+
 	@PostMapping("/add")
-	public ItemDetails addItem(@RequestBody AddItem request) {
+	public ItemDetails addItem(@RequestBody @Valid AddItem request) {
 		Item item = itemUtil.getItem();
 		Restaurant restaurant = restaurantService.viewRestaurant(request.getRestaurantId());
 		Category category = categoryService.viewCategory(request.getCatId());
@@ -70,19 +75,19 @@ public class ItemController {
 	}
 
 	@PutMapping("/addtorestaurant")
-	public RestaurantDetails addItemToRestaurant(@RequestBody AddItemToRestaurant request) {
+	public RestaurantDetails addItemToRestaurant(@RequestBody @Valid AddItemToRestaurant request) {
 		Item item = itemService.viewItem(request.getItemId());
 		Restaurant restaurant = restaurantService.viewRestaurant(request.getRestaurantId());
 		List<Item> restaurantItems = restaurant.getItemList();
 		if (!restaurantItems.contains(item)) {
-			restaurantItems.add(item);		
+			restaurantItems.add(item);
 		}
 		restaurant = restaurantService.updateRestaurant(restaurant);
 		return restaurantUtil.toRestaurantDetails(restaurant);
 	}
 
 	@PutMapping("/update")
-	public ItemDetails updateItem(@RequestBody UpdateItem request) {
+	public ItemDetails updateItem(@RequestBody @Valid UpdateItem request) {
 		Item item = itemService.viewItem(request.getItemId());
 		item.setCost(request.getCost());
 		item.setItemName(request.getItemName());
@@ -92,28 +97,28 @@ public class ItemController {
 	}
 
 	@DeleteMapping("/remove")
-	public ItemDetails removeItem(@RequestBody RemoveItem request) {
+	public ItemDetails removeItem(@RequestBody @Valid RemoveItem request) {
 		return itemUtil.toItemDetails(itemService.removeItem(request.getItemId()));
 	}
 
 	@GetMapping("/view/{id}")
-	public ItemDetails viewItem(@PathVariable String id) {
+	public ItemDetails viewItem(@PathVariable @NotBlank String id) {
 		return itemUtil.toItemDetails(itemService.viewItem(id));
 	}
 
 	@GetMapping("/byname/{name}")
-	public List<ItemDetails> viewItembyname(@PathVariable String name) {
+	public List<ItemDetails> viewItembyname(@PathVariable @NotBlank String name) {
 		return itemUtil.toItemDetailsList(itemService.viewAllItemsByName(name));
 	}
 
 	@GetMapping("/bycategory")
-	public List<ItemDetails> viewItembycategory(@RequestBody FindItemByCategory request) {
+	public List<ItemDetails> viewItembycategory(@RequestBody @Valid FindItemByCategory request) {
 		Category category = categoryService.viewCategory(request.getCatId());
 		return itemUtil.toItemDetailsList(itemService.viewAllItems(category));
 	}
 
 	@GetMapping("/byrestaurant")
-	public List<ItemDetails> viewItembyrestaurant(@RequestBody FindItemByRestaurant request) {
+	public List<ItemDetails> viewItembyrestaurant(@RequestBody @Valid FindItemByRestaurant request) {
 		Restaurant restaurant = restaurantService.viewRestaurant(request.getRestaurantId());
 		return itemUtil.toItemDetailsList(itemService.viewAllItems(restaurant));
 	}

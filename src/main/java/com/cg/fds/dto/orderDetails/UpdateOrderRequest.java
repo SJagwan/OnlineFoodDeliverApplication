@@ -1,11 +1,16 @@
 package com.cg.fds.dto.orderDetails;
 
+import javax.validation.constraints.NotNull;
+
 public class UpdateOrderRequest {
-	
+
 	private String orderStatus;
-	private int orderId;
 	
-	public UpdateOrderRequest() {}
+	@NotNull
+	private int orderId;
+
+	public UpdateOrderRequest() {
+	}
 
 	public String getOrderStatus() {
 		return orderStatus;
@@ -22,8 +27,5 @@ public class UpdateOrderRequest {
 	public void setOrderId(int orderId) {
 		this.orderId = orderId;
 	}
-	
-	
-	
 
 }

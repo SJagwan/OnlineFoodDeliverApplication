@@ -13,17 +13,15 @@ public class Bill {
 	@GeneratedValue
 	@Id
 	private int billId;
-	
+
 	@OneToOne
 	private OrderDetails order;
 	private int totalItem;
 	private double totalCost;
 	LocalDateTime billDate;
 
-
 	public Bill() {
 	}
-
 
 	public int getBillId() {
 		return billId;
@@ -65,13 +63,11 @@ public class Bill {
 		this.billDate = billDate;
 	}
 
-
 	@Override
 	public String toString() {
 		return "Bill [billId=" + billId + ", order=" + order + ", totalItem=" + totalItem + ", totalCost=" + totalCost
 				+ ", billDate=" + billDate + "]";
 	}
-
 
 	@Override
 	public int hashCode() {
@@ -80,7 +76,6 @@ public class Bill {
 		result = prime * result + billId;
 		return result;
 	}
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -95,6 +90,5 @@ public class Bill {
 			return false;
 		return true;
 	}
-	
-	
+
 }

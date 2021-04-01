@@ -11,13 +11,11 @@ import com.cg.fds.entities.Restaurant;
 import com.cg.fds.exception.InvalidRestaurantException;
 import com.cg.fds.exception.InvalidRestaurantLocationException;
 import com.cg.fds.exception.InvalidRestaurantNameException;
-import com.cg.fds.exception.RemoveRestaurantException;
 import com.cg.fds.exception.RestaurantNotFoundException;
-import com.cg.fds.exception.UpdateRestaurantException;
+
 import com.cg.fds.repository.IAddressRepository;
 import com.cg.fds.repository.IRestaurantRepository;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Assertions;
@@ -30,7 +28,7 @@ public class RestaurantServiceImpUnitTest {
 
 	@Mock
 	IRestaurantRepository restaurantRepository;
-	
+
 	@Mock
 	IAddressRepository addressRepository;
 
@@ -47,7 +45,7 @@ public class RestaurantServiceImpUnitTest {
 	public void addRestaurantTest() {
 
 		Restaurant restaurant = Mockito.mock(Restaurant.class);
-		Address address=Mockito.mock(Address.class);
+		Address address = Mockito.mock(Address.class);
 		Mockito.doNothing().when(restaurantService).validateRestaurant(restaurant);
 		Restaurant restaurantSaved = Mockito.mock(Restaurant.class);
 		Mockito.when(restaurant.getAddress()).thenReturn(address);
@@ -80,7 +78,7 @@ public class RestaurantServiceImpUnitTest {
 		Mockito.when(restaurant.getRestaurantId()).thenReturn(restaurantId);
 		Mockito.when(restaurantRepository.existsById(restaurantId)).thenReturn(false);
 		Executable executable = () -> restaurantService.removeRestaurant(restaurant);
-		Assertions.assertThrows(RemoveRestaurantException.class, executable);
+		Assertions.assertThrows(RestaurantNotFoundException.class, executable);
 	}
 
 	@Test
@@ -129,7 +127,7 @@ public class RestaurantServiceImpUnitTest {
 		Mockito.when(restaurant.getRestaurantId()).thenReturn(restaurantId);
 		Mockito.when(restaurantRepository.existsById(restaurantId)).thenReturn(false);
 		Executable executable = () -> restaurantService.updateRestaurant(restaurant);
-		Assertions.assertThrows(UpdateRestaurantException.class, executable);
+		Assertions.assertThrows(RestaurantNotFoundException.class, executable);
 	}
 
 	/**
@@ -167,7 +165,7 @@ public class RestaurantServiceImpUnitTest {
 //	public void viewAllRestaurant() {
 //		
 //	}
-	
+
 	/**
 	 * Scenario if Restaurant Name in null;
 	 */

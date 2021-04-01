@@ -1,10 +1,10 @@
 package com.cg.fds.dto.Bill;
 
-import com.cg.fds.entities.OrderDetails;
+import javax.validation.constraints.NotNull;
 
 public class AddBillRequest {
+	@NotNull
 	private int billId;
-	
 
 	public int getBillId() {
 		return billId;
@@ -14,5 +14,4 @@ public class AddBillRequest {
 		this.billId = billId;
 	}
 
-	
 }

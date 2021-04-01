@@ -16,8 +16,6 @@ public interface ICartItemRepository extends JpaRepository<CartItem,String> {
     
     List<CartItem> findByCart(FoodCart cart);
 
-//    void deleteByCartAndItem(FoodCart cart, Item item);
-
     @Query("select item from CartItem where cart=:cart")
     List<Item>findItemsByCart(@Param("cart") FoodCart cart);
 

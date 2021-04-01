@@ -9,8 +9,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 
 @Entity
 public class OrderDetails {
@@ -19,42 +17,47 @@ public class OrderDetails {
 	@Id
 	private int orderId;
 	private LocalDateTime orderDate;
-	
+
 	@ManyToOne
 	private FoodCart cart;
-	
+
 	private String orderStatus;
 
-	
 	@ManyToMany(fetch = FetchType.EAGER)
 	private List<Item> items;
-	
-	
+
 	public OrderDetails() {
-		//Do Nothing
+		// Do Nothing
 	}
-	
+
 	public int getOrderId() {
 		return orderId;
 	}
+
 	public void setOrderId(int orderId) {
 		this.orderId = orderId;
 	}
+
 	public LocalDateTime getOrderDate() {
 		return orderDate;
 	}
+
 	public void setOrderDate(LocalDateTime orderDate) {
 		this.orderDate = orderDate;
 	}
+
 	public FoodCart getCart() {
 		return cart;
 	}
+
 	public void setCart(FoodCart cart) {
 		this.cart = cart;
 	}
+
 	public String getOrderStatus() {
 		return orderStatus;
 	}
+
 	public void setOrderStatus(String orderStatus) {
 		this.orderStatus = orderStatus;
 	}
@@ -94,12 +97,5 @@ public class OrderDetails {
 			return false;
 		return true;
 	}
-	
-	
-	
-
-	
-	
-	
 
 }

@@ -1,7 +1,5 @@
 package com.cg.fds.dto.Bill;
 
-import java.time.LocalDateTime;
-import com.cg.fds.entities.OrderDetails;
 
 public class BillDetailsResponse {
 	private int billId;

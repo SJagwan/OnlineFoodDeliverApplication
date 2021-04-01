@@ -1,7 +1,5 @@
 package com.cg.fds.dto.restaurant;
 
-import java.util.List;
-
 public class RestaurantDetails {
 	private String restaurantName;
 	private String managerName;
@@ -9,8 +7,6 @@ public class RestaurantDetails {
 
 	public RestaurantDetails() {
 	}
-
-
 
 	public String getRestaurantName() {
 		return restaurantName;
@@ -35,7 +31,5 @@ public class RestaurantDetails {
 	public void setContactNumber(String contactNumber) {
 		this.contactNumber = contactNumber;
 	}
-
-	
 
 }

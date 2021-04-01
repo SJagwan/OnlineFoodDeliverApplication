@@ -7,9 +7,10 @@ public class OrderDetailsResponse {
 	private String firstName;
 	private String orderStatus;
 	private String orderDate;
-	private List<String>itemName;
-	
-	public OrderDetailsResponse() {}
+	private List<String> itemName;
+
+	public OrderDetailsResponse() {
+	}
 
 	public String getCustomerId() {
 		return customerId;
@@ -50,5 +51,5 @@ public class OrderDetailsResponse {
 	public void setItemName(List<String> itemName) {
 		this.itemName = itemName;
 	}
-	
+
 }

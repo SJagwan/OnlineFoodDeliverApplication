@@ -1,8 +1,10 @@
 package com.cg.fds.dto.Bill;
 
+import javax.validation.constraints.NotNull;
+
 public class BillRequest {
-private int billId;
-	
+	@NotNull
+	private int billId;
 
 	public int getBillId() {
 		return billId;

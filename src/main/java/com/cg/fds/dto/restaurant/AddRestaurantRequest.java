@@ -1,8 +1,13 @@
 package com.cg.fds.dto.restaurant;
 
+import javax.validation.constraints.Size;
+
 public class AddRestaurantRequest {
+	
 	private String restaurantName;
 	private String managerName;
+	
+	@Size(min=10,max=10)
 	private String contactNumber;
 	private String buildingName;
 	private String area;
@@ -11,8 +16,9 @@ public class AddRestaurantRequest {
 	private String state;
 	private String country;
 	private String pincode;
-	
-	public AddRestaurantRequest() {}
+
+	public AddRestaurantRequest() {
+	}
 
 	public String getRestaurantName() {
 		return restaurantName;
@@ -93,10 +99,5 @@ public class AddRestaurantRequest {
 	public void setPincode(String pincode) {
 		this.pincode = pincode;
 	}
-	
-	
-		
-	
-
 
 }

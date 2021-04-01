@@ -19,8 +19,7 @@ import com.cg.fds.entities.Restaurant;
 import com.cg.fds.exception.AddOrderException;
 import com.cg.fds.exception.InvalidOrderException;
 import com.cg.fds.exception.OrderNotFoundException;
-import com.cg.fds.exception.RemoveOrderException;
-import com.cg.fds.exception.UpdateOrderException;
+
 import com.cg.fds.repository.IBillRepository;
 import com.cg.fds.repository.ICartItemRepository;
 import com.cg.fds.repository.ICartRepository;
@@ -35,29 +34,30 @@ public class OrderServiceImp implements IOrderService {
 
 	@Autowired
 	private ICartService cartService;
-	
+
 	@Autowired
 	private IBillService billService;
 
 	@Autowired
 	private ICartRepository cartRepository;
-	
+
 	@Autowired
 	private ICartItemRepository cartItemRepository;
-	
+
 	@Autowired
 	private IBillRepository billRepository;
-	
+
 	@Autowired
 	private BillUtil billUtil;
 
 	public LocalDateTime currentDateTime() {
 		return LocalDateTime.now();
 	}
+
 	/**
-	 * scenario : Adding the Order
-	 * input: order Object is passed in the parameter
-	 * expectation: Order should be added. If the order is not added, an exception is thrown. 
+	 * scenario : Adding the Order input: order Object is passed in the parameter
+	 * expectation: Order should be added. If the order is not added, an exception
+	 * is thrown.
 	 */
 	@Transactional
 	@Override
@@ -72,18 +72,19 @@ public class OrderServiceImp implements IOrderService {
 		order.setOrderDate(currentDateTime());
 		order.setOrderStatus(OrderStatus.CREATED);
 		order = orderRepository.save(order);
-		
+
 		cartService.clearCart(cart);
-		Bill bill=billUtil.getBill();
+		Bill bill = billUtil.getBill();
 		bill.setOrder(order);
 		billService.addBill(bill);
-		
+
 		return order;
 	}
+
 	/**
-	 * scenario : Updating the Order
-	 * input: order Object is passed in the parameter
-	 * expectation: If the order is present in the Database, then order is getting updated, or else an exception is thrown
+	 * scenario : Updating the Order input: order Object is passed in the parameter
+	 * expectation: If the order is present in the Database, then order is getting
+	 * updated, or else an exception is thrown
 	 */
 	@Override
 	public OrderDetails updateOrder(OrderDetails order) {
@@ -91,36 +92,37 @@ public class OrderServiceImp implements IOrderService {
 		int orderId = order.getOrderId();
 		boolean exist = orderRepository.existsById(orderId);
 		if (!exist) {
-			throw new UpdateOrderException("Order doesn't exist for id =" + order.getOrderId());
+			throw new OrderNotFoundException("Order doesn't exist for id =" + order.getOrderId());
 		}
 		return orderRepository.save(order);
 	}
+
 	/**
-	 * scenario : Removing the Order
-	 * input: order Object is passed in the parameter
-	 * expectation: If the order is present in the Database, then order is getting removed, or else an exception is thrown
+	 * scenario : Removing the Order input: order Object is passed in the parameter
+	 * expectation: If the order is present in the Database, then order is getting
+	 * removed, or else an exception is thrown
 	 */
 
 	@Override
 	public OrderDetails removeOrder(OrderDetails order) {
 		validateOrder(order);
-		int orderId=order.getOrderId();
+		int orderId = order.getOrderId();
 		boolean exist = orderRepository.existsById(orderId);
 		if (!exist) {
-			throw new RemoveOrderException("Order doesn't exist for id =" + order.getOrderId());
+			throw new OrderNotFoundException("Order doesn't exist for id =" + order.getOrderId());
 		}
-		Bill bill=billRepository.findBillByOrder(order);
+		Bill bill = billRepository.findBillByOrder(order);
 		billRepository.delete(bill);
 		orderRepository.delete(order);
 		return order;
 	}
-	
+
 	/**
-	 * scenario : viewing the Order
-	 * input: orderId Object is passed in the parameter
-	 * expectation: If the orderId is not present in the Database, an exception is thrown
+	 * scenario : viewing the Order input: orderId Object is passed in the parameter
+	 * expectation: If the orderId is not present in the Database, an exception is
+	 * thrown
 	 */
-	
+
 	@Override
 	public OrderDetails viewOrder(int orderId) {
 		Optional<OrderDetails> optionOrderDetail = orderRepository.findById(orderId);
@@ -129,25 +131,27 @@ public class OrderServiceImp implements IOrderService {
 		}
 		return optionOrderDetail.get();
 	}
+
 	/**
-	 * scenario : Viewing the list of all Orders in the restaurant
-	 * input: resName Object is passed in the parameter
-	 * expectation: list of all Orders should be viewed
+	 * scenario : Viewing the list of all Orders in the restaurant input: resName
+	 * Object is passed in the parameter expectation: list of all Orders should be
+	 * viewed
 	 */
 
 	@Override
 	public List<OrderDetails> viewAllOrders(Restaurant resName) {
 		return null;
 	}
+
 	/**
-	 * scenario : viewing the list of all orders of the customer 
-	 * input: customer Object is passed in the parameter
-	 * expectation: List of all orders should be returned
+	 * scenario : viewing the list of all orders of the customer input: customer
+	 * Object is passed in the parameter expectation: List of all orders should be
+	 * returned
 	 */
 
 	@Override
 	public List<OrderDetails> viewAllOrders(Customer customer) {
-		FoodCart cart=cartRepository.findFoodCartByCustomer(customer);
+		FoodCart cart = cartRepository.findFoodCartByCustomer(customer);
 		List<OrderDetails> orderList = orderRepository.findByCart(cart);
 		return orderList;
 

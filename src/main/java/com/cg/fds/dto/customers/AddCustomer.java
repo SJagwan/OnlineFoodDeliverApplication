@@ -1,17 +1,23 @@
 package com.cg.fds.dto.customers;
 
-import java.time.LocalDateTime;
-
-import com.cg.fds.entities.Address;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 public class AddCustomer {
-	
+
+	@NotBlank
 	private String firstName;
+	@NotBlank
 	private String lastName;
+	@NotBlank
 	private String age;
 	private String gender;
+	
+	@Size(min=10,max=10)
 	private String mobileNumber;
 	private String buildingName;
+	
+	@NotBlank
 	private String area;
 	private String streetNo;
 	private String city;
@@ -19,10 +25,10 @@ public class AddCustomer {
 	private String country;
 	private String pincode;
 	private String email;
-	
+
 	public AddCustomer() {
 	}
-	
+
 	public String getFirstName() {
 		return firstName;
 	}
@@ -126,5 +132,5 @@ public class AddCustomer {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
+
 }
