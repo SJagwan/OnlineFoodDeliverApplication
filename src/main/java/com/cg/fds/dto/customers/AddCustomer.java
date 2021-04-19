@@ -1,23 +1,27 @@
 package com.cg.fds.dto.customers;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 public class AddCustomer {
 
-	@NotBlank
+	@NotBlank(message="FistName cannot be null for Customer")
 	private String firstName;
-	@NotBlank
+	@NotBlank(message="FistName cannot be null for Customer")
 	private String lastName;
-	@NotBlank
+	
+	@NotBlank(message="Age cannot be null for Customer")
+	@Min(value=0,message="Age cannot be negative") @Max(value=100,message="Age should be less than 100")
 	private String age;
 	private String gender;
 	
-	@Size(min=10,max=10)
+	@Size(min=10,max=10,message="Mobile number should be of length 10")
 	private String mobileNumber;
 	private String buildingName;
 	
-	@NotBlank
+	@NotBlank(message="Area cannot be null for customer address")
 	private String area;
 	private String streetNo;
 	private String city;

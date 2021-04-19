@@ -4,7 +4,7 @@ import javax.validation.constraints.NotNull;
 
 public class ViewOrDeleteOrderRequest {
 
-	@NotNull
+	@NotNull(message="Order id cannot be null")
 	private int orderId;
 
 	public ViewOrDeleteOrderRequest() {

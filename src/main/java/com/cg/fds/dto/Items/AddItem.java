@@ -6,12 +6,12 @@ public class AddItem {
 
 	private String itemName;
 	
-	@NotBlank
+	@NotBlank(message="CategoryId cannot be null in item")
 	private String catId;
 	private int quantity;
 	private double cost;
 	
-	@NotBlank
+	@NotBlank(message="RestaurantId cannot be null in item")
 	private String restaurantId;
 
 	public String getRestaurantId() {

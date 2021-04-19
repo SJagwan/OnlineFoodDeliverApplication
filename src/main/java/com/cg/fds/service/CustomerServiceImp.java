@@ -14,6 +14,7 @@ import com.cg.fds.entities.FoodCart;
 import com.cg.fds.exception.CustomerNotFoundException;
 import com.cg.fds.exception.InvalidCustomerAddressException;
 import com.cg.fds.exception.InvalidCustomerException;
+import com.cg.fds.exception.InvalidCustomerGenderException;
 import com.cg.fds.exception.InvalidCustomerPhoneNumberException;
 
 import com.cg.fds.repository.IAddressRepository;
@@ -59,6 +60,7 @@ public class CustomerServiceImp implements ICustomerService {
 	public Customer addCustomer(Customer customer) {
 		validateCustomer(customer);
 		validatePhone(customer.getMobileNumber());
+		
 		Address address = customer.getAddress();
 		addressRepository.save(address);
 		customer.setCustomerId(generateId());
@@ -144,7 +146,13 @@ public class CustomerServiceImp implements ICustomerService {
 		if (customer == null) {
 			throw new InvalidCustomerException("Customer cannot be null");
 		}
-
+		validateGender(customer.getGender());
+	}
+	public void validateGender(String gender) {
+		if(!(gender.equalsIgnoreCase("Male") || gender.equalsIgnoreCase("Female")))
+		{
+			throw new InvalidCustomerGenderException("Customer gender can be Male or Female");
+		}
 	}
 
 	public void validatePhone(String phoneNumber) {
@@ -158,4 +166,5 @@ public class CustomerServiceImp implements ICustomerService {
 			throw new InvalidCustomerAddressException("Customer Address cannot be null");
 		}
 	}
+	
 }

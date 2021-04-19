@@ -3,7 +3,7 @@ package com.cg.fds.dto.orderDetails;
 import javax.validation.constraints.NotBlank;
 
 public class AddOrderRequest {
-	@NotBlank
+	@NotBlank(message="CustomerId cannot be null for OrderDetails")
 	private String customerId;
 
 	public AddOrderRequest() {

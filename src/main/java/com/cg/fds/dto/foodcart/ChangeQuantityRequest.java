@@ -5,11 +5,11 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 
 public class ChangeQuantityRequest {
-	@NotBlank
+	@NotBlank(message="customerId cannot be null in foodcart for changing quantity")
 	private String customerId;
-	@NotBlank
+	@NotBlank(message="ItemId cannot be null in foodcart for changing quantity")
 	private String itemId;
-	@Min(1)
+	@Min(value=1)
 	private int quantity;
 
 	public ChangeQuantityRequest() {

@@ -4,7 +4,7 @@ import javax.validation.constraints.NotBlank;
 
 public class ClearCartRequest {
 
-	@NotBlank
+	@NotBlank(message="CustomerId cannot be null in foodcart for clearing Cart")
 	private String customerId;
 
 	public ClearCartRequest() {

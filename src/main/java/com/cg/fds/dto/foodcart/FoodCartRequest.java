@@ -3,9 +3,9 @@ package com.cg.fds.dto.foodcart;
 import javax.validation.constraints.NotBlank;
 
 public class FoodCartRequest {
-	@NotBlank
+	@NotBlank(message="CustomerId cannot be null in foodcart")
 	private String customerId;
-	@NotBlank
+	@NotBlank(message="ItemId cannot be null in foodcart")
 	private String itemId;
 
 	public FoodCartRequest() {

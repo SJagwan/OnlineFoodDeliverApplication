@@ -4,7 +4,7 @@ import javax.validation.constraints.NotBlank;
 
 public class UpdateRestaurantRequest {
 
-	@NotBlank
+	@NotBlank(message="Restaurant Id cannot be null")
 	private String restaurantId;
 
 	private String restaurantName;

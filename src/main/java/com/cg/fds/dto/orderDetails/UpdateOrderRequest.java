@@ -6,7 +6,7 @@ public class UpdateOrderRequest {
 
 	private String orderStatus;
 	
-	@NotNull
+	@NotNull(message="Order id cannot be null")
 	private int orderId;
 
 	public UpdateOrderRequest() {

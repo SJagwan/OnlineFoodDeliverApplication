@@ -5,9 +5,9 @@ import javax.validation.constraints.NotBlank;
 public class UpdateCategory {
 	
 
-	@NotBlank
+	@NotBlank(message="Category id cannot be null/blank")
 	private String id;
-	@NotBlank
+	@NotBlank(message="Category name cannot be blank")
 	private String name;
 	
 	public UpdateCategory() {

@@ -3,7 +3,7 @@ package com.cg.fds.dto.Items;
 import javax.validation.constraints.NotBlank;
 
 public class FindItemByRestaurant {
-	@NotBlank
+	@NotBlank(message="RestaurantId cannot be null in item")
 	private String restaurantId;
 
 	public String getRestaurantId() {

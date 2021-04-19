@@ -5,13 +5,13 @@ import javax.validation.constraints.Size;
 
 public class UpdateCustomerRequest {
 
-	@NotBlank
+	@NotBlank(message="Id cannot be null for customer")
 	private String id;
 	private String firstName;
 	private String lastName;
 	private String age;
 	
-	@Size(min=10,max=10)
+	@Size(min=10,max=10,message="Mobile number should be of length 10")
 	private String mobileNumber;
 	private String email;
 

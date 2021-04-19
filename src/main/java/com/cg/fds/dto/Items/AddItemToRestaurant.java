@@ -3,9 +3,9 @@ package com.cg.fds.dto.Items;
 import javax.validation.constraints.NotBlank;
 
 public class AddItemToRestaurant {
-	@NotBlank
+	@NotBlank(message="Item id cannot be null")
 	private String itemId;
-	@NotBlank
+	@NotBlank(message="restaurantId cannot be null in item")
 	private String restaurantId;
 	
 	public AddItemToRestaurant()

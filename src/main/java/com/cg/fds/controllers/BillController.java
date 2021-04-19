@@ -43,7 +43,7 @@ public class BillController {
 	private DateUtil dateUtil;
 
 	@GetMapping(value = "/get/{id}")
-	public BillDetailsResponse fetchBillDetails(@PathVariable("id") @NotNull int id) {
+	public BillDetailsResponse fetchBillDetails(@PathVariable("id") @NotNull(message="Bill Id cannot be null") int id) {
 		Bill bill = billService.viewBill(id);
 		return billUtil.toDetails(bill);
 	}
@@ -80,7 +80,7 @@ public class BillController {
 	}
 
 	@GetMapping("/viewbycustomer/{id}")
-	public List<BillDetailsResponse> viewBills(@PathVariable @NotBlank String id) {
+	public List<BillDetailsResponse> viewBills(@PathVariable @NotBlank(message="Bill Id cannot be null") String id) {
 		List<Bill> bill = billService.viewBills(id);
 		return billUtil.toDetailsList(bill);
 	}

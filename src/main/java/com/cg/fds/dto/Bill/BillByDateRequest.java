@@ -3,9 +3,9 @@ package com.cg.fds.dto.Bill;
 import javax.validation.constraints.NotBlank;
 
 public class BillByDateRequest {
-	@NotBlank
+	@NotBlank (message="start-Date cannot be null")
 	private String startDate;
-	@NotBlank
+	@NotBlank (message="end-Date cannot be null")
 	private String endDate;
 
 	public String getStartDate() {

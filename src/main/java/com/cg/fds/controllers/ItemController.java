@@ -102,12 +102,12 @@ public class ItemController {
 	}
 
 	@GetMapping("/view/{id}")
-	public ItemDetails viewItem(@PathVariable @NotBlank String id) {
+	public ItemDetails viewItem(@PathVariable @NotBlank(message="Item Id cannot be null") String id) {
 		return itemUtil.toItemDetails(itemService.viewItem(id));
 	}
 
 	@GetMapping("/byname/{name}")
-	public List<ItemDetails> viewItembyname(@PathVariable @NotBlank String name) {
+	public List<ItemDetails> viewItembyname(@PathVariable @NotBlank(message="Item name cannot be null") String name) {
 		return itemUtil.toItemDetailsList(itemService.viewAllItemsByName(name));
 	}
 

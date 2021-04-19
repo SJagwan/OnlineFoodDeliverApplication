@@ -4,7 +4,7 @@ import javax.validation.constraints.NotBlank;
 
 public class ViewAllByCustomerIdRequest {
 
-	@NotBlank
+	@NotBlank(message="Customer id cannot be null")
 	private String customerId;
 
 	public ViewAllByCustomerIdRequest() {

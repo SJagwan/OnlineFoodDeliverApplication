@@ -99,7 +99,7 @@ public class BillServiceImp implements IBillService {
 	}
 
 	/**
-	 * scenario : Viewing the Bill input: Bill Object is passed in the parameter
+	 * scenario : Viewing the Bill input: Bill ID is passed in the parameter
 	 * expectation: If the bill is present in the Database, then bill is getting
 	 * viewed, or else an exception is thrown
 	 */

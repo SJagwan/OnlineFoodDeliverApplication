@@ -4,7 +4,7 @@ import javax.validation.constraints.NotBlank;
 
 public class RemoveCustomerRequest {
 
-	@NotBlank
+	@NotBlank(message="Id cannot be null for customer")
 	private String id;
 
 	public RemoveCustomerRequest() {

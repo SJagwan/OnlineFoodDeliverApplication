@@ -70,19 +70,19 @@ public class RestaurantController {
 	}
 
 	@DeleteMapping("/deleterestaurant/{id}")
-	public RestaurantDetails deleteRestaurant(@PathVariable @NotBlank String id) {
+	public RestaurantDetails deleteRestaurant(@PathVariable @NotBlank(message="Restaurant Id cannot be null") String id) {
 		Restaurant res = restaurantService.viewRestaurant(id);
 		return restaurantUtil.toRestaurantDetails(restaurantService.removeRestaurant(res));
 	}
 
 	@GetMapping("/viewrestaurant/{id}")
-	public RestaurantDetails viewRestaurant(@PathVariable @NotBlank String id) {
+	public RestaurantDetails viewRestaurant(@PathVariable @NotBlank(message="Restaurant Id cannot be null") String id) {
 
 		return restaurantUtil.toRestaurantDetails(restaurantService.viewRestaurant(id));
 	}
 
 	@GetMapping("/viewbynamerestaurant/{name}")
-	public List<RestaurantDetails> viewByNameRestaurant(@PathVariable @NotBlank String name) {
+	public List<RestaurantDetails> viewByNameRestaurant(@PathVariable @NotBlank(message="Restaurant name cannot be null") String name) {
 
 		return restaurantUtil.toRestaurantDetailsList(restaurantService.viewRestaurantByItemName(name));
 	}
@@ -94,7 +94,7 @@ public class RestaurantController {
 	}
 
 	@GetMapping("/viewbylocationrestaurant/{location}")
-	public List<RestaurantDetails> viewByLocationRestaurant(@PathVariable @NotBlank String location) {
+	public List<RestaurantDetails> viewByLocationRestaurant(@PathVariable @NotBlank(message="Location cannot be null") String location) {
 
 		return restaurantUtil.toRestaurantDetailsList(restaurantService.viewNearByRestaurant(location));
 	}

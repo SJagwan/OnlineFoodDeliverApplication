@@ -3,7 +3,7 @@ package com.cg.fds.dto.Items;
 import javax.validation.constraints.NotBlank;
 
 public class UpdateItem {
-	@NotBlank
+	@NotBlank(message="Item Id cannot be null")
 	private String itemId;
 	private String itemName;
 	private int quantity;

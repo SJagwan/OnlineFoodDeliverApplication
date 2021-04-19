@@ -15,7 +15,7 @@ public class AddCategory {
 		this.name = name;
 	}
 
-	@NotBlank
+	@NotBlank(message="Category name cannot be null")
 	private String name;
 
 }

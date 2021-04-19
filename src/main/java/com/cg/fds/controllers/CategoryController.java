@@ -47,15 +47,9 @@ public class CategoryController {
 		return categoryUtil.toCategoryDetail(category);
 	}
 
-//	@DeleteMapping("/remove")
-//	public CategoryDetails removingCategory(@RequestBody RemoveCategory request) {
-//		Category category = categoryService.viewCategory(request.getId());
-//		category =  categoryService.removeCategory(category);
-//		return categoryUtil.toCategoryDetail(category);
-//	}
 
 	@GetMapping("/view/{id}")
-	public CategoryDetails viewingCategory(@PathVariable @NotBlank String id) {
+	public CategoryDetails viewingCategory(@PathVariable @NotBlank(message="Category Id cannot be null") String id) {
 		Category category = categoryService.viewCategory(id);
 		return categoryUtil.toCategoryDetail(category);
 	}

@@ -4,7 +4,7 @@ import javax.validation.constraints.NotBlank;
 
 public class FindCartRequest {
 
-	@NotBlank
+	@NotBlank(message="CustomerId cannot be null in foodcart to find FoodCart")
 	private String customerId;
 
 	public FindCartRequest() {

@@ -79,7 +79,7 @@ public class CustomerController {
 	}
 
 	@GetMapping("/view/{id}")
-	public CustomerDetails viewCustomer(@PathVariable @NotBlank String id) {
+	public CustomerDetails viewCustomer(@PathVariable @NotBlank(message="Customer Id cannot be null") String id) {
 		return customerUtil.customerDetails(customerService.viewCustomer(id));
 	}
 
