@@ -3,6 +3,7 @@ package com.cg.fds.dto.orderDetails;
 import java.util.List;
 
 public class OrderDetailsResponse {
+	private int orderId;
 	private String customerId;
 	private String firstName;
 	private String orderStatus;
@@ -10,6 +11,14 @@ public class OrderDetailsResponse {
 	private List<String> itemName;
 
 	public OrderDetailsResponse() {
+	}
+
+	public int getOrderId() {
+		return orderId;
+	}
+
+	public void setOrderId(int orderId) {
+		this.orderId = orderId;
 	}
 
 	public String getCustomerId() {

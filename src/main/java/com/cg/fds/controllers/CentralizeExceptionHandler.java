@@ -90,6 +90,7 @@ public class CentralizeExceptionHandler {
 	 * scenario : Catching Exception when cart is null and creating order
 	 */
 
+	@ResponseStatus(HttpStatus.NOT_FOUND)
 	@ExceptionHandler(AddOrderException.class)
 	public String addOrderException(AddOrderException e) {
 		return e.getMessage();

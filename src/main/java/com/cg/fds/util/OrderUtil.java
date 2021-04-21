@@ -23,6 +23,7 @@ public class OrderUtil {
 	public OrderDetailsResponse toOrderDetailsResponse(OrderDetails order) {
 		OrderDetailsResponse odr = new OrderDetailsResponse();
 		List<String> itemName = new ArrayList<>();
+		odr.setOrderId(order.getOrderId());
 		odr.setCustomerId(order.getCart().getCustomer().getCustomerId());
 		odr.setFirstName(order.getCart().getCustomer().getFirstName());
 		odr.setOrderStatus(order.getOrderStatus());

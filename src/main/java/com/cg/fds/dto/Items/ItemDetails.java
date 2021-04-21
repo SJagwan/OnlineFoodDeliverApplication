@@ -1,7 +1,9 @@
 package com.cg.fds.dto.Items;
 
 public class ItemDetails {
+	
 
+	private String itemId;
 	private String itemName;
 	private int quantity;
 	private double cost;
@@ -9,6 +11,14 @@ public class ItemDetails {
 
 	public ItemDetails() {
 
+	}
+
+	public String getItemId() {
+		return itemId;
+	}
+
+	public void setItemId(String itemId) {
+		this.itemId = itemId;
 	}
 
 	public String getItemName() {

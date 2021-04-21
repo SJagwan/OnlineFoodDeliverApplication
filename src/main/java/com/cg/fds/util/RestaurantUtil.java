@@ -20,6 +20,7 @@ public class RestaurantUtil {
 		RestaurantDetails resNew = new RestaurantDetails();
 		resNew.setContactNumber(res.getContactNumber());
 		resNew.setManagerName(res.getManagerName());
+		resNew.setRestaurantId(res.getRestaurantId());
 		resNew.setRestaurantName(res.getRestaurantName());
 		return resNew;
 		}

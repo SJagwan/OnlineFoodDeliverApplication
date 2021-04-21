@@ -24,6 +24,8 @@ public class FoodCartUtil {
 	@Autowired
 	private ItemServiceImp itemService;
 	
+	
+	
 	public FoodCart getFoodCart() {
 		return new FoodCart();
 	}
@@ -34,7 +36,7 @@ public class FoodCartUtil {
 		fcd.setCustomerId(cart.getCustomer().getCustomerId());
 		fcd.setFirstName(cart.getCustomer().getFirstName());
 		FoodCart c=cartService.findFoodCartByCustomer(cart.getCustomer().getCustomerId());
-		List<Item>items=itemService.viewAllItemsByCart(c);	
+		List<Item>items=itemService.viewAllItemsByCart(c);
 		fcd.setItems(toFoodCartItemDeatilList(items));
 		return fcd;
 	}
