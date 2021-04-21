@@ -2,11 +2,20 @@ package com.cg.fds.dto.customers;
 
 public class CustomerDetails {
 
+	private String customerId;
 	private String firstName;
 	private String lastName;
 	private String gender;
 
 	public CustomerDetails() {
+	}
+
+	public String getCustomerId() {
+		return customerId;
+	}
+
+	public void setCustomerId(String customerId) {
+		this.customerId = customerId;
 	}
 
 	public String getFirstName() {

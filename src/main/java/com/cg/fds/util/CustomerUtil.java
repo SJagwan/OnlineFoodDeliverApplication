@@ -22,6 +22,7 @@ public class CustomerUtil {
 	    details.setFirstName(customer.getFirstName());
 	    details.setLastName(customer.getLastName());
 	    details.setGender(customer.getGender());
+	    details.setCustomerId(customer.getCustomerId());
 	    return details;
 	}
 	public List<CustomerDetails> customerDetailsList(List<Customer> list){

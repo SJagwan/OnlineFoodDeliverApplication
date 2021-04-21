@@ -2,7 +2,6 @@ package com.cg.fds.util;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import org.springframework.stereotype.Component;
 
@@ -19,6 +18,7 @@ public class CategoryUtil {
 	public CategoryDetails toCategoryDetail(Category category) {
 		CategoryDetails cd = new CategoryDetails();
 		cd.setName(category.getCategoryName());
+		cd.setCatId(category.getCatId());
 		return cd;
 	}
 

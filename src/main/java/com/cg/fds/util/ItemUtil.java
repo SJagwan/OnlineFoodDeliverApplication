@@ -22,6 +22,7 @@ public class ItemUtil {
 		id.setCost(item.getCost());
 		id.setQuantity(item.getQuantity());
 		id.setItemName(item.getItemName());
+		id.setItemId(item.getItemId());
 		return id;
 	}
 
