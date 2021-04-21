@@ -5,7 +5,7 @@ plugins {
 	id 'war'
 }
 
-group = 'com.cg.fds'
+group = 'com.cg'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
 
@@ -20,6 +20,7 @@ dependencies {
 	implementation  'org.postgresql:postgresql:42.2.19'
 	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	testImplementation 'org.hsqldb:hsqldb:2.5.1'
 }
 

@@ -7,11 +7,11 @@ import com.cg.fds.entities.Bill;
 
 public interface IBillService {
 
-	public Bill addBill(Bill bill);
-	public Bill updateBill(Bill bill);
-	public Bill removeBill(Bill bill);
-	public Bill viewBill(Bill bill);
-	public List<Bill> viewBills(LocalDate startDate,LocalDate endDate);
-	public List<Bill> viewBills(String custId);
-	
+	 Bill addBill(Bill bill);
+	 Bill updateBill(Bill bill);
+	 Bill removeBill(Bill bill);
+	 Bill viewBill(int bill);
+	 List<Bill> viewBills(LocalDate startDate,LocalDate endDate);
+	 List<Bill> viewBills(String custId);
+	 double totalCost(Bill bill);
 }

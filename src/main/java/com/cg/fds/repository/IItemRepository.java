@@ -2,18 +2,14 @@ package com.cg.fds.repository;
 
 import java.util.List;
 
+import org.springframework.data.jpa.repository.JpaRepository;
+
 import com.cg.fds.entities.Category;
 import com.cg.fds.entities.Item;
-import com.cg.fds.entities.Restaurant;
 
-public interface IItemRepository {
+public interface IItemRepository extends JpaRepository<Item, String> {
 
-	public Item addItem(Item item);
-	public Item viewItem(String id);
-	public Item updateItem(Item item);
-	public Item removeItem(String id);
-	public List<Item> viewAllItems(Restaurant res);
-	public List<Item> viewAllItems(Category cat);
-	public List<Item> viewAllItemsByName(String name);
-	
+	List<Item> findByItemName(String itemName);
+
+	List<Item> findByCategory(Category category);
 }

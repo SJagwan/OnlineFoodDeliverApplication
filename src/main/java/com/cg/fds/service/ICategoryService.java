@@ -6,9 +6,8 @@ import com.cg.fds.entities.Category;
 
 public interface ICategoryService {
 
-	public Category addCategory(Category cat);
-	public Category updateCategory(Category cat);
-	public Category removeCategory(Category cat);
-	public Category viewCategory(Category cat);
-	public List<Category> viewAllCategory();
+	 Category addCategory(Category cat);
+	 Category updateCategory(Category cat);
+	 Category viewCategory(String cat);
+	 List<Category> viewAllCategory();
 }

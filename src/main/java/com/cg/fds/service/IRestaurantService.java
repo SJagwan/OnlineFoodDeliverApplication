@@ -6,11 +6,11 @@ import com.cg.fds.entities.Restaurant;
 
 public interface IRestaurantService {
 
-	public Restaurant addRestaurant(Restaurant res);
-	public Restaurant removeRestaurant(Restaurant res);
-	public Restaurant updateRestaurant(Restaurant res);
-	public Restaurant viewRestaurant(String name);
-	public Restaurant viewAllRestaurants();
-	public List<Restaurant> viewNearByRestaurant(String location);
-	public List<Restaurant> viewRestaurantByItemName(String name);
+	 Restaurant addRestaurant(Restaurant res);
+	 Restaurant removeRestaurant(Restaurant res);
+	 Restaurant updateRestaurant(Restaurant res);
+	 Restaurant viewRestaurant(String name);
+	 List<Restaurant> viewAllRestaurants();
+	 List<Restaurant> viewNearByRestaurant(String location);
+	 List<Restaurant> viewRestaurantByItemName(String name);
 }
