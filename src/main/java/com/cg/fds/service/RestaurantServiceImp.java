@@ -1,5 +1,6 @@
 package com.cg.fds.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -103,10 +104,14 @@ public class RestaurantServiceImp implements IRestaurantService {
 	 * returned with respect to the address/location
 	 */
 	@Override
-	public List<Restaurant> viewNearByRestaurant(String location) {
-		Address address = addressRepository.findAddressByArea(location);
-		List<Restaurant> listr = restaurantRepository.findByAddress(address);
-		return listr;
+	public List<Restaurant> viewNearByRestaurant(String pincode) {
+		List<Address> address = addressRepository.findByPincode(pincode);
+		List<Restaurant>res=new ArrayList<>();
+		for(Address a:address)
+		{
+			res.add(restaurantRepository.findRestaurantByAddress(a));
+		}
+		return res;
 
 	}
 
