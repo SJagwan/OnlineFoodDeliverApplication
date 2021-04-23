@@ -9,8 +9,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class DateUtil {
 
-	private final String pattern = "dd/MM/yy hh:mm:ss";
-	private final String pattern2 = "dd/MM/yy";
+	private final String pattern = "dd/MM/yyyy hh:mm:ss";
+	private final String pattern2 = "dd/MM/yyyy";
 
 	public String toText(LocalDateTime datetime, String pattern) {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);
