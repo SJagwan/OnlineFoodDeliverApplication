@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cg.fds.dto.Items.AddItem;
 import com.cg.fds.dto.Items.AddItemToRestaurant;
-import com.cg.fds.dto.Items.FindItemByCategory;
 import com.cg.fds.dto.Items.FindItemByRestaurant;
 import com.cg.fds.dto.Items.ItemDetails;
 import com.cg.fds.dto.Items.RemoveItem;
@@ -111,9 +110,9 @@ public class ItemController {
 		return itemUtil.toItemDetailsList(itemService.viewAllItemsByName(name));
 	}
 
-	@GetMapping("/bycategory")
-	public List<ItemDetails> viewItembycategory(@RequestBody @Valid FindItemByCategory request) {
-		Category category = categoryService.viewCategory(request.getCatId());
+	@GetMapping("/bycategory/{id}")
+	public List<ItemDetails> viewItembycategory(@PathVariable @NotBlank(message="CategoryId cannot be null") String id ) {
+		Category category = categoryService.viewCategory(id);
 		return itemUtil.toItemDetailsList(itemService.viewAllItems(category));
 	}
 
