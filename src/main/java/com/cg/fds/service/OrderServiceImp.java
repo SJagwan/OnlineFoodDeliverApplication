@@ -65,7 +65,7 @@ public class OrderServiceImp implements IOrderService {
 		validateOrder(order);
 		FoodCart cart = order.getCart();
 		List<Item> items = cartItemRepository.findItemsByCart(cart);
-		if (items == null || items.isEmpty()) {
+		if (items.isEmpty()) {
 			throw new AddOrderException("order can't be created because cart is empty");
 		}
 		order.setItems(items);
