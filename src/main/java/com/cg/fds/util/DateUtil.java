@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 public class DateUtil {
 
 	private final String pattern = "dd/MM/yyyy hh:mm:ss";
-	private final String pattern2 = "dd/MM/yyyy";
+	private final String pattern2 = "yyyy-MM-dd";
 
 	public String toText(LocalDateTime datetime, String pattern) {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);

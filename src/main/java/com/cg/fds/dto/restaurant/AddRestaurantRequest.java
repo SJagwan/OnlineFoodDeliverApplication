@@ -12,12 +12,13 @@ public class AddRestaurantRequest {
 	@Size(min=10,max=10,message="Contact length for the restaurant should be equal to 10")
 	private String contactNumber;
 	private String buildingName;
-	@NotBlank(message="Restaurant area cannot be null")
+	
 	private String area;
 	private String streetNo;
 	private String city;
 	private String state;
 	private String country;
+	@NotBlank(message="Restaurant pincode cannot be null")
 	private String pincode;
 
 	public AddRestaurantRequest() {

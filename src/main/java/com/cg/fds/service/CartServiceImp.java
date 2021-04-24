@@ -1,5 +1,6 @@
 package com.cg.fds.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import com.cg.fds.entities.CartItem;
 import com.cg.fds.entities.Customer;
 import com.cg.fds.entities.FoodCart;
 import com.cg.fds.entities.Item;
+import com.cg.fds.exception.CartItemNotFoundException;
 import com.cg.fds.exception.InvalidCartException;
 import com.cg.fds.repository.ICartItemRepository;
 import com.cg.fds.repository.ICartRepository;
@@ -119,6 +121,21 @@ public class CartServiceImp implements ICartService {
 		Customer customer = customerService.viewCustomer(customerId);
 		FoodCart foodCart = cartRepository.findFoodCartByCustomer(customer);
 		return foodCart;
+	}
+	
+	@Override
+	public List<CartItem> findCartItemsByCart(FoodCart cart){
+		return cartItemRepository.findByCart(cart);
+	}
+	
+	@Override
+	public CartItem findCartItem(FoodCart cart, Item item){
+		String id=CartItem.id(cart,item);
+		Optional<CartItem> optional=cartItemRepository.findById(id);
+	    if(!optional.isPresent()){
+	    	throw new CartItemNotFoundException("cart item not found");
+		}
+	    return optional.get();
 	}
 
 	public void validateCart(FoodCart cart) {

@@ -64,10 +64,10 @@ public class BillController {
 		return billUtil.toDetails(updatedBill);
 	}
 
-	@GetMapping("/getByDate")
-	public List<BillDetailsResponse> fetchBillDetailsByDate(@RequestBody @Valid BillByDateRequest requestData) {
-		LocalDate start = dateUtil.toLocalDate(requestData.getStartDate());
-		LocalDate end = dateUtil.toLocalDate(requestData.getEndDate());
+	@GetMapping("/getByDate/{startDate}/{endDate}")
+	public List<BillDetailsResponse> fetchBillDetailsByDate(@PathVariable String startDate,@PathVariable String endDate) {
+		LocalDate start = dateUtil.toLocalDate(startDate);
+		LocalDate end = dateUtil.toLocalDate(endDate);
 		List<Bill> bill = billService.viewBills(start, end);
 		return billUtil.toDetailsList(bill);
 	}
