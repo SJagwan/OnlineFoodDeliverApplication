@@ -40,7 +40,7 @@ public class RestaurantController {
 	@Autowired
 	private RestaurantUtil restaurantUtil;
 
-	@PostMapping("/addrestaurant")
+	@PostMapping("/add")
 	public RestaurantDetails addRestaurant(@RequestBody @Valid AddRestaurantRequest request) {
 		Restaurant res = new Restaurant();
 		res.setRestaurantId(restaurantUtil.generateId());
@@ -60,7 +60,7 @@ public class RestaurantController {
 		return restaurantUtil.toRestaurantDetails(restaurantService.addRestaurant(res));
 	}
 
-	@PutMapping("/updaterestaurant")
+	@PutMapping("/update")
 	public RestaurantDetails updateRestaurant(@RequestBody @Valid UpdateRestaurantRequest request) {
 		Restaurant res = restaurantService.viewRestaurant(request.getRestaurantId());
 		res.setContactNumber(request.getContactNumber());
@@ -69,31 +69,31 @@ public class RestaurantController {
 		return restaurantUtil.toRestaurantDetails(restaurantService.updateRestaurant(res));
 	}
 
-	@DeleteMapping("/deleterestaurant/{id}")
+	@DeleteMapping("/delete/{id}")
 	public RestaurantDetails deleteRestaurant(@PathVariable @NotBlank(message="Restaurant Id cannot be null") String id) {
 		Restaurant res = restaurantService.viewRestaurant(id);
 		return restaurantUtil.toRestaurantDetails(restaurantService.removeRestaurant(res));
 	}
 
-	@GetMapping("/viewrestaurant/{id}")
+	@GetMapping("/view/{id}")
 	public RestaurantDetails viewRestaurant(@PathVariable @NotBlank(message="Restaurant Id cannot be null") String id) {
 
 		return restaurantUtil.toRestaurantDetails(restaurantService.viewRestaurant(id));
 	}
 
-	@GetMapping("/viewbynamerestaurant/{name}")
+	@GetMapping("/viewbyname/{name}")
 	public List<RestaurantDetails> viewByNameRestaurant(@PathVariable @NotBlank(message="Restaurant name cannot be null") String name) {
 
 		return restaurantUtil.toRestaurantDetailsList(restaurantService.viewRestaurantByItemName(name));
 	}
 
-	@GetMapping("/viewallrestaurant")
+	@GetMapping("/viewall")
 	public List<RestaurantDetails> viewAllRestaurant() {
 
 		return restaurantUtil.toRestaurantDetailsList(restaurantService.viewAllRestaurants());
 	}
 
-	@GetMapping("/viewbylocationrestaurant/{location}")
+	@GetMapping("/viewbylocation/{location}")
 	public List<RestaurantDetails> viewByLocationRestaurant(@PathVariable @NotBlank(message="Location cannot be null") String location) {
 
 		return restaurantUtil.toRestaurantDetailsList(restaurantService.viewNearByRestaurant(location));

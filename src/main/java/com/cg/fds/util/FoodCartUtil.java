@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 import com.cg.fds.dto.foodcart.FoodCartDetails;
 import com.cg.fds.dto.foodcart.FoodCartItemDetails;
+import com.cg.fds.entities.CartItem;
 import com.cg.fds.entities.FoodCart;
 import com.cg.fds.entities.Item;
 import com.cg.fds.service.CartServiceImp;
@@ -35,29 +36,29 @@ public class FoodCartUtil {
 		FoodCartDetails fcd=new FoodCartDetails();
 		fcd.setCustomerId(cart.getCustomer().getCustomerId());
 		fcd.setFirstName(cart.getCustomer().getFirstName());
-		FoodCart c=cartService.findFoodCartByCustomer(cart.getCustomer().getCustomerId());
-		List<Item>items=itemService.viewAllItemsByCart(c);
-		fcd.setItems(toFoodCartItemDeatilList(items));
+		List<CartItem>cartItems=cartService.findCartItemsByCart(cart);
+		fcd.setItems(toFoodCartItemDeatilList(cartItems));
 		return fcd;
 	}
 	
-	public FoodCartItemDetails toFoodCartItemDeatil(Item item)
+	public FoodCartItemDetails toFoodCartItemDeatil(CartItem cartItem)
 	{
 		FoodCartItemDetails foodItem=new FoodCartItemDetails();
+		Item item=cartItem.getItem();
 		foodItem.setItemId(item.getItemId());
 		foodItem.setItemName(item.getItemName());
-//		foodItem.setQuantity(item.getQuantity());
-		foodItem.setCost(item.getCost());
+		foodItem.setQuantity(cartItem.getQuantity());
+		foodItem.setCost(cartItem.getQuantity()*item.getCost());
 		foodItem.setCategoryName(item.getCategory().getCategoryName());
 		return foodItem;
 	}
 	
-	public List<FoodCartItemDetails> toFoodCartItemDeatilList(List<Item>items)
+	public List<FoodCartItemDetails> toFoodCartItemDeatilList(List<CartItem>cartItems)
 	{
 		List<FoodCartItemDetails> list=new ArrayList<>();
-		for(Item item:items)
+		for(CartItem cartItem:cartItems)
 		{
-			list.add(toFoodCartItemDeatil(item));
+			list.add(toFoodCartItemDeatil(cartItem));
 		}
 		return list;
 	}

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import com.cg.fds.exception.AddOrderException;
 import com.cg.fds.exception.BillDoesNotExistException;
+import com.cg.fds.exception.CartItemNotFoundException;
 import com.cg.fds.exception.CategoryNotFoundException;
 import com.cg.fds.exception.CustomerNotFoundException;
 import com.cg.fds.exception.InvalidBillException;
@@ -140,6 +141,12 @@ public class CentralizeExceptionHandler {
 	@ResponseStatus(HttpStatus.NOT_FOUND)
 	@ExceptionHandler(OrderNotFoundException.class)
 	public String orderNotFoundException(OrderNotFoundException e) {
+		return e.getMessage();
+	}
+	
+	@ResponseStatus(HttpStatus.NOT_FOUND)
+	@ExceptionHandler(CartItemNotFoundException.class)
+	public String cartItemNotFoundException(CartItemNotFoundException e) {
 		return e.getMessage();
 	}
 
