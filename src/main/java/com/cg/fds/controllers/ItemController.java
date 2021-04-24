@@ -106,18 +106,18 @@ public class ItemController {
 	}
 
 	@GetMapping("/byname/{name}")
-	public List<ItemDetails> viewItembyname(@PathVariable @NotBlank(message="Item name cannot be null") String name) {
+	public List<ItemDetails> viewItemByName(@PathVariable @NotBlank(message="Item name cannot be null") String name) {
 		return itemUtil.toItemDetailsList(itemService.viewAllItemsByName(name));
 	}
 
 	@GetMapping("/bycategory/{id}")
-	public List<ItemDetails> viewItembycategory(@PathVariable @NotBlank(message="CategoryId cannot be null") String id ) {
+	public List<ItemDetails> viewItemByCategory(@PathVariable @NotBlank(message="CategoryId cannot be null") String id ) {
 		Category category = categoryService.viewCategory(id);
 		return itemUtil.toItemDetailsList(itemService.viewAllItems(category));
 	}
 
 	@GetMapping("/byrestaurant")
-	public List<ItemDetails> viewItembyrestaurant(@RequestBody @Valid FindItemByRestaurant request) {
+	public List<ItemDetails> viewItemByRestaurant(@RequestBody @Valid FindItemByRestaurant request) {
 		Restaurant restaurant = restaurantService.viewRestaurant(request.getRestaurantId());
 		return itemUtil.toItemDetailsList(itemService.viewAllItems(restaurant));
 	}
