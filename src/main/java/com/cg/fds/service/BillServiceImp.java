@@ -124,6 +124,9 @@ public class BillServiceImp implements IBillService {
 		LocalDateTime startDateTime = LocalDateTime.of(startDate, LocalTime.MIN);
 		LocalDateTime endDateTime = LocalDateTime.of(endDate, LocalTime.MAX);
 		List<Bill> bills = billRepository.findOrdersBetweenDates(startDateTime, endDateTime);
+		if(bills.isEmpty()) {
+			throw new  BillDoesNotExistException("Bill doesn't exist for =" + startDate + " to " + endDate);
+		}
 		return bills;
 
 	}

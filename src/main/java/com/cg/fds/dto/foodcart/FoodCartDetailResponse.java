@@ -3,7 +3,7 @@ package com.cg.fds.dto.foodcart;
 public class FoodCartDetailResponse {
 
 	private String itemId;
-
+	private String itemName;
 	private int quantity;
 	private double cost;
 	
@@ -12,10 +12,11 @@ public class FoodCartDetailResponse {
 
     }
 
-	public FoodCartDetailResponse(String itemId, int quantity,double cost){
+	public FoodCartDetailResponse(String itemId,String itemName, int quantity,double cost){
         this.itemId=itemId;
         this.quantity=quantity;
         this.cost=cost;
+        this.itemName=itemName;
         
     }
 
@@ -41,6 +42,14 @@ public class FoodCartDetailResponse {
 
 	public void setCost(double cost) {
 		this.cost = cost;
+	}
+
+	public String getItemName() {
+		return itemName;
+	}
+
+	public void setItemName(String itemName) {
+		this.itemName = itemName;
 	}
 	
 

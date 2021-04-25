@@ -230,9 +230,9 @@ public class CustomUi {
 		System.out.println("------------------UI-- FoodCart -----------------");
 
 		System.out.println("Adding ItemToCart");
-		System.out.println(cartService.addItemToCart(cart1, item1));
-		System.out.println(cartService.addItemToCart(cart1, item2));
-		System.out.println(cartService.addItemToCart(cart2, item3));
+//		System.out.println(cartService.addItemToCart(cart1, item1));
+//		System.out.println(cartService.addItemToCart(cart1, item2));
+//		System.out.println(cartService.addItemToCart(cart2, item3));
 //		System.out.println(" Increase Quantity");
 //		System.out.println(cartService.increaseQuantity(cart, item1, 3));
 //		System.out.println(" Reduce Quantity");

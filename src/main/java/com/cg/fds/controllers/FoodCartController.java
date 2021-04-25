@@ -47,7 +47,7 @@ public class FoodCartController {
 		Item item = itemService.viewItem(request.getItemId());
 		cart=cartService.addItemToCart(cart, item);
 		CartItem cartItem = cartService.findCartItem(cart, item);
-		FoodCartDetailResponse response=new FoodCartDetailResponse(item.getItemId(), cartItem.getQuantity(),item.getCost());
+		FoodCartDetailResponse response=new FoodCartDetailResponse(item.getItemId(),item.getItemName(), cartItem.getQuantity(),item.getCost());
 		return response;
 	}
 
@@ -57,7 +57,7 @@ public class FoodCartController {
 		Item item = itemService.viewItem(request.getItemId());
 		cart=cartService.increaseQuantity(cart, item,request.getQuantity());
 		CartItem cartItem = cartService.findCartItem(cart, item);
-		FoodCartDetailResponse response=new FoodCartDetailResponse(item.getItemId(), cartItem.getQuantity(),item.getCost());
+		FoodCartDetailResponse response=new FoodCartDetailResponse(item.getItemId(),item.getItemName(),  cartItem.getQuantity(),item.getCost());
 		return response;
 	}
 
@@ -65,9 +65,10 @@ public class FoodCartController {
 	public FoodCartDetailResponse reduceQuantity(@RequestBody @Valid ChangeQuantityRequest request) {
 		FoodCart cart = cartService.findFoodCartByCustomer(request.getCustomerId());
 		Item item = itemService.viewItem(request.getItemId());
-		cart=cartService.reduceQuantity(cart, item,request.getQuantity());
 		CartItem cartItem = cartService.findCartItem(cart, item);
-		FoodCartDetailResponse response=new FoodCartDetailResponse(item.getItemId(), cartItem.getQuantity(),item.getCost());
+		cart=cartService.reduceQuantity(cart, item,request.getQuantity());
+		
+		FoodCartDetailResponse response=new FoodCartDetailResponse(item.getItemId(),item.getItemName(), cartItem.getQuantity(),item.getCost());
 		return response;
 	}
 
