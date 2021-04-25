@@ -136,13 +136,17 @@ public class ItemServiceImp implements IItemService {
 
 	/**
 	 * scenario : viewing the list of all items by name and returning the list
-	 * input: name Object is passed in the parameter expectation: List shoukd be
+	 * input: name Object is passed in the parameter expectation: List should be
 	 * returned
 	 */
 
 	@Override
 	public List<Item> viewAllItemsByName(String name) {
 		List<Item> list = itemRepository.findByItemName(name);
+		if(list.isEmpty())
+		{
+			throw new InvalidItemNameException("Item Name is does exist");
+		}
 		return list;
 	}
 
