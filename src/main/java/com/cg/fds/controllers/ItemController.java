@@ -121,5 +121,10 @@ public class ItemController {
 		Restaurant restaurant = restaurantService.viewRestaurant(request.getRestaurantId());
 		return itemUtil.toItemDetailsList(itemService.viewAllItems(restaurant));
 	}
+	@GetMapping("/viewall")
+	public List<ItemDetails> viewAllItems()
+	{
+		return itemUtil.toItemDetailsList(itemService.viewAllItem());
+	}
 
 }

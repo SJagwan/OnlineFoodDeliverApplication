@@ -153,6 +153,11 @@ public class ItemServiceImp implements IItemService {
 	public List<Item> viewAllItemsByCart(FoodCart cart) {
 		return cartItemRepository.findItemsByCart(cart);
 	}
+	
+	@Override
+	public List<Item> viewAllItem(){
+		return itemRepository.findAll();
+	}
 
 	/**
 	 * scenario : Validate the item input: item Object is passed in the parameter

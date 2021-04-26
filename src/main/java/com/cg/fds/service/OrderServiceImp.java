@@ -15,7 +15,6 @@ import com.cg.fds.entities.Customer;
 import com.cg.fds.entities.FoodCart;
 import com.cg.fds.entities.Item;
 import com.cg.fds.entities.OrderDetails;
-import com.cg.fds.entities.Restaurant;
 import com.cg.fds.exception.AddOrderException;
 import com.cg.fds.exception.InvalidOrderException;
 import com.cg.fds.exception.OrderNotFoundException;
@@ -132,16 +131,7 @@ public class OrderServiceImp implements IOrderService {
 		return optionOrderDetail.get();
 	}
 
-	/**
-	 * scenario : Viewing the list of all Orders in the restaurant input: resName
-	 * Object is passed in the parameter expectation: list of all Orders should be
-	 * viewed
-	 */
 
-	@Override
-	public List<OrderDetails> viewAllOrders(Restaurant resName) {
-		return null;
-	}
 
 	/**
 	 * scenario : viewing the list of all orders of the customer input: customer
