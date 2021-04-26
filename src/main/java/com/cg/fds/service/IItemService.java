@@ -15,5 +15,6 @@ public interface IItemService {
 	 List<Item> viewAllItems(Restaurant res);
 	 List<Item> viewAllItems(Category cat);
 	 List<Item> viewAllItemsByName(String name);
+	 List<Item> viewAllItem();
 	
 }
