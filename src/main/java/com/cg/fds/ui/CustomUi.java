@@ -124,6 +124,7 @@ public class CustomUi {
 
 		Customer customer2 = customerUtil.getCustomer();
 		customer2.setMobileNumber("70180293893");
+		customer2.setFirstName("Hardik");
 		customer2.setAddress(address2);
 		customer2.setGender("Female");
 

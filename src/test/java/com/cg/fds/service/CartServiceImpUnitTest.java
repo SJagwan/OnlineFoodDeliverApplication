@@ -100,14 +100,4 @@ public class CartServiceImpUnitTest {
 		Assertions.assertThrows(InvalidCartException.class, executable);
 	}
 
-//	@Test
-//	public void cartExistTest() {
-//		String cartId = "1";
-//		FoodCart cart = Mockito.mock(FoodCart.class);
-//		Mockito.when(cart.getCartId()).thenReturn(cartId);
-//		Mockito.when(cartRepository.existsById(cartId)).thenReturn(false);
-//		Executable executable = () -> cartService.cartExist(cart);
-//		Assertions.assertThrows(CartNotExistException.class, executable);
-//	}
-
 }
