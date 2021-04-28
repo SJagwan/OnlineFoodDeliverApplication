@@ -137,9 +137,8 @@ public class CustomerServiceImp implements ICustomerService {
 	 */
 
 	@Override
-	public List<Customer> viewAllCustomer(String restaurantname) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Customer> viewAllCustomer() {
+		return customerRepository.findAll();
 	}
 
 	public void validateCustomer(Customer customer) {
