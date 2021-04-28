@@ -10,5 +10,5 @@ public interface ICustomerService {
 	 Customer updateCustomer(Customer customer);
 	 Customer removeCustomer(Customer customer);
 	 Customer viewCustomer(String id );
-	 List<Customer> viewAllCustomer(String restaurantname); 
+	 List<Customer> viewAllCustomer(); 
 }

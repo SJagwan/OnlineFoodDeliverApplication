@@ -1,5 +1,7 @@
 package com.cg.fds.controllers;
 
+import java.util.List;
+
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 
@@ -81,6 +83,11 @@ public class CustomerController {
 	@GetMapping("/view/{id}")
 	public CustomerDetails viewCustomer(@PathVariable @NotBlank(message="Customer Id cannot be null") String id) {
 		return customerUtil.customerDetails(customerService.viewCustomer(id));
+	}
+	
+	@GetMapping("/viewall")
+	public List<CustomerDetails> viewAllCustomer() {
+		return customerUtil.customerDetailsList(customerService.viewAllCustomer());
 	}
 
 }

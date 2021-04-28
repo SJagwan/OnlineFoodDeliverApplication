@@ -3,6 +3,7 @@ package com.cg.fds.service;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -138,10 +139,15 @@ public class BillServiceImp implements IBillService {
 
 	@Override
 	public List<Bill> viewBills(String custId) {
+		List<Bill> bills=new ArrayList<>();
 		Customer customer = customerRepository.findCustomerByCustomerId(custId);
 		FoodCart cart = cartRepository.findFoodCartByCustomer(customer);
-		OrderDetails orderDetail = orderRepository.findOrderDetailsByCart(cart);
-		return billRepository.findByOrder(orderDetail);
+		List<OrderDetails> orderDetail = orderRepository.findByCart(cart);
+		for(OrderDetails od:orderDetail)
+		{
+			bills.add(billRepository.findBillByOrder(od));
+		}
+		return bills;
 	}
 
 	/**

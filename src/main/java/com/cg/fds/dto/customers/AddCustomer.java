@@ -7,9 +7,9 @@ import javax.validation.constraints.Size;
 
 public class AddCustomer {
 
-	@NotBlank(message="FistName cannot be null for Customer")
+	@NotBlank(message="FirstName cannot be null for Customer")
 	private String firstName;
-	@NotBlank(message="FistName cannot be null for Customer")
+	@NotBlank(message="LastName cannot be null for Customer")
 	private String lastName;
 	
 	@NotBlank(message="Age cannot be null for Customer")
