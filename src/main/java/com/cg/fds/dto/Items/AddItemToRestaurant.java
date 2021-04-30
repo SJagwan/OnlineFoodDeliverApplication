@@ -10,7 +10,7 @@ public class AddItemToRestaurant {
 	
 	public AddItemToRestaurant()
 	{
-		
+		// Do Nothing
 	}
 	public String getItemId() {
 		return itemId;

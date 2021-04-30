@@ -12,6 +12,7 @@ public class ChangeQuantityRequest {
 	private int quantity;
 
 	public ChangeQuantityRequest() {
+		// Do Nothing
 	}
 
 	public String getCustomerId() {

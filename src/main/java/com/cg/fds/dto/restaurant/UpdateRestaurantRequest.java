@@ -12,6 +12,7 @@ public class UpdateRestaurantRequest {
 	private String contactNumber;
 
 	public UpdateRestaurantRequest() {
+		// Do Nothing
 	}
 
 	public String getRestaurantId() {

@@ -4,7 +4,7 @@ import javax.validation.constraints.NotBlank;
 
 public class AddCategory {
 	public AddCategory() {
-
+		// Do Nothing
 	}
 
 	public String getName() {

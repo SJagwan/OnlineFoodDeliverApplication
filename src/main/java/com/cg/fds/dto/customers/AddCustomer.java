@@ -31,6 +31,7 @@ public class AddCustomer {
 	private String email;
 
 	public AddCustomer() {
+		//do Nothing
 	}
 
 	public String getFirstName() {

@@ -6,6 +6,8 @@ import java.util.Optional;
 
 import javax.transaction.Transactional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,6 +29,8 @@ import com.cg.fds.util.BillUtil;
 
 @Service
 public class OrderServiceImp implements IOrderService {
+	
+	private static final Logger Log=LoggerFactory.getLogger(OrderServiceImp.class);
 
 	@Autowired
 	private IOrderRepository orderRepository;
@@ -50,6 +54,7 @@ public class OrderServiceImp implements IOrderService {
 	private BillUtil billUtil;
 
 	public LocalDateTime currentDateTime() {
+		Log.info("will return the current time");
 		return LocalDateTime.now();
 	}
 
@@ -61,6 +66,7 @@ public class OrderServiceImp implements IOrderService {
 	@Transactional
 	@Override
 	public OrderDetails addOrder(OrderDetails order) {
+		Log.info("inside add order , this will create order and bill");
 		validateOrder(order);
 		FoodCart cart = order.getCart();
 		List<Item> items = cartItemRepository.findItemsByCart(cart);
@@ -87,6 +93,7 @@ public class OrderServiceImp implements IOrderService {
 	 */
 	@Override
 	public OrderDetails updateOrder(OrderDetails order) {
+		Log.info("this will update the status of order");
 		validateOrder(order);
 		int orderId = order.getOrderId();
 		boolean exist = orderRepository.existsById(orderId);
@@ -141,6 +148,7 @@ public class OrderServiceImp implements IOrderService {
 
 	@Override
 	public List<OrderDetails> viewAllOrders(Customer customer) {
+		Log.info("view all orders , of a particular customer");
 		FoodCart cart = cartRepository.findFoodCartByCustomer(customer);
 		List<OrderDetails> orderList = orderRepository.findByCart(cart);
 		return orderList;

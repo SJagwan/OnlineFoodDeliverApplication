@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +21,10 @@ import com.cg.fds.repository.IRestaurantRepository;
 
 @Service
 public class RestaurantServiceImp implements IRestaurantService {
+	
+	private static final Logger Log=LoggerFactory.getLogger(RestaurantServiceImp.class);
+	
+	
 	@Autowired
 	private IRestaurantRepository restaurantRepository;
 
@@ -32,6 +38,7 @@ public class RestaurantServiceImp implements IRestaurantService {
 
 	@Override
 	public Restaurant addRestaurant(Restaurant res) {
+		Log.info("added restaurant sing addRestaurant function");
 		validateRestaurant(res);
 		Address address = res.getAddress();
 		addressRepository.save(address);
@@ -65,6 +72,7 @@ public class RestaurantServiceImp implements IRestaurantService {
 
 	@Override
 	public Restaurant updateRestaurant(Restaurant res) {
+        Log.info("inside updaetRestaurant value passed");
 		validateRestaurant(res);
 		String restaurantId = res.getRestaurantId();
 		boolean exists = restaurantRepository.existsById(restaurantId);
@@ -82,6 +90,7 @@ public class RestaurantServiceImp implements IRestaurantService {
 	 */
 	@Override
 	public Restaurant viewRestaurant(String id) {
+		Log.info("viewRestaurant function will fetch restaurant");
 		Optional<Restaurant> viewRestaurant = restaurantRepository.findById(id);
 		if (!viewRestaurant.isPresent()) {
 			throw new RestaurantNotFoundException("Restaurant with id not present=" + id);
@@ -95,6 +104,7 @@ public class RestaurantServiceImp implements IRestaurantService {
 
 	@Override
 	public List<Restaurant> viewAllRestaurants() {
+		Log.info("fetch all restaurant using this function");
 		return restaurantRepository.findAll();
 	}
 

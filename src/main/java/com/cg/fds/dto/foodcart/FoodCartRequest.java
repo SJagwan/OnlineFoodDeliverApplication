@@ -9,6 +9,7 @@ public class FoodCartRequest {
 	private String itemId;
 
 	public FoodCartRequest() {
+		// Do Nothing
 
 	}
 

@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +27,8 @@ import com.cg.fds.util.FoodCartUtil;
 
 @Service
 public class CustomerServiceImp implements ICustomerService {
+	
+	private static final Logger Log=LoggerFactory.getLogger(CustomerServiceImp.class);
 	@Autowired
 	private ICustomerRepository customerRepository;
 
@@ -41,6 +45,7 @@ public class CustomerServiceImp implements ICustomerService {
 	private FoodCartUtil cartUtil;
 
 	public String generateId() {
+		Log.info("Generating random id");
 		StringBuilder builder = new StringBuilder();
 		Random random = new Random();
 		for (int i = 0; i < 10; i++) {
@@ -58,6 +63,7 @@ public class CustomerServiceImp implements ICustomerService {
 
 	@Override
 	public Customer addCustomer(Customer customer) {
+		Log.info("Inside add customer function and it will also create cart");
 		validateCustomer(customer);
 		validatePhone(customer.getMobileNumber());
 		
@@ -138,6 +144,7 @@ public class CustomerServiceImp implements ICustomerService {
 
 	@Override
 	public List<Customer> viewAllCustomer() {
+		Log.info("will return all the customer in database");
 		return customerRepository.findAll();
 	}
 

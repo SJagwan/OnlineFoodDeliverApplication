@@ -8,7 +8,7 @@ public class RemoveCategory {
 	private String id;
 	
 	public RemoveCategory() {
-
+		// Do Nothing
 	}
 
 	public String getId() {

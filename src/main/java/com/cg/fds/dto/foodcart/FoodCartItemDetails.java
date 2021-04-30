@@ -10,6 +10,7 @@ public class FoodCartItemDetails {
 	private double cost;
 
 	public FoodCartItemDetails() {
+		// Do Nothing
 
 	}
 

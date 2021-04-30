@@ -22,6 +22,7 @@ public class AddRestaurantRequest {
 	private String pincode;
 
 	public AddRestaurantRequest() {
+		// Do Nothing
 	}
 
 	public String getRestaurantName() {

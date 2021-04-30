@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +26,7 @@ import com.cg.fds.repository.IOrderRepository;
 
 @Service
 public class BillServiceImp implements IBillService {
+	private static final Logger Log=LoggerFactory.getLogger(BillServiceImp.class);
 
 	@Autowired
 	private IBillRepository billRepository;
@@ -71,6 +74,7 @@ public class BillServiceImp implements IBillService {
 
 	@Override
 	public Bill updateBill(Bill bill) {
+		Log.info("Inside Update bill method",bill);
 		validateBill(bill);
 		int billId = bill.getBillId();
 		boolean exist = billRepository.existsById(billId);
@@ -122,6 +126,7 @@ public class BillServiceImp implements IBillService {
 
 	@Override
 	public List<Bill> viewBills(LocalDate startDate, LocalDate endDate) {
+		Log.info("Inside viewbills by using start and end date");
 		LocalDateTime startDateTime = LocalDateTime.of(startDate, LocalTime.MIN);
 		LocalDateTime endDateTime = LocalDateTime.of(endDate, LocalTime.MAX);
 		List<Bill> bills = billRepository.findOrdersBetweenDates(startDateTime, endDateTime);
