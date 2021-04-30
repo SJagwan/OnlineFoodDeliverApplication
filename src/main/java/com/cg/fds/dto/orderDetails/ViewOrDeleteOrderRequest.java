@@ -8,6 +8,7 @@ public class ViewOrDeleteOrderRequest {
 	private int orderId;
 
 	public ViewOrDeleteOrderRequest() {
+		// Do Nothing
 
 	}
 

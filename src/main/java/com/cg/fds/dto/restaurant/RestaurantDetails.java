@@ -7,6 +7,7 @@ public class RestaurantDetails {
 	private String contactNumber;
 
 	public RestaurantDetails() {
+		// Do Nothing
 	}
 
 	public String getRestaurantId() {

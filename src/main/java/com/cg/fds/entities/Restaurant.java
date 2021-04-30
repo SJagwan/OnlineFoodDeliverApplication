@@ -26,7 +26,7 @@ public class Restaurant {
 	private String contactNumber;
 
 	public Restaurant() {
-
+		// Do Nothing
 	}
 
 	public String getRestaurantId() {

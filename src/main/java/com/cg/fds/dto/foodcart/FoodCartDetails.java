@@ -9,6 +9,7 @@ public class FoodCartDetails {
 	private List<FoodCartItemDetails> items;
 
 	public FoodCartDetails() {
+		// Do Nothing
 
 	}
 

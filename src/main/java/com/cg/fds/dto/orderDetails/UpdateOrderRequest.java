@@ -10,6 +10,7 @@ public class UpdateOrderRequest {
 	private int orderId;
 
 	public UpdateOrderRequest() {
+		// Do Nothing
 	}
 
 	public String getOrderStatus() {

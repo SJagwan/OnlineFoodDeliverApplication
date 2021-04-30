@@ -8,6 +8,7 @@ public class ClearCartRequest {
 	private String customerId;
 
 	public ClearCartRequest() {
+		// Do Nothing
 
 	}
 

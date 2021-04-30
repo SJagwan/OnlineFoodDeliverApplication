@@ -44,7 +44,7 @@ public class CustomerServiceImpUnitTest {
 	 */
 	@Test
 
-	public void addCustomerTest_1() {
+	 void addCustomerTest_1() {
 		String mobile="0123456789";
 		Customer customer = Mockito.mock(Customer.class);
 		Customer customerSaved = Mockito.mock(Customer.class);
@@ -72,7 +72,7 @@ public class CustomerServiceImpUnitTest {
 	 */
 	@Test
 
-	public void updateCustomerTest_1() {
+	 void updateCustomerTest_1() {
 		String id = "1";
 		Customer customer = Mockito.mock(Customer.class);
 		Mockito.doNothing().when(customerService).validateCustomer(customer);
@@ -90,7 +90,7 @@ public class CustomerServiceImpUnitTest {
 	 * test to update details of an existing customer from the list
 	 */
 	@Test
-	public void updateCustomerTest_2() {
+	 void updateCustomerTest_2() {
 		String id = "1";
 		Customer customer = Mockito.mock(Customer.class);
 		Mockito.doNothing().when(customerService).validateCustomer(customer);
@@ -106,7 +106,7 @@ public class CustomerServiceImpUnitTest {
 	 */
 	@Test
 
-	public void viewCustomerTest_1() {
+	 void viewCustomerTest_1() {
 		String id = "1";
 		Customer customer = Mockito.mock(Customer.class);
 		Optional<Customer> optionalSaved = Optional.of(customer);

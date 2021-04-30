@@ -7,6 +7,7 @@ public class AddOrderRequest {
 	private String customerId;
 
 	public AddOrderRequest() {
+		// Do Nothing
 	}
 
 	public String getCustomerId() {

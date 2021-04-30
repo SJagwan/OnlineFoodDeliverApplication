@@ -9,6 +9,7 @@ public class FoodCartDetailResponse {
 	
 
 	public FoodCartDetailResponse(){
+		// Do Nothing
 
     }
 

@@ -11,7 +11,7 @@ public class UpdateCategory {
 	private String name;
 	
 	public UpdateCategory() {
-
+		// Do Nothing
 	}
 
 	public String getName() {

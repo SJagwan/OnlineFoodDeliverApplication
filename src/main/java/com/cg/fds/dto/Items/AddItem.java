@@ -23,7 +23,7 @@ public class AddItem {
 	}
 
 	public AddItem() {
-
+		// Do Nothing
 	}
 
 	public String getItemName() {

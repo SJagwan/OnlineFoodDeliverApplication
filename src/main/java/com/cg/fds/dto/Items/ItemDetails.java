@@ -10,7 +10,7 @@ public class ItemDetails {
 	private String categoryName;
 
 	public ItemDetails() {
-
+		// Do Nothing
 	}
 
 	public String getItemId() {

@@ -11,6 +11,7 @@ public class OrderDetailsResponse {
 	private List<String> itemName;
 
 	public OrderDetailsResponse() {
+		// Do Nothing
 	}
 
 	public int getOrderId() {

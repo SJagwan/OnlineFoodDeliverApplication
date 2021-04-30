@@ -16,7 +16,7 @@ public class AddRestaurant {
 	private String pincode;
 
 	public AddRestaurant() {
-
+		// Do Nothing
 	}
 
 	public String getRestaurantId() {

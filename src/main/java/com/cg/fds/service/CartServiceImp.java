@@ -3,6 +3,8 @@ package com.cg.fds.service;
 import java.util.List;
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +19,8 @@ import com.cg.fds.repository.ICartRepository;
 
 @Service
 public class CartServiceImp implements ICartService {
+	
+	private static final Logger Log=LoggerFactory.getLogger(CartServiceImp.class);
 	@Autowired
 	private ICartRepository cartRepository;
 
@@ -46,6 +50,7 @@ public class CartServiceImp implements ICartService {
 
 	@Override
 	public FoodCart increaseQuantity(FoodCart cart, Item item, int quantity) {
+		Log.info("This function will increase the quantity.");
 		validateCart(cart);
 		String cartItemId = CartItem.id(cart, item);
 		Optional<CartItem> optional = cartItemRepository.findById(cartItemId);
@@ -70,6 +75,7 @@ public class CartServiceImp implements ICartService {
 
 	@Override
 	public FoodCart reduceQuantity(FoodCart cart, Item item, int quantity) {
+		Log.info("This function will reduce the quantity, and if quantity is less than 0,remove it from cart");
 		validateCart(cart);
 		String cartItemId = CartItem.id(cart, item);
 		Optional<CartItem> optional = cartItemRepository.findById(cartItemId);

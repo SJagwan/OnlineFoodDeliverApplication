@@ -21,7 +21,7 @@ public class CartItem {
 	private int quantity;
 
 	public CartItem() {
-
+		// Do Nothing
 	}
 
 	public static String id(FoodCart cart, Item item) {

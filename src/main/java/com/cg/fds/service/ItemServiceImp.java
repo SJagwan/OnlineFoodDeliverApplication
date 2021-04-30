@@ -3,6 +3,8 @@ package com.cg.fds.service;
 import java.util.List;
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +22,8 @@ import com.cg.fds.repository.IRestaurantRepository;
 
 @Service
 public class ItemServiceImp implements IItemService {
+	
+	private static final Logger Log=LoggerFactory.getLogger(ItemServiceImp.class);
 
 	@Autowired
 	private IItemRepository itemRepository;
@@ -37,6 +41,7 @@ public class ItemServiceImp implements IItemService {
 
 	@Override
 	public Item addItem(Item item) {
+		Log.info("This function will add item");
 		validateItem(item);
 		Item saved = itemRepository.save(item);
 		List<Restaurant> restaurants = saved.getRestaurants();
@@ -91,6 +96,7 @@ public class ItemServiceImp implements IItemService {
 	 */
 	@Override
 	public Item removeItem(String id) {
+		Log.info("will remove all the item from data base");
 		boolean exists = itemRepository.existsById(id);
 		if (!exists) {
 			throw new ItemNotFoundException("Item with id not present=" + id);
@@ -131,6 +137,7 @@ public class ItemServiceImp implements IItemService {
 
 	@Override
 	public List<Item> viewAllItems(Category cat) {
+		Log.info("will give list of item with same category");
 		return itemRepository.findByCategory(cat);
 	}
 
@@ -156,6 +163,7 @@ public class ItemServiceImp implements IItemService {
 	
 	@Override
 	public List<Item> viewAllItem(){
+		Log.info("return all the item from database");
 		return itemRepository.findAll();
 	}
 

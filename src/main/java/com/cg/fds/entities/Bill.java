@@ -21,6 +21,7 @@ public class Bill {
 	LocalDateTime billDate;
 
 	public Bill() {
+		// Do Nothing
 	}
 
 	public int getBillId() {

@@ -8,6 +8,7 @@ public class FindCartRequest {
 	private String customerId;
 
 	public FindCartRequest() {
+		// Do Nothing
 
 	}
 

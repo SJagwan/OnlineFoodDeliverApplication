@@ -8,6 +8,7 @@ public class CustomerDetails {
 	private String gender;
 
 	public CustomerDetails() {
+		// Do Nothing
 	}
 
 	public String getCustomerId() {
